@@ -1,0 +1,5 @@
+after updating to today s build, i have two identical errors in my javascript console: error: [exception..
+component returned failure code: 0x80004005 (ns_error_failure) [nsifile.remove] nsresult: 0x80004005 (ns_error_failure) location: js frame :: file:///users/zach/desktop/deerpark.app/contents/macos/components/nsupdateservice.js :: cleanupupdatesdir :: line 318 data: no] source file: file:///users/zach/desktop/deerpark.app/contents/macos/components/nsupdateservice.js line: 318 i m not sure if this is related to split-window or not
+i ll try to narrow this down somewhat.
+this sounds more like a duplicate of bug 300087
+*** this bug has been marked as a duplicate of 300087 ***

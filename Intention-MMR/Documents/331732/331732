@@ -1,0 +1,27 @@
+purge playlist
+add two files
+play the first entry
+right-lick it and select eleminate
+playback skips to the next song but the entry is not visibly removed
+this leads to a crash when the first entry is played again and attempted to eleminate.
+can t duplicate this with head as of today
+i suspect this is a duplicate of bug #131150 which just got fixed today
+marking as such
+re-open if this still isn t fixed
+*** this bug has been marked as a duplicate of 131150 ***
+hmm i still can reproduce it
+with cvs head
+what do you mean by eliminate, you mean remove or move to trash
+i can t duplicate this.
+yes with cvs head
+still there with cvs build from today
+i mean remove from playlist (the minus symbol)
+created an attachment (id=61038)
+delay rhythmdb entry-deleted signal until commit
+this was happening because the entry was being deleted while it still had outstanding changes
+the deletion signal was emitted immediately (removing the entry from all sources), then the changes were emitted on the next rhythmdb_commit, which re-added the entry to any sources it had been in
+this patch delays the entry deleted signal until the next rhythmdb_commit, like all other changes
+all rhythmdb_entry_delete calls except one already had rhythmdb_commit calls immediately afterwards
+this patch adds the missing commit.
+looks good to me.
+committed, with some small changes to add a reference on entries in the deleted-entries list, and free the list in rhythmdb_commit_internal.

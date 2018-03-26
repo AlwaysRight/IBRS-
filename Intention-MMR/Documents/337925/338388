@@ -1,0 +1,14 @@
+hi, xml2po (installed from cvs) is generating some empty xml files for some (but not all) translations
+here is the error message: traceback (most recent call last):
+the command i m running is: xml2po -e -p cc.po c/about-ubuntu.xml >cc/about-ubuntu.xml (where cc is the language code)
+i m going to attach: 1
+c/about-ubuntu.xml 2
+sv.po (works) 3
+cs.po (doesn t work)
+any idea what is going on here
+thanks
+created an attachment (id=63406) original language the english source for the document.
+created an attachment (id=63407) sv.po this one works.
+created an attachment (id=63409) cs.po this one doesn t work (along with a number of others).
+if the patch in #337925 doesn t resolve this for you, please reopen
+;) *** this bug has been marked as a duplicate of 337925 ***

@@ -1,0 +1,40 @@
+user-agent: mozilla/5.0 (windows windows nt 5.1 en-us rv:1.9b2pre) gecko/2007111312 minefield/3.0b2pre
+build identifier: mozilla/5.0 (windows windows nt 5.1 en-us rv:1.9b2pre) gecko/2007111312 minefield/3.0b2pre
+when using the star icon to add a bookmark or when using the bookmark this page menu item, the ui for adding a bookmark is dismissed/disappears without saving the bookmark
+the line for folders had 2 drop down boxes
+clicking on the first (bold arrow) brings up the most recent folders (i assume) if i do not like the options and click the arrow again, the entire dialog box disappears
+clicking anywhere causes the box to disappear
+once the arrow is clicked upon, doing anything other than selecting one of the folders causes the box to be dismissed
+reproducible: always steps to reproduce: 1.press ctrl-d to bookmark page 2.click first arrow in folder selection box 3.click anywhere else within the add bookmark dialog box 4.dialog box disappears actual results: dialog box disappears with no bookmark saved expected results: drop down list should close with no changes
+this is a dup, sorry for not having the dup bug # handy.
+*** bug 403614 has been marked as a duplicate of this bug ***
+i can t find other dupes, so confirming this atm since it has valid steps to reproduce there is bug 393948 but it s about clicking elsewhere in the browser, not on the dialog itself
+yeah, make sure not to close this one, because they closed mine as a dupe of it, even though mine was the earlier reporting
+i don t care about that, though, just as long as it gets fixed!
+this doesn t reproduce in the current nightly build
+mozilla/5.0 (macintosh intel mac os x 10.5 en-us rv:1.9b2pre) gecko/2007112104 minefield/3.0b2pre
+if i open the add bookmark dialog, open the select dropdown (not the arrow for expansion) and then click elsewhere in the dialog, it just closes the select folder dropdown, not the add dialog.
+still valid here, i can clearly reproduce
+mozilla/5.0 (windows windows nt 5.1 en-us rv:1.9b2pre) gecko/2007112106 minefield/3.0b2pre
+my mistake
+this is windows only
+i ve confirmed it in mozilla/5.0 (windows windows nt 5.1 en-us rv:1.9b2pre) gecko/2007112106 minefield/3.0b2pre.
+i wonder if the select box arrow really should exist in the add bookmark dialog, given the amount of times that i click mistakenly on the wrong arrow, with this bug as irritating consequence :)
+neil, johnath: is this related to your click-to-dismiss-panels work?
+*** bug 406207 has been marked as a duplicate of this bug ***
+should the summary be changed to ...when not selecting a folder
+ps apparently a mid-air collision added gamesonline10 to the cc list in my name
+i ll leave it there on the assumption the addition was intended, but i ll decline the credit.
+(in reply to comment #9) > neil, johnath: is this related to your click-to-dismiss-panels work
+this involves weird interaction between a dismissible widget (the combo box) *within* a dismissible widget (the bookmark panel) which is different than the problem i was having, but it does still sound like consume-rollup-event foo, so neil might have useful input.
+*** this bug has been marked as a duplicate of bug 400019 ***
+bug 451915 - move firefox/places bugs to firefox/bookmarks and history
+remove all bugspam from this move by filtering for the string places-to-b-and-h
+in thunderbird 3.0b, you do that as follows: tools | message filters make sure the correct account is selected
+click new conditions: body contains places-to-b-and-h change the action to delete message
+select manually run from the dropdown at the top
+click ok
+select the filter in the list, make sure inbox is selected at the bottom, and click run now
+this should delete all the bugspam
+you can then delete the filter
+gerv

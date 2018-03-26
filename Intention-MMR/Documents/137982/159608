@@ -1,0 +1,8 @@
+version: 2.0 (using 4.0.2 (kde 4.0.2), debian packages) compiler: cc os: linux (i686) release 2.6.24 i really appreciate the work you did on gv 1.x, but i m unhappy that many of the things i liked about 1.x are gone in 2.0
+here s the list: * double click a picture in the list view
+expected result: picture opens actual result: nothing happens * view small picture with zoom to fit expected result: scales to fit window, even if scaling by a factor of more than 1
+actual result: factor bounded to 1, config option where you could allow factors > 1 is gone
+* use mouse wheel to quickly zip through a large folder full of pictures expected result: pictures change actual result: nothing happens, plus zoom/zip config option is gone.
+please avoid reporting multiple bugs in one report
+it makes it difficult to track
+as for your bugs: - double click: fixed in 2.0.3 - view small pictures: duplicate of #137982 - mouse wheel to browse: fixed in 2.1 *** this bug has been marked as a duplicate of 137982 ***

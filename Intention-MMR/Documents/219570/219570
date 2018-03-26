@@ -1,0 +1,82 @@
+i20080219-1124 due to low bandwidth i often start my update or commit work by clicking on several files in the synchronize view
+this way other files load and comparison starts while i review the changes of the first file
+now, my problem is that when i switch to another compare editor, the file is not automatically selected in the synchronize view
+there are two feature i ' d like to see
+add the synchronize view as ' show in ' target 2
+add the commonly known ' link with editor ' tool bar button and/or view menu item
+(in reply to comment #0) > i20080219-1124 > > due to low bandwidth i often start my update or commit work by clicking on > several files in the synchronize view
+this way other files load and comparison > starts while i review the changes of the first file
+> > now, my problem is that when i switch to another compare editor, the file is not > automatically selected in the synchronize view
+if i ' ve understood you correctly after you switch to another compare editor the several files you clicked on in the sync view are still selected
+would you like to loose the selection
+> there are two feature i ' d like to see
+> 1. add the synchronize view as ' show in ' target
+> 2. add the commonly known ' link with editor ' tool bar button and/or view menu > item would you like them to have in both compare and non-compare editors?
+> if i ' ve understood you correctly after you switch to another compare editor the > several files you clicked on in the sync view are still selected
+would you > like to loose the selection
+yes, exactly as it works in all other views that allow linking
+i don ' t have > 1 selected as i clicked each of them to open the compare editor and hence only the last one was selected
+> would you like them to have in both compare and non-compare editors
+i ' m happy if it works with the compare editor but normally back-linking works for all editor parts.
+*** bug 284083 has been marked as a duplicate of this bug ***
+due to style-guidelines 7.21 and 13.3 both features should be implemented.
+created an attachment (id=148515) fix v01
+patch that adds linking when sync ' ed using workspace model (i guess with models turned off it will work as well)
+it ' s a working copy, so do not apply
+it ' s still missing couple of things
+* ishowintarget is not implemented yet
+* linking doesn ' t work for editors that do not adapt to ifile.class
+* only ifile or istorageeditorinput based elements are selected in the sync tree when linking, won ' t work for java workspace sync for instance
+created an attachment (id=148516)
+mylyn/context/zip
+do you think that making the " link with editor " action enabled only for non-model or workspace model synchronizations is acceptable
+for other types i would disable the action (for now) and file a separate bug to address it
+this would make the fix, in it ' s current shape, available pretty soon.
+> do you think that making the " link with editor " action enabled only for > non-model or workspace model synchronizations is acceptable
+for me yes, and since it ' s limited scope i would probably not even add a toolbar button but simply add it to the view menu.
+sounds good to me
+and put it back on the toolbar with the other bug as soon as linking starts to work for all synchronizations (i.e. including models)?
+created an attachment (id=148537) fix v02
+sync view as " show in " target available in synchronize perspective.
+(in reply to comment #9) > sounds good to me
+and put it back on the toolbar with the other bug as soon as > linking starts to work for all synchronizations (i.e. including models)
+yes, though i could also live without that button
+i doubt people are going to toggle this frequently.
+(in reply to comment #11) > (in reply to comment #9) > > sounds good to me
+and put it back on the toolbar with the other bug as soon as > > linking starts to work for all synchronizations (i.e. including models)
+> yes, though i could also live without that button
+i doubt people are going to > toggle this frequently
+in other views like package-explorer i use this button frequently
+so a button in view-toolbar would be useful
+for first iteration a menu entry is admissible.
+> in other views like package-explorer i use this button frequently
+yes me too, but i guess i won ' t toggle it often in the sync view, e.g. i also never disable it in the history view
+anyway, i also don ' t care if it ' s there by default
+just make sure to put it into an action set so, that i can remove it.
+> i also don ' t care if it ' s there by default
+just make sure to put it into an > action set so, that i can remove it
+forget this
+action sets are only for the main toolbar.
+created an attachment (id=148657) fix v03
+this is an updated version of the patch that imo is ready to be committed
+however, it ' s still missing bunch of things (see bug 291212, bug 291213, bug 291214, bug 291215) so if you think any of these is a no-go for this patch to be applied please let me know.
+i have not tried the patch, but when i glanced though it, i didn ' t see any command id being used for the togglelinkingaction
+iworkbenchcommandconstants.navigate_toggle_link_with_editor should be used as actiondefinitionid
+in the package explorer, we handle activation in packageexploreractiongroup.setglobalactionhandlers(iactionbars).
+*** bug 249919 has been marked as a duplicate of this bug ***
+created an attachment (id=148740) fix v04
+added iworkbenchcommandconstants.navigate_toggle_link_with_editor as actiondefinitionid for togglelinkingaction.
+> so if you think any of these is a no-go for this patch to > be applied please let me know
+for me it ' s useless given the current limitations as
+1. my main use case is to link from compare editor to view and not the other way around (not working due to bug 291213)
+2. i use the old non-model based sync (bug 291215)
+all right, at least i now know which bugs i should fix first
+thanks for the comment.
+created an attachment (id=149732) fix v05
+final version of the patch to be committed simultaneously with fixes for bug 291215, bug 291214 and bug 291213.
+applied to head, available in builds > n20091015-2000
+bug 291213 no longer blocks this one.
+verified in i20091027-0100
+works great
+remaining issue
+the view menu action has not mnemonic (bug 293542 ).

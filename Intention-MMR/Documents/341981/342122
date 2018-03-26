@@ -1,0 +1,6 @@
+- have a folder searchplugins in your profile - remove the folder searchplugins in the firefox directory - start firefox - result: search is broken - advantage: firefox closes quickly now :) regression between 1.9a1_2006061614 and 1.9a1_2006061622
+http://bonsai.mozilla.org/cvsquery.cgi?module=phoenixtinderbox&date=explicit&mindate=2006-06-16+13%3a00&maxdate=2006-06-16+22%3a00 also in branch
+errors after it regressed: error: engine has no properties source file: file:///c:/docume~1/ria/bureau~1/firefox/components/nssearchservice.js line: 2118 error: uncaught exception: [exception..
+servicemanager::getservice returned failure code: nsresult: 0x80570016 (ns_error_xpc_gs_returned_failure) location: js frame :: chrome://browser/content/search/search.xml :: get_searchservice :: line 118 data: no]
+removing any search plugin after running a build with it will fail
+*** this bug has been marked as a duplicate of 341981 ***

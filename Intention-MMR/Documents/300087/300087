@@ -1,0 +1,90 @@
+when i update today (0708) from yesterday ' s nightly, i get to download the new build, but after restart it doesn ' t apply anything (no patching window comes up, no messages on the console or js console)
+i tried running updater.app by hand as well, and didn ' t get anything
+active-update.xml
+< updates xmlns= " http://www.mozilla.org/2005/app-update " / > updates.xml
+< updates xmlns= " http://www.mozilla.org/2005/app-update " > < update type= " minor " name= " deer park 1.0+ " version= " 1.0+ " extensionversion= " 1.0+ " detailsurl= " undefined " licenseurl= " undefined " serviceurl= "
+https://aus-staging.mozilla.org:8711/update2/0/firefox/1.0%2b/2005070707/darwin_ppc-gcc3/en-us/update.xml " installdate= " 1120831182796 " statustext= " install pending " iscompleteupdate= " false " > < patch type= " complete " url= "
+http://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/2005-07-07-21-trunk/firefox-1.0+.en-us.mac.mar " hashfunction= " md5 " hashvalue= " f34d2966c30fb8f6bc51c1a1a9972886 " size= " 8490739 " selected= " true " state= " pending " / > < /update > < /updates >
+not sure if this is just the server being mistaken about there being newer builds for me, or what, but i thought i ' d file it.
+i ' m still seeing this
+after i restart, the update archive gets deleted, but i never get the " updating firefox " window, and the build is the same old one
+is there some kind of logging i can turn on?
+mano tells me that this got fixed two days ago, but i can ' t find a duplicate bug tracking that fix
+at any rate, as of at least 2005-07-20 builds, this works now.
+point is, i ' m not aware of any mac-swu fix which was landed in that time frame (and i was able to reproduce this issue until two days ago or so).
+i was apparently a little premature in filing this as worksforme
+what i ' m seeing now is that the update applies *once*, and then subsequent updates do not get applied
+is active-update.xml supposed to be deleted after the update is applied
+if so, that ' s the problem, since it ' s still there after an update
+1. get a day-before-today-nightly build
+2. check for updates
+3. restart & apply updates
+4. look in deer park.app/contents/macos/
+5. check for updates again tomorrow (or modify the app.update.url to fake a previous build number by switching %build_id% to " 0 " and check today!)
+6. restart & apply updates
+7. notice that they ' re not applied
+you ' ll see the active-update.xml ..
+i ' ll attach the one that was lying around in mine.
+created attachment 190834
+active-update.xml that was left around after applying updates
+nominating for 1.8b4 blocker
+i just tried updating from a freshly downloaded 7/28 build to the 7/29 build on my mac, and it worked
+however, i also see that active-updates.xml is still in the application directory after the update
+i also see an active-updates.xml file under windows, but its contents are significantly different (just an empty xml tag).
+(in reply to comment #7) > i just tried updating from a freshly downloaded 7/28 build to the 7/29 build on > my mac, and it worked
+however, i also see that active-updates.xml is still in > the application directory after the update
+i also see an active-updates.xml > file under windows, but its contents are significantly different (just an empty > xml tag)
+hm
+i just tried removing active-updates.xml and that didn ' t seem to help
+in fact, i can ' t seem to find the .mar file from the second update cycle anywhere on my hdd.
+i ' ve been using the auto update feature for the last week
+strangely it has been working on alternate days
+updates for the 24/7, 26/7 and 28/7 versions of deer park were all fine.
+(in reply to comment #9) > i ' ve been using the auto update feature for the last week
+strangely it has been > working on alternate days
+updates for the 24/7, 26/7 and 28/7 versions of deer > park were all fine
+it occurred to me the other day, but i wanted to be sure
+my experience seems to indicate dp can only be updated once
+day one
+download nightly .dmg, day two
+update it the next day via updates mechanism, day 3
+download via updates mechanism fails to overwrite
+i ' m guessing something is being written somewhere to prevent further updates
+i ' ve also tried scouring my hard drive for any signs of firefox-1.0+.en-us.mac.mar after a failed update and their doesn ' t appear to be any sign
+OS X 10.4.2 Mozilla/5.0 (Macintosh; U; PPC Mac OS X Mach-O; en-US; rv:1.8b4)Gecko/20050730 Firefox/1.0+
+> i ' ve also tried scouring my hard drive for any signs of > firefox-1.0+.en-us.mac.mar after a failed update and their doesn ' t appear to be > any sign
+the file is actually downloaded to update.mar.
+when i hit this problem today, i noticed that the updates/0/ folder contained a copy of updater.app
+there was nothing else left in the folder
+when i deleted the entire updates/ folder, the problem went away, and i was able to update from the 7/29 build to today ' s 8/1 build
+adding this to my bug list.
+(in reply to comment #12) > adding this to my bug list
+thanks for the tip darin, i ' ll keep an eye open for it
+i successfully updated this morning after grabbing a nightly yesterday
+i notice two updater.app ' s in deerpark.app
+one in deerpark.app/contents/macos, and another in deerpark.app/contents/macos/updates/0/updater.app
+is this correct/normal or expected?
+from the javascript console " error:[exception.." component returned failure code: 0x80004005 (ns_error_failure) [nsifile.remove] " nsresult: " 0x80004005 (ns_error_failure) "
+location: " js frame::file:///applications/deerpark.app/contents/macos/components/nsupdateservice.js::cleanupupdatesdir::line 318 " data: no]
+source file:
+file:///applications/deerpark.app/contents/macos/components/nsupdateservice.js line: 318
+" line 318 is " updatedir.remove(false)
+OS X 10.4.2? Mozilla/5.0 (Macintosh; U; PPC Mac OS X Mach-O; en-US; rv:1.8b4)Gecko/20050801 Firefox/1.0+
+yeah, i think it ' s having trouble removing updates/0/updater.app/ because it does not expect that to be a directory
+under other systems (linux and windows), it is not a directory
+it is a simple executable
+the solution is probably to change nsupdateservice.js to pass |true| to the nsifile
+remove method.
+*** bug 303024 has been marked as a duplicate of this bug ***
+created attachment 191407 v1 patch
+comment on attachment 191407 v1 patch r=ben@mozilla.org
+will this land tonight
+i ' d love to be able to test it ..
+> will this land tonight
+i ' d love to be able to test it .
+if someone will approve the patch, then i will land it.
+(in reply to comment #20) > > will this land tonight
+i ' d love to be able to test it .
+> > if someone will approve the patch, then i will land it
+...bless this patch which we are about to receive, for we are truly grateful.
+fixed-on-trunk

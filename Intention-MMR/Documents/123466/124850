@@ -1,0 +1,7 @@
+i20060119-0800 in recent builds i occasionally see tableitems that are cut at the end (end in an ellipsis) when the item is selected
+as soon as i remove the selection for the item, the full label appears again (see screenshot)
+i guess this is something like bug 54057, which has probably been solved by the fix for bug 57426.
+created attachment 33457 screenshot
+duplicate of bug 123466?
+yes, thanks
+*** this bug has been marked as a duplicate of 123466 ***

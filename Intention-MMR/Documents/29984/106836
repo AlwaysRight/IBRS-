@@ -1,0 +1,8 @@
+version: 3.4.0 (using kde kde 3.4.0) installed from: suse rpms as a newbie , i am often having to follow tutorials from *nix gurus on the web
+some give permissions as rw-r--r--, some as 644, some as the two ways that konqueror gives it (permissions tab, and advanced permissions window from that tab)
+the problem is that i have trouble translating [quickly] from numerical permissions (is there a term for that?) to what konqueror displays
+i wish that konqueror would have the numerical permissions displayed right on the permissions tab, directly on the access permissions area of that tab
+another bug mentioned that the user would want to edit/modify the permissions numerically, which i also think would be helpful
+more choice is better
+:) -thanks
+*** this bug has been marked as a duplicate of 29984 ***

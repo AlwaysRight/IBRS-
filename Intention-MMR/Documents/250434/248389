@@ -1,0 +1,9 @@
+version: e5 n900 4.5~20100813.1163254-1maemo1.1164259 in all calendar views events are surrounded with black points
+it doesn t look well
+test: 1 select e.g a day with an event and open the day view
+look at the surrounding of the event
+=> small black points
+(these points shouldn t be displayed.)
+same basic opengl rendering problem as in 250434
+*** this bug has been marked as a duplicate of bug 250434 ***
+does not appear in 4:4.5~20100917.1176264-1maemo1.1174921 and was reported duplicate, closing.

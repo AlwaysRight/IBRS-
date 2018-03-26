@@ -1,0 +1,16 @@
+go to twitter.com, enter a dummy username, click login
+page starts to load, some content is shown, and the device locks up (mouse won t move).
+seems to be working for me, both for a valid login credentials & invalid ones
+i just rebuilt today.
+i don t get a crash on this site, but every time i log into twitter the browser freezes
+this happens with the latest 20090727 vlad put it both on my unit and the one in tchung s cube.
+still seeing this with a current build
+a couple of times it hung loading the front page, but that might be something else (reloading it repeatedly didn t seem to trigger the hang)
+the hang after login appear to happen right around the time it switches to ssl mode..
+i see the site identity button turn blue, but the hangs before a favicon shows up
+this appears to hang the device hard..
+the kernel debugger doesn t seem to notice anything happens, and i can t break or get a list of threads/processes after the hang.
+bug might be a dupe of this too.
+i can t reproduce this in this local build that i just did, which has a fix for bug 508113 in it.
+alas, i still get the hang on my oban board with the 504970 patch.
+*** this bug has been marked as a duplicate of bug 510627 ***

@@ -1,0 +1,8 @@
+user-agent: mozilla/4.0 (compatible msie 7.0 windows nt 5.1 net clr 1.1.4322 net clr 2.0.50727)
+build identifier: firefox build for wince
+after just sign in to flickr.com firefox throws exception in xul.dll the issue might not have been observed last week with the same release
+so there is something special on the signin page today so might want to look today only
+reproducible: always steps to reproduce: 1.open flickr.com in firefox 2.sign in with yahoo id 3
+actual results: data abort observed in xul.dll and firefox closes log is as below: 852238 pid:3fb097a tid:75903f2 ** we want fake weight 852455 pid:3fb097a tid:75903f2 _ogl_surface_create returned opengl es error code 0x500 852593 pid:3fb097a tid:75903f2 _ogl_surface_create returned opengl es error code 0x500 852660 pid:3fb097a tid:75903f2 _ogl_surface_create returned opengl es error code 0x500 852995 pid:3fb097a tid:75903f2 _ogl_surface_create returned opengl es error code 0x500 853184 pid:3fb097a tid:75903f2 exception data abort (4): thread-id=075903f2(pth=874ff000), proc-id=03fb097a(pprc=87181324) firefox.exe , vm-active=03fb097a(pprc=87181324) firefox.exe 853187 pid:3fb097a tid:75903f2 pc=43038820(xul.dll+0x00b08820) ra=58595a20(???+0x58595a20) sp=0011f4d8, bva=00000000
+morphing this bug some -- firefox is no longer crashing, but the entire system is hanging when the yahoo sign-in page is opened.
+*** this bug has been marked as a duplicate of bug 510627 ***

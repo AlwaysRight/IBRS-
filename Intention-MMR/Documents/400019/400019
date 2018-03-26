@@ -1,0 +1,70 @@
+steps to reproduce
+click star icon on address bar
+open the menulist
+click the bookmarks panel
+the menulist should close but the panel should stay open i think this might be a windows only regression
+the fix here seems to be to remove the extra check for wm_activate in nswindow::eventisinsidewindow
+that supposedly will break bug 45108 but i don ' t see that happening.
+*** bug 402115 has been marked as a duplicate of this bug ***
+changing os to windows, since we know it happens there
+if it really does happen on mac, we should change os to all
+seeking blocking (as i sought it for bug #402115)
+mconnor and beltzner feel this is an important blocker for 1.9
+*** bug 403711 has been marked as a duplicate of this bug ***
+*** bug 406207 has been marked as a duplicate of this bug ***
+*** bug 403209 has been marked as a duplicate of this bug ***
+transferring p1 from bug 403209
+is this the good component/product ?
+created attachment 293233
+use a activateapp here instead
+this patch fixes this bug as well as bug 390197
+the change is to some code that was added by bug 45108 when windows+m is pressed to minimize all windows while hovering over the menu
+this code skipped checking if the event occured over a popup for the wm_activate event
+instead, we ' ll use the wm_activateapp event.
+created attachment 293234
+this is a readable version of the patch
+is there a better reviewer here?
+maybe dougt might want to check this patch too?
+*** bug 409351 has been marked as a duplicate of this bug ***
+comment on attachment 293234 this is a readable version of the patch
+ere should review this also
+you can comment out / remove the windows ce part of this
+there is no way to test this on the mozilla 1.9 trunk yet (wince doesn ' t build yet)
+when i get windows ce working again, i will investigate.
+comment on attachment 293234 this is a readable version of the patch
+neil, did you check that there are no ill effects if config.trim_on_minimize is on?
+comment on attachment 293234 this is a readable version of the patch
++ on the wince part.
+dougt, did you mean the patch is ok as is, or to remove the windows ce part entirely
+ere, i don ' t see anything different happening with that pref set, either visibly or to memory use
+the code being changed only gets executed when a popup is open though
+is there a specific case you were thinking might be a problem?
+you can do either -- when wince is building again on trunk, i can look at this
+(hopefully in a few weeks).
+comment on attachment 293234 this is a readable version of the patch
+nevermind about the pref. r=me
+*** bug 410051 has been marked as a duplicate of this bug ***
+patch as 3 reviews is it possible to land ?
+yes, but i won ' t have access to windows for a bit, so someone else should do it.
+neil, what should be done
+running a build with the patch and have tests
+if i understand it right and no-one can build it on windows we could use the tryserver therefor?
+there is no means of creating tests for this currently, it requires native messages to be sent
+testing involves making sure this and bug 390197 are fixed
+i ' m not too worried about that though
+i just won ' t be able to fix any problems that occur if the evil test machine fails.
+if someone sends me a build i can test it...
+we ' re not actually looking for someone to test it, but it would still be useful
+we ' re looking for someone to check it in and be able to monitor the tinderbox afterwards.
+checking in widget/src/windows/nswindow.cpp
+/cvsroot/mozilla/widget/src/windows/nswindow.cpp,v < -- nswindow.cpp new revision: 3.723
+previous revision: 3.722 done
+neil, we have the correct behavior now
+but i see another problem which seems to be raised by this patch
+when i click on the menulist the complete name field is highlighted
+it is reverted when closing the menulist again
+should i file a new bug for that issue
+i don ' t think that is expected.
+(in reply to comment #26) > should i file a new bug for that issue
+you should always file new bugs.
+*** bug 416579 has been marked as a duplicate of this bug ***

@@ -1,0 +1,17 @@
+i20080930-0921
+it would be nice if the synchronize view would support editor linking
+here s the workflow i often use: 1
+open many compare editors from sync view at once (because it takes long to load them due to slow connection)
+review the changes in one compare editor 3
+update (or commit) the changes
+now, in order to do this: i have to manually find that file in the synchronize view because: - there s no editor linking - there is no navigate > show in > synchronize view - there is no action on the compare editor that would directly allow me to do this
+sound reasonable to me, but just to clarify one thing: (in reply to comment #0) > - there is no action on the compare editor that would directly allow me to do this
+by this you mean commit/update action avaliable in the compare editor s popup menu?
+>by this you mean commit/update action avaliable in the compare editor s popup >menu
+yes.
+sounds the same as bug 219570, unless you want to keep this bug to improve the compare editor context menu.
+(in reply to comment #3) > sounds the same as bug 219570, right, marking as a duplicate
+thanks markus
+> unless you want to keep this bug to improve the > compare editor context menu
+we have a bug for it as well (see bug 286219)
+*** this bug has been marked as a duplicate of bug 219570 ***

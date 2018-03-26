@@ -1,0 +1,97 @@
+version: 1.5.1 (using kde kde 3.1.1a)
+installed from: suse rpms
+os: linux
+i just upgraded from kde 3.1.0 to 3.1.1.a
+now i am not able to create a new mail folder on my imap account
+all the folders i create end up in the local mail tree
+in the dialog box the button belongs to only offers top level which apparently is the local mail tree
+no choice for the imap account is given
+this is also true if i want to generate subfolders of any already existing folders on the imap account
+i had no problems like this prior to upgrading to 3.1.1a
+it definitely works in the current 3_1_branch
+subject: re: cannot create mail folder in imap account
+it definitely does not work using kdenetwork3-3.1.1-45 biuld on 02 april 2003 by suse
+volker on tuesday 22 april 2003 10:52, you wrote
+> ------- you are receiving this mail because -------
+> you reported the bug, or are watching the reporter
+> > http://bugs.kde.org/show_bug.cgi?id=57562
+> burghardt@kde.org changed
+> > what |removed |added > --------------------------------------------------------------------------- >- status|unconfirmed |resolved > resolution| |fixed > > >
+> ------- additional comments from burghardt@kde.org 2003-04-22 19:52
+> ------- it definitely works in the current 3_1_branch
+subject: re: cannot create mail folder in imap account
+ok, so it works with kdenetwork3-3.1.1-34 but not with but not with kdenetwork3-3.1.1-45 bravo
+probably the suse guys who messed this one up volker on tuesday 22 april 2003 10:52, you wrote
+> ------- you are receiving this mail because -------
+> you reported the bug, or are watching the reporter
+> > http://bugs.kde.org/show_bug.cgi?id=57562
+> burghardt@kde.org changed
+> > what |removed |added > --------------------------------------------------------------------------- >- status|unconfirmed |resolved > resolution| |fixed > > >
+> ------- additional comments from burghardt@kde.org 2003-04-22 19:52
+> ------- it definitely works in the current 3_1_branch
+subject: re: new: cannot create mail folder in imap account
+i m pretty sure that it s a suse only problem (they want to prevent the user from trying to move a local folder to an imap account)
+please report the bug to them
+subject: re: cannot create mail folder in imap account
+done already v
+on tuesday 22 april 2003 15:21, you wrote
+> ------- you are receiving this mail because -------
+> you reported the bug, or are watching the reporter
+> > http://bugs.kde.org/show_bug.cgi?id=57562
+> > > > > ------- additional comments from kloecker@kde.org 2003-04-23 00:21 -------
+> subject: re: new: cannot create mail folder in imap account
+> > i m pretty sure that it s a suse only problem (they want to prevent the > user from trying to move a local folder to an imap account)
+please > report the bug to them
+yes, it s a suse patch
+because originally you could move folders to nirvana when changing the belongs option of local folders to a imap location
+i m not sure how to fix that ;(
+what are the chances of having the real bug fixed for 3.1.2
+then suse could take out that workaround
+is there a bug report already for the real bug
+subject: re: cannot create mail folder
+in imap account am mittwoch, 23 april 2003 11:34 schrieb stephan kulow
+> ------- you are receiving this mail because -------
+> you are the assignee for the bug, or are watching the assignee
+> > http://bugs.kde.org/show_bug.cgi?id=57562
+> > > > > ------- additional comments from coolo@kde.org 2003-04-23 11:34 -------
+> what are the chances of having the real bug fixed for 3.1.2
+then suse > could take out that workaround i would propose the attached better workaround for 3.1 that doesn
+subject: re: cannot create mail folder in imap account
+the chances for having a real bug fix for 3.1.2 are pretty good since i just committed carsten s patch
+for 3.2 i have cleaned up kmfolderdia.cpp quite a bit
+there s still a minor problem which prevents me from committing it to head
+*** bug 58565 has been marked as a duplicate of this bug ***
+i am using kmail-1.5.2 on kde 3.1.2 (suse-packages)
+and i still can t create folders on an imap account
+do i have to wait until 3.2 or should i report this to suse
+subject: re: cannot create mail folder in imap account
+on friday 13 june 2003 09:30, ddjander@yahoo.com wrote
+> ------- you are receiving this mail because -------
+> you are the assignee for the bug, or are watching the assignee
+> > http://bugs.kde.org/show_bug.cgi?id=57562
+> > > > > ------- additional comments from ddjander@yahoo.com 2003-06-13 09:30 -------
+> i am using kmail-1.5.2 on kde 3.1.2 (suse-packages)
+and i still can t create folders on an > imap account
+> do i have to wait until 3.2 or should i report this to suse
+if you re sure you have 3.1.2 for kdenetwork3-mail, then it s nothing suse specific greetings, stephan
+well i just upgraded to the suse packages myself kdenetwork3-3.1.2-3
+same problem
+no way to create folder on imap
+just as before
+maybe someone should tell suse
+i don t find the bug-report e-mail address
+but then again, didn t help last time...
+maybe time to switch
+>i am using kmail-1.5.2 on kde 3.1.2 (suse-packages)
+and i still can t create >folders on an > imap account
+do i have to wait until 3.2 or should i report this to suse
+subject: re: cannot create mail folder in imap account
+on saturday 14 june 2003 21:37, vkoch@lbl.gov wrote
+> well i just upgraded to the suse packages myself > kdenetwork3-3.1.2-3
+did you also upgrade kdenetwork3-mail (which contains kmail)
+kdenetwork3 only contains a few libraries used by some of the kde network applications
+regards, ingo
+*** bug 59956 has been marked as a duplicate of this bug ***
+hi, i can confirm that the bug still exists with the following suse packages installed
+kdenetwork3-query-3.1.2-7 kdenetwork3-lan-3.1.2-7 kdenetwork3-vnc-3.1.2-7 kdenetwork3-devel-3.1.2-7 kdenetwork3-chat-3.1.2-7 kdenetwork3-lisa-3.1.2-7 kdenetwork3-news-3.1.2-7 kdenetwork3-3.1.2-7 kdenetwork3-mail-3.1.2-7 kdenetwork3-dialup-3.1.2-7
+as i remember i had no problem creating imap folders with the original kde 3.1.1 packages from suse 8.2 greetings, joerg

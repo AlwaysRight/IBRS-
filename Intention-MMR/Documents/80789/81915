@@ -1,0 +1,4 @@
+version: 0.11.9 (using kde kde 3.2.2) installed from: gentoo packages os: linux i think that if k3b is the cd burning software of kde it should be coherent with the rest of the applications
+in kde is standard to change names with f2 (like in konqueror), it would be more intuitive to be able to do the same with the cd name in the main window of k3b when creating data cd/dvd.
+this is a duplicate of bug 80789.
+*** this bug has been marked as a duplicate of 80789 ***

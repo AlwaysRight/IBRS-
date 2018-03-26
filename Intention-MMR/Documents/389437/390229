@@ -1,0 +1,2 @@
+trunk topcrash regression at nssamplewordbreaker::nextword(unsigned short const *,unsigned int,unsigned int) appeared around 7/12 http://crash-stats.mozilla.com/report/list?range_unit=weeks&branch=1.9&range_value=2&signature=nssamplewordbreaker%3a%3anextword(unsigned+short+const+*%2cunsigned+int%2cunsigned+int)
+*** this bug has been marked as a duplicate of bug 389437 ***

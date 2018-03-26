@@ -1,0 +1,26 @@
+steps to reproduce : 1 create bookmark with star button
+2 open menu to select folder
+3 click elsewhere then the menu to select folder but on the menu to create bookmark
+wrong behavior : this close the menu entirely
+correct behavior : should only close menu to select folder and leave the bookmark menu open for further modification
+after all you are clicking on it
+you should be able to use it.
+*** this bug has been marked as a duplicate of bug 395176 ***
+this bug is not a duplicate of bug 395176, that bug is about the bookmarks menu, and this is about the new add bookmark dialog box
+please reopen this bug
+this bug is a huge annoyance - if you click on the list of folders to put the bookmark in, and the one you want isn t there, you can t then click on the arrow to the right (which provides the drop down list of all bookmark folders), because this bug makes the entire window disappear (as does switching focus to anything else in the window)
+this bug will annoy a lot of users, and really needs to be fixed before release.
+(in reply to comment #2) > this bug is not a duplicate of bug 395176, that bug is about the bookmarks > menu, and this is about the new add bookmark dialog box
+> > please reopen this bug
+> > this bug is a huge annoyance - if you click on the list of folders to put the > bookmark in, and the one you want isn t there, you can t then click on the > arrow to the right (which provides the drop down list of all bookmark folders), > because this bug makes the entire window disappear (as does switching focus to > anything else in the window)
+> > this bug will annoy a lot of users, and really needs to be fixed before > release
+> this is a dupe for me
+the bug does speak about toolbar bookmark menu
+we should comment on importance on the other bug
+it is very annoying.
+doesn t look like the same bug to me.
+ok if this is not the same bug
+it should definitely be blocking for me
+it is a major loss of functionality in the toolbar bookmark menu.
+it is, however, a duplicate of bug 400019
+*** this bug has been marked as a duplicate of bug 400019 ***

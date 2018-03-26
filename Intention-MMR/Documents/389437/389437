@@ -1,0 +1,49 @@
+created attachment 273632 stack
+i ' ve recently been experiencing crashes when using alt+arrow to move the cursor around word-by-word in text boxes
+i ' ve noticed this most recently in the gmail compose window, although i ' m pretty sure i ' ve seen it in " normal " textareas/inputs as well
+i don ' t have a consistent set of steps to reproduce the issue, although i think it may be related to moving from one line to the next
+all i have is a stack from a mac opt build, i ' ll see if i can get one from a debug build with a line number.
+*** bug 390229 has been marked as a duplicate of this bug ***
+http://crash-stats.mozilla.com/report/list?range_unit=weeks & branch=1.9 & range_value=2 & signature=nssamplewordbreaker%3a%3anextword(unsigned+short+const+*%2cunsigned+int%2cunsigned+int%29 regression appears to have happened around 7/13
+xul!nssamplewordbreaker::nextword+0xb [e:\builds\tinderbox\fx-trunk\winnt_5.2_depend\mozilla\intl\lwbrk\src\nssamplewordbreaker.cpp @ 166]
+xul!clusteriterator::clusteriterator+0x10d [e:\builds\tinderbox\fx-trunk\winnt_5.2_depend\mozilla\layout\generic\nstextframethebes.cpp @ 4762]
+xul!nstextframe::peekoffsetword+0x5a [e:\builds\tinderbox\fx-trunk\winnt_5.2_depend\mozilla\layout\generic\nstextframethebes.cpp @ 4781]
+xul!nsiframe::peekoffset+0x3e6 [e:\builds\tinderbox\fx-trunk\winnt_5.2_depend\mozilla\layout\generic\nsframe.cpp @ 4839]
+xul!nsframeselection::movecaret+0x255 [e:\builds\tinderbox\fx-trunk\winnt_5.2_depend\mozilla\layout\generic\nsselection.cpp @ 1350]
+xul!nsframeselection::wordmove+0x18 [e:\builds\tinderbox\fx-trunk\winnt_5.2_depend\mozilla\layout\generic\nsselection.cpp @ 2765]
+gavin, do the steps in bug 391356 crash for you
+(that bug looks like a dup of this one)
+(in reply to comment #4) > gavin, do the steps in bug 391356 crash for you
+(that bug looks like a dup of > this one) i can ' t seem to reproduce using those steps, but that bug does look like a dupe.
+oh, and i ' m testing mac - could be a platform difference that make your steps only work on windows, i guess.
+*** bug 391356 has been marked as a duplicate of this bug ***
+(in reply to comment #6) > oh, and i ' m testing mac - could be a platform difference that make your steps > only work on windows, i guess
+not windows-specific -- i get a crash from following those steps under linux, at least.
+related issue
+we ' re don ' t correctly handle a trailing space character in gmail ' s compose box
+steps to show this
+1. open up a gmail compose window
+2. type " a " (no quotes, but with a single trailing space)
+3. press return key
+4. press left-arrow key ** notice that the cursor is immediately after " a " , hiding the fact that there ' s a space there
+5. press " b " ** notice that the space has reappeared, between " a " and " b "
+6. press backspace to delete the ' a ' ** notice that the space is hidden again
+7. press backspace to delete the invisible space
+** notice that cursor doesn ' t move as invisible space is deleted
+conclusion
+the space is there, sort of, but we ' re not showing it
+side note 1: not only are we not showing it, but the arrow keys don ' t seem to respect the space
+pressing left-arrow and right-arrow keys will skip right over the invisible space, as if it weren ' t there
+(as opposed to the backspace key, which does actually delete the invisible space without moving the cursor, as shown in the above steps)
+side note 2: - when coming at the invisible space from the left side, via pressing right-arrow, it ' s impossible to reach a position *immediately after* the invisible space
+- similarly, when coming at the invisible space from the following line, via pressing left-arrow, it ' s impossible to reach the position *immediately before* the invisible space
+(you can demonstrate this by navigating with the arrow keys, and then typing some text to see where you are with respect to the invisible space.)
+created attachment 278339 testcase
+i get this crash when double-clicking the first word in the sentence of this testcase
+i get indeed a regression range between 2007-07-12 and 2007-07-13.
+created attachment 279826 fix
+the wordbreaker should be able to handle being passed apos==alength
+simon, who should sr this?
+comment on attachment 279826 fix r+moa=me, and intl policy is that you don ' t need sr if you have moa
+comment on attachment 279826 fix need approval from m8 drivers right now
+checked in

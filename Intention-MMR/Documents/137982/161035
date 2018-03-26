@@ -1,0 +1,20 @@
+version: (using devel) installed from: compiled sources i would like to see: - fit to window (zoom in smaller and zoom out larger images) - fit only larger images to window - fit to width - fit to height - fit window to image - actual/original size and configurable key shortcut for every mode.
+i think it s a bit too much, so i won t add that much zoom options
+note however that there are past and coming improvements which brings some of the functionality you are asking for
+- fitting smaller image to window is bug #137982
+- when you zoom in and out with the (+) and (-) actions, gwenview now snaps to the zoom to width and zoom to height ratios when it comes across them
+*** this bug has been marked as a duplicate of 137982 ***
+why do you think it s a bit too much
+irfanview, a popular image viewer for windows which i often use, has all this options and i don t see any reason why gwenview shouldn t have them.
+i believe it would clutter the application for little outcome
+as i said, part of what you are asking is already there or will be soon
+i don t think most users have a need for so many zoom options.
+it is interesting that this clutter doesn t bother irfanview userbase (which is larger than gwenview userbase)
+ah..
+i understand now, this is part of the global effort to reduce clutter in kde by reducing features and making it a gnome clone
+at least then add actual size action with configurable shortcut as in old gwenview
+regards!
+actual action is already in gwenview 2.0, and you can configure its shortcut
+thanks for the sarcasm.
+where is the zoom to width option
+using 2.9.1

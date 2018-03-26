@@ -1,0 +1,49 @@
+i20060110-1026 i can no longer click some elements in the packages view and suddenly the label gets corrupted into" org.ec.."
+test case
+1. start attached workspace
+2. select project ' foo ' in the package explorer
+3. select ' org.eclipse.jface.text ' in the packages view
+3. expand ' foo ' in the package explorer
+4. select ' src ' == > strange label " org.ec..
+this works with i200605-0800 plus jdt ' s build input for i20060110-1026
+created an attachment (id=32846) test workspace
+this used to happen back in the 3.0 days (bug 56593) when we explicitly set the font on a particular item...
+moving to swt since this looks like a regression at the swt level
+i did not change anything related to labels recently.
+boris, i saw that a new labledecorator got added with i20060110-1026
+i don ' t know the details about it but thought it might be related.
+tod, could it be that this was caused by the patch from bug 121623?
+no i wouldn ' t think so - bug 121623 is just a way of passing context but it doesn ' t change how decoration is done
+any update on this one?
+ping.
+would you be able to send me a screenshot of the bug
+i opened your workspace with the latest built (20060118-1600) and i don ' t get the strange label problem you do
+thanks.
+> would you be able to send me a screenshot of the bug
+i opened your workspace > with the latest built (20060118-1600) sure, but as far as i know the latest build is i20060131-1200
+here my steps again
+1. download eclipse sdk build i20060131-1200 for windowsxp
+2. extract the attached workspace to c:
+3. start eclipse using -data c:\tmp == > picture 1
+4. execute step 2 to 4 from comment 0 == > picture 2
+created an attachment (id=33926) picture 1
+created an attachment (id=33927) picture 2
+thanks for the screenshots
+you were right, the labels are appearing strange
+it seems to be modifying the name that was last selected before clicking on another view
+note:Also tested with Version: 3.1.1, Build id: M20050929-0840 and the bug is not present.
+> Note: Also tested with Version: 3.1.1, Build id: M20050929-0840 and the bug is not present.
+mmh, i never said it didn ' t work there, did i
+i first saw the bug in i20060110-1026, as indicated in comment 0
+once the dots appear i often can ' t select the top item any longer.
+no you did not, we usually add comments to the bug to save time for the person that is fixing it.
+*** bug 124850 has been marked as a duplicate of this bug ***
+we already had something like that in bug 54057, which has probably been solved by the fix for bug 57426
+could it be that the support for background images has a similarly adverse effect as the support for fonts had?
+yes, there have been many changes since 3.1.x.
+i have a handle on this one
+it was caused by the fix for bug 117700.
+actually, it turned out to be caused by the fix for bug 119207.
+fixed > 20060215 vi, we should consider this for m5.
+*** bug 127838 has been marked as a duplicate of this bug ***
+verified in 3.2 m5 (i20060217-1115).

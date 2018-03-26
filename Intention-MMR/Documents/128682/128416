@@ -1,0 +1,18 @@
+from bugzilla helper: user-agent: mozilla/5.0 (x11 linux i686 en-us rv:0.9.8+) gecko/20020226
+buildid: 2002022608
+dragging a link on an image to a tab results in that image being loaded, not the link it points to
+dragging a text link to a tab loads the link as you would expect
+this behaviour has changed in the recent nightly builds and this was a feature that i (used to) use a lot
+reproducible: always steps to reproduce: 1
+open a new tab
+drag a link from an image to the tab
+actual results: the image is loaded in the tabbed window
+expected results: the link the image points to should be loaded.
+confirmed win2k build 128416
+drag the mozilla banner to a new tab at the top of this page
+but this isnt only tabs, happens if you drag to a new window too need to move os-> all and component to browser-general
+confirm win2k build 2002022503 rather :)
+this doesn t seem limited to tabs, as i can can repro the problem with d n d ing an image link from one window to another
+over to d n d for triage.
+duping against bug with analysis and patch, higher-number though it may be
+*** this bug has been marked as a duplicate of 128682 ***

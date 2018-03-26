@@ -1,0 +1,23 @@
+when creating a new webproject, i created a new runtime but i was unable to see in the drop down the newly created runtime
+i then created a second one, i was then able to see the first one, but not the second newly created runtime
+0. ensure you don ' t have any installed server (runtimes) defined
+1. open the create new dynamyc web project wizard
+2. enter the name for the web project
+3. using the target runtime " new " button, create a new runtime
+4. the runtime should be displayed in the combobox, but is not there
+*** bug 213006 has been marked as a duplicate of this bug***
+i was unable to reproduce this (using i20071221182137)
+which runtime type were you using?
+i was using tomcat 5.5
+i just tried this again today using the latest build available (20080104023442), and i am still able to recreate the problem
+the one thing i did noticed that i did is i skipped step 0, and instead added a step 2.1, where i just click on the drop down arrow of the target runtime (this way i ensure that there is nothing in the box), i then continue with step 3, using tomcat 5.5
+reproduced the problem using tomcat 5.5
+investigating now.
+*** bug 214404 has been marked as a duplicate of this bug ***
+raising severity to major since this can be a pretty confusing regression for the user to deal with
+whether this comes up or not depends on the implementation details of the server adapter
+i can reproduce with tomcat, but not with weblogic.
+created an attachment (id=86250) patch v1
+i have a patch for this issue and bug 214375 (they are interconnected)
+both issues appear to be fixed by the patch, but due to the size of the change, this will need further testing/review before being released.
+fix released to the m5 code stream.

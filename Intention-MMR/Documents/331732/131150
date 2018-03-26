@@ -1,0 +1,13 @@
+this bug was originally reported in the debian bts: http://bugs.debian.org/205976 when the currently playing song is deleted, rhythmbox should go onto the next song
+created an attachment (id=58079) patch this patch fixed this by queuing a next operation when the playing song is deleted, rather than stopping.
+with this patch it appears that upon a remove action, it always skips to the song at the top of the current list of songs in the library song list
+this is ok only if you are deleting the first song in the place, it should skip to the song immediately below.
+(in reply to comment #2) > only if you are deleting the first song in the place, it should skip to the > song immediately below
+oops, should read: only if you are deleting the first song in the list, otherwise it should skip to the song immediately below
+created an attachment (id=58382) fixed patch this now chooses the entry to play correctly.
+works for me.
+has this patch been committed yet
+switching patch status to none .
+thanks for reminding me, i d forgotten
+committed to cvs.
+*** bug 331732 has been marked as a duplicate of this bug ***

@@ -1,0 +1,33 @@
+user-agent: mozilla/5.0 (windows windows nt 5.1 en-us rv:1.8.1a3) gecko/20060616 bonecho/2.0a3
+build identifier: mozilla/5.0 (windows windows nt 5.1 en-us rv:1.8.1a3) gecko/20060618 bonecho/2.0a3
+after updating from (gecko/20060616 bonecho/2.0a3) to any build from 18th onwards the search engines disappear from the search field and manage search engines when pressed opens up the manage search engines list box but the buttons do not respond and the only way to close it is by pressing x
+reproducible: always steps to reproduce: 1.update to any build from 18th nightly onwards 2
+3.
+a way to work around this is to delete storage.sdb from your profile
+it s unclear though why an old (corrupted?) storage.sdb file would cause this.
+i confirm this bug
+if you open the browser manually, the engines are there...
+if you open the browser via clicking an external link from a different application, the engines are gone and the search manager is broken
+created attachment 226371 before the drop down the browser had been opened by a link in an external application
+created attachment 226373 after the drop down the browser had been opened by a link in an external application
+(in reply to comment #1) > a way to work around this is to delete storage.sdb from your profile
+it s > unclear though why an old (corrupted?) storage.sdb file would cause this
+> doesnt fix it for me
+here s what appears in the error console because of this: error: [javascript error: engine has no properties {file: file:///c:/progra~1/bonech~1/components/nssearchservice.js line: 2115}] when calling method: [nsibrowsersearchservice::getvisibleengines] = ns_error_xpc_javascript_error_with_details source file: chrome://browser/content/search/search.xml line: 252 and: error: engine has no properties source file: file:///c:/progra~1/bonech~1/components/nssearchservice.js line: 2115
+> i confirm this bug
+if you open the browser manually, the engines are there...
+> if you open the browser via clicking an external link from a different > application, the engines are gone and the search manager is broken
+> no in my case the search engines arent there no matter how i open firefox
+when trying to manage searches, this is what appears: error: [exception..
+component returned failure code: 0x80004005 (ns_error_failure) [nsiobserverservice.removeobserver] nsresult: 0x80004005 (ns_error_failure) location: js frame :: chrome://browser/content/search/enginemanager.js :: enginemanager_onok :: line 46 data: no] source file: chrome://browser/content/search/enginemanager.js line: 46 error: [exception..
+component returned failure code: 0x80004005 (ns_error_failure) [nsiobserverservice.removeobserver] nsresult: 0x80004005 (ns_error_failure) location: js frame :: chrome://browser/content/search/enginemanager.js :: enginemanager_oncancel :: line 56 data: no] source file: chrome://browser/content/search/enginemanager.js line: 56
+(in reply to comment #7) > > i confirm this bug
+if you open the browser manually, the engines are there...
+> > if you open the browser via clicking an external link from a different > > application, the engines are gone and the search manager is broken
+> > > > no in my case the search engines arent there no matter how i open firefox > sometimes works this way for me also mozilla/5.0 (windows windows nt 5.2 en-us rv:1.8.1a3) gecko/20060620 bonecho/2.0a3 id:2006062004
+some feedback would be nice
+you want resolution within five hours
+you must be new here ;) *** this bug has been marked as a duplicate of 341981 ***
+(in reply to comment #11) > you want resolution within five hours
+you must be new here ;) > > *** this bug has been marked as a duplicate of 341981 *** > yes iam :p
+i found a way to fix this just go into firefox safe mode then is gonna give you a choice of what to do then just chekc reset toolbar and continue and its fixed

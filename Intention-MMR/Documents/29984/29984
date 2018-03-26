@@ -1,0 +1,65 @@
+(*** this bug was imported into bugs.kde.org ***)
+package: konqueror
+version: 2.1
+severity: wishlist
+installed from: debian package 4:2.1.2-2 (testing/unstable)
+compiler: gcc version 2.95.4.20010319 (debian prerelease)
+os: linux 2.4.4 i686
+to also change numerically the permits of the files on konqueror
+for a lot of people it is easier and quick to change the permits of the files with the values chmod in numbers that to mark the stalls
+i would be very happy if this option was included when making click in properties permits in a file with the konqueror
+i think that under the options of the stalls it could have an option that allowed to insert the numeric values of the permits of the file.
+i m here because i will report this wish too, but i will add one thing, when selecting the file permissions, the numerical number sould appear
+it s nothing essencial, but it helps to complete kde
+subject: [patch] #29984 change file permission using octal numbers
+hello, i wrote a patch to close the feature requested in bug #29984 http://bugs.kde.org/show_bug.cgi?id=29984
+the patch adds a line edit to the permission page of the properties dialog
+the user can enter any octal number in the line edit to change the file permission like he would do when using chmod
+additionally the file permissions selected by the user are shown as an octal number
+the attached patch is tested against head and works flawlessly for me when applied to kdelibs
+may i commit it
+are there any comments for improvements
+cu dom created an attachment (id=1582) kpropertiesdialog.diff
+subject: re: [patch] #29984 change file permission using octal numbers
+hello, am donnerstag, 15 mai 2003 16:20 schrieb scott wheeler
+> on thursday 15 may 2003 14:32, dominik seichter wrote
+> > the patch adds a line edit to the permission page of the properties > > dialog
+the user can enter any octal number in the line edit to change > > the file permission like he would do when using chmod
+additionally the > > file permissions selected by the user are shown as an octal number
+> > hmm, to me it just doesn t seem like this belongs in the gui -- certainly > not simply with the string permissions
+well, you are right
+the string permission should be changed
+i simply had no idea for a better, more descriptive string
+maybe octal permissions would be better or chmod permissions
+> i think understanding unix > permissions is confusing as is, but allowing for setting the octal mode > would just add another widget to the general confusion
+this would seem > roughly like being prompted for command line switches when dragging and > dropping a file because it s more powerful that way
+the additional widget might help the user to better understand the concept of unix permissions numbers, because the number is updated in real time, as soon as the user clicks on one of the checkboxes
+maybe there is a possibility to make it more obvious to the user that s/he has not to change anything in this line edit
+i can t think of any better way right now
+> anyway -- just my opinion
+we ll see what others think..
+cu dom
+subject: re: change numerically the permits of the files
+on konqueror on thursday 15 may 2003 16:45, domseichter@web.de wrote
+> > > i think understanding unix > > permissions is confusing as is, but allowing for setting the octal mode > > would just add another widget to the general confusion
+this would seem > > roughly like being prompted for command line switches when dragging and > > dropping a file because it s more powerful that way
+> the additional widget might help the user to better understand the concept of > unix permissions numbers, because the number is updated in real time, as soon > as the user clicks on one of the checkboxes
+maybe there is a possibility to > make it more obvious to the user that s/he has not to change anything in this > line edit
+i can t think of any better way right now
+well, if that s the goal
+why is your patch missing massive whatsthis help
+greetings, stephan
+*** bug 106836 has been marked as a duplicate of this bug ***
+@peter: what do you think about this wish
+could be interesting to implement it on dolphin?
+@finex: the corresponding file where the change must be done is in kdelibs and out of scope of dolphin
+from my point of view i m strongly against this feature
+the file properties dialog is used by a lot of users (bug #185551 gives an indication about this)
+adding a line editor to the ui that can be used and is understood by only by a very, very small user group should not be part of a ui that is used by other user groups too
+i even don t see a benefit for the advanced users in this case
+i think it is more effort to right click an item, select properties..., select permissions , fokus the line editor, type in the permissions instead of pressing f4 to open the konsole and type one line chmod...
+ah, in the last sentence i meant i think it is not efficient to right click ..
+sorry!
+thanks peter
+i agree with you
+i ll move the request to kdelibs even if i m against too.

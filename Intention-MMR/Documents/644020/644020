@@ -1,0 +1,15 @@
+we need a 256x256 variant for various places in gnome shell
+would be good to have for the os x port as well i guess.
+created an attachment (id=182607) icons in all sizes
+also included is source svg using the one canvas approach.
+plese note that the source svg needs to be kept in the repository, no need to ship it with the tomboy source package tho.
+any progress on this one?
+created an attachment (id=185534) icons + source svg
+slightly refesh d version with more contrast and better canvas usage on the 256x256.
+*** bug 647174 has been marked as a duplicate of this bug ***
+ping?
+created an attachment (id=202264) adds 256x256 icon support
+tested with my opensuse 12.1 gnome 3.2 build.
+hopefully this can be approved quickly
+(in reply to comment #6) > ping?
+committed r50006f367b34

@@ -1,0 +1,27 @@
+happens with at least the following jhbuild gnome 2.14 modules
+gedit, zenity, file-roller, rhythmbox traceback (most recent call last)
+make[2]: *** [es/rhythmbox.xml] fehler 1
+make[2]: verlasse verzeichnis ?/cvs/gnome/rhythmbox/help?
+<kmaraas> nazgul, i got the same problem as you in gnome-panel
+and i found that if i continued the build outside of jhbuild it passed (or it could be that running it a second time would make it pass too, but i didn t check that)
+a second run does not change anything i acknowledge
+it compiles for me as well using the system-wide xml2po
+playing with python_path environment variable did not remedy.
+got the same for gnome-applet, gedit and perhaps more with jhbuild is smth changed in xml2po
+last week it was working correctly..
+i have no system wide xml2po and playing with the environment fix nothing
+created an attachment (id=63236)
+fix handling of untranslated translators-credits
+yes, something has changed in xml2po (we allow marking of untranslated strings now, it was a recent bugfix, and this introduced a problem with untranslated translator-credits )
+please commit this for me (i don t have my ssh key here)
+2006-04-11 danilo ?egan <danilo@gnome.org>
+* modes/docbook.py: check if translators-credits is translated
+note to self: add more regression tests involving docbook mode and real data.
+*** bug 338031 has been marked as a duplicate of this bug ***
+fix works for me.
+can anyone commit it for me
+thanks
+sure
+*** bug 338096 has been marked as a duplicate of this bug ***
+*** bug 338388 has been marked as a duplicate of this bug ***
+*** bug 337015 has been marked as a duplicate of this bug ***

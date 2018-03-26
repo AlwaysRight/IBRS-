@@ -1,0 +1,12 @@
+i ve been seeing this error in some different modules in the tinderbox builds:
+if test -d de/ then mkdir de/
+fi case in /*) sd= *) sd= ../;;
+esac \ if [ -f c/gedit.xml ] then d= ../ else d= $sd/ fi
+\ (cd de/ && \ `which xml2po` -e -p \ ${d}de/de.po \ ${d}c/gedit.xml > gedit.xml.tmp && \ cp gedit.xml.tmp gedit.xml && rm -f gedit.xml.tmp) traceback (most recent call last): make[2]: leaving directory `/cvs/gnome/gedit/help make[1]: leaving directory `/cvs/gnome/gedit
+make[2]: *** [de/gedit.xml] error 1 make[1]: *** [all-recursive] error 1 make: *** [all] error 2 i tracked it down and it is happening when in gettranslation(tcmsg), there s no translation and so the nonetranslations fallback is used, which indeed returns none
+i m not sure why the nonetranslations was added, but anyway, you should know how to fix it danilo :)
+and you really should hang around irc too!
+*** this bug has been marked as a duplicate of 337925 ***
+nonetranslations was added for --mark-untranslated option (requested feature).
+ah, i thought --mark-untrasnlated was a post-2.14 feature
+thanks for both the feature and the bug fix :).

@@ -1,0 +1,6 @@
+version: 0.9.11 (using kde kde 3.2.2) installed from: compiled from sources os: linux when you select the disk label of a data cd project, the f2 key should have the same effect as double clicking on it: rename
+this will make it more consistent with konqueror s file renaming shortcut, which is also the f2 key.
+there is another inconsistency with konqueror s renaming behavior: when you have edited the name and select another widget without pressing enter first, the editing action is aborted
+in konqueror, the edit action is confirmed and executed by unselecting the icon that the user was editing
+the only way to abort editing the name is by pressing esc, which makes sense to me.
+*** this bug has been marked as a duplicate of 80789 ***

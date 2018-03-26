@@ -1,0 +1,4 @@
+please describe the problem: gnome-panel & bug-buddy builds abort with a gnome-doc-utils error: traceback (most recent call last):
+make[3]: *** [de/clock.xml] error 1 log available on http://jhbuild.bxlug.be/builds/2006-04-03-0001/logs/gnome-panel/#build steps to reproduce: actual results: expected results: does this happen every time
+other information: patched locally to replace if translators == self.getstringfortranslators(): by if translators is none or translators == self.getstringfortranslators():
+*** this bug has been marked as a duplicate of 337925 ***

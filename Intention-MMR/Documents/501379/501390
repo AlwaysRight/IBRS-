@@ -1,0 +1,5 @@
+since bug 487245 landed, wheel scroll distance seems to have increased significantly on windows.
+bug 501379 and this appear to be dups.
+*** this bug has been marked as a duplicate of bug 501379 ***
+created attachment 386041 wheel scroll fix v1 my refactor patch in 487245 split the wheel scroll event handling out into an event handler, which introduced a bug where aretvalue was not set correctly
+this patch addresses that and also adds some commenting to onwheelscroll to clearly explain what the handler does.

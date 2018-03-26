@@ -1,0 +1,7 @@
+version: 1.5.1 (using kde 3.1.1) installed from: suse compiler: gcc version 3.3 20030226 (prerelease) (suse linux) os: linux (i686) release 2.4.20-4gb in the new version of kmail (1.5.1) it seems to be impossible to create subfolders to imap-folders
+in the dialog for creating the folder appears only the list of local foldern for selection as parent folder
+in the listbox is no imap folder
+if i create the imap-folder on the server, the kmail do not show the new folder (but after a new start)
+thank you for the great program kmail!
+bug in suse packages - suse supplementary has fixed packages
+*** this bug has been marked as a duplicate of 57562 ***

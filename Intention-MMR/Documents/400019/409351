@@ -1,0 +1,19 @@
+user-agent: mozilla/5.0 (windows windows nt 5.1 en-us rv:1.8.1.11 net clr 2.0.50727) gecko/20071127 firefox/2.0.0.11
+build identifier: mozilla/5.0 (windows windows nt 5.1 en-us rv:1.8.1.11 net clr 2.0.50727) gecko/20071127 firefox/2.0.0.11
+when trying to add a bookmark through booksmarks > bookmark this page if you perform a certain click combination the box closes and registers your bookmark prematurely
+in the same vein, when the box loses focus it will register the bookmark
+reproducible: always steps to reproduce: 1
+load a webpage
+open bookmark this page 3
+click the folder drop down menu 4
+keep the drop down menu open and click anywhere on the box chrome 1
+load a webpage 2
+open bookmark this page 3
+click anywhere but the bookmark this page box actual results: bookmark this page box closes
+bookmark gets filed underneath the bookmarks menu
+expected results: the box should not have closed nor should the bookmark have been filed underneath the main bookmarks menu
+windows xp sp 3 release candidate
+firefox 3 beta 2
+your second set of steps to reproduce demonstrates strange but intended behavior
+(see bug 404560, bug 403699, and bug 396513 -- especially the comment from alex faaborg in the second bug.) your first set of steps to reproduce sounds like bug 400019
+*** this bug has been marked as a duplicate of bug 400019 ***

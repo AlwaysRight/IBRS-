@@ -1,0 +1,9 @@
+when creating a new webproject, i created a new runtime but i was unable to see in the drop down the newly created runtime
+i then created a second one, i was then able to see the first one, but not the second newly created runtime
+ensure you don t have any installed server (runtimes) defined 1
+open the create new dynamyc web project wizard
+enter the name for the web project 3
+using the target runtime new button, create a new runtime 4
+the runtime should be displayed in the combobox, but is not there
+looks like you accidentally opened 2 copies of the same bug
+*** this bug has been marked as a duplicate of bug 213005 ***

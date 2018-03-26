@@ -1,0 +1,21 @@
+while generating docs with a language where the translator-credits string is empty, it breaks:
+some debugging shows that xml2po fetches the contents of the gettext string translator-credits to get the string with translators
+however, when this empty, for example in gnome-panel/help/clock/de/de.po: #
+put one translator per line, in the form of name <email>, year1, year2
+#: ../c/legal.xml:0(none) msgid translator-credits msgstr it breaks, because a none object is returned instead of a string
+then, the currentxmlmode.postprocessxmltranslation breaks because it tries to do a nonetype.split
+as shown in the error above.
+btw, it s weird that this doesn t happen overall
+am i the first
+maybe it s some ubuntu dapper python bug..
+can anyone tell?
+created an attachment (id=63245) proposed fix to check if translators is not none
+this patch fixes it on my automated build system with jhbuild on ubuntu dapper.
+hmm, could also be a gettext bug
+maybe it shouldn t even get none.
+hmm the older report has a simple fix that was just committed and fixes the problem
+no idea if your patch could be useful as well
+*** this bug has been marked as a duplicate of 337925 ***
+ah right, thanks
+that fix was a tiny bit nicer indeed
+thanks!

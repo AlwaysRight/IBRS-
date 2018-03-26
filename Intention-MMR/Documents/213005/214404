@@ -1,0 +1,16 @@
+build id: i20071213-1700 steps to reproduce: 1
+open the new dynamic web project wizard 2
+define a new runtime by pressing the new..
+button in the target runtime group 3
+after the runtime is defined, select the target runtime combo
+notice that the new runtime is not in it
+press cancel to exit the dialog
+open the dialog again, the new runtime will now appear
+more information:
+what web project version (j2ee 1.2, 1.3, ...) are you creating in the wizard, and which runtime type (tomcat, ...) did you create
+my initial guess would be that you created runtime that won t work with the project version you re creating and this is just a filtering problem when you launch the runtime creation from the project wizard.
+it was for apache tomcat 5.5.23, using the default j2ee version (2.4)
+notice that after i cancel out of the wizard, and open the wizard again, the runtime does appear in the dropdown..
+so it s probably just a ui refresh issue.
+marking as dup *** this bug has been marked as a duplicate of bug 213005 ***
+closing duplicate.

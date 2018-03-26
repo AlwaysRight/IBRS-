@@ -1,0 +1,21 @@
+version: 1.4.1 (using kde kde 3.5.5)
+installed from: compiled from sources
+compiler: gcc version 4.1.2 20061115 (prerelease) (debian 4.1.1-20)
+os: linux
+in gwenview 1.4.1 when i select the zoom option fit to window it doesn t work on an image that is smaller to the image window size, however it works if the image is bigger than the image window size
+also, the zoom options fit to width and fit to height are working correctly with images that are smaller to the image window size and they are scaled acording to the option selected
+thanks.
+i checked with a current build of the kde4 version, and this issue is still present, when an image it is smaller than the gwenview s image view area and the zoom to fit toolbar button is pressed the image isn t scaled to fit the image view area and it s showed exaclty like if actual size button were pressed.
+in fact, there is an option to do what you want in gwenview 1.4
+it s in the configuration dialog, go to image view , then check enlarge small images when auto zoom is activated
+unfortunately, i haven t ported that option to gwenview 2.0 and since we are freezing for kde4.0, it won t be there
+you will probably have to wait for kde4.1.
+would love to have it in 4.1 for sure, and imho it should be on by default (for the sake of simplicity, i wouldn t even make it an option).
+marking as kde4.1
+thanks, aurelien i don t know how i missed this option in 1.4.
+*** bug 159608 has been marked as a duplicate of this bug ***
+*** bug 161035 has been marked as a duplicate of this bug ***
+svn commit 801676 by gateau
+new option to enlarge smaller images in zoom to fit mode
+bug: 137982 m +42 -2 app/configdialog.ui m +4 -0 lib/gwenviewconfig.kcfg m +15 -1 lib/imageview.cpp m +2 -0 lib/imageview.h m +1 -0 part/gvpart.cpp
+websvn link: http://websvn.kde.org/?view=rev&revision=801676

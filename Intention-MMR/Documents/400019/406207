@@ -1,0 +1,23 @@
+user-agent: mozilla/5.0 (windows windows nt 6.0 en-us rv:1.9b1) gecko/2007110904 firefox/3.0b1
+build identifier: mozilla/5.0 (windows windows nt 6.0 en-us rv:1.9b1) gecko/2007110904 firefox/3.0b1
+by right-clicking then bookmark this page or by clicking the star, the small dialogue that comes up will close the down arrow next to folder (not the far right one, the one next to the input box) clicked twice
+reproducible: always steps to reproduce: 1
+actual results: the whole dialogue closes
+expected results: just the drop down box to close/collapse
+this is on default theme.
+i see this on: mozilla/5.0 (windows windows nt 5.2 en-us rv:1.9b2pre) gecko/2007113007 minefield/3.0b2pre - build id: 2007113007
+i believe these days it should go under places rather than bookmarks, though
+if not, sorry bout that.
+*** this bug has been marked as a duplicate of bug 403711 ***
+bug 403711 was duped to bug 400019, so i assume this one should also point to the parent
+*** this bug has been marked as a duplicate of bug 400019 ***
+bug 451915 - move firefox/places bugs to firefox/bookmarks and history
+remove all bugspam from this move by filtering for the string places-to-b-and-h
+in thunderbird 3.0b, you do that as follows: tools | message filters make sure the correct account is selected
+click new conditions: body contains places-to-b-and-h change the action to delete message
+select manually run from the dropdown at the top
+click ok
+select the filter in the list, make sure inbox is selected at the bottom, and click run now
+this should delete all the bugspam
+you can then delete the filter
+gerv

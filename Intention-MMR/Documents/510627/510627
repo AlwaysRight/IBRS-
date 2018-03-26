@@ -1,0 +1,57 @@
+we ' ve found a number of bugs where the tegra device locks up hard (ie, mouse pointer frozen, kernel debugger can ' t connect to it) after visiting a ssl site
+not every ssl site does this, however.
+*** bug 506722 has been marked as a duplicate of this bug ***
+*** bug 508478 has been marked as a duplicate of this bug ***
+*** bug 502230 has been marked as a duplicate of this bug ***
+*** bug 504970 has been marked as a duplicate of this bug ***
+created attachment 394606
+debugging info so far (from email)
+i ' ve previously sent some info out via email regarding this, appending here for posterity
+i took a spin through existing hang bugs, and verified that the workaround mentioned at the end of these email seems to make all the sites work fine
+so, it ' s most likely a common root cause, so i ' ve duped them all to this bug.
+*** bug 510419 has been marked as a duplicate of this bug ***
+kalle noticed that the kernel ' s kitl thread has a priority level of 131, and our thread was setting a priority level of 116 (0 is the highest priority)
+this ends up being the reason that the kernel debugger wasn ' t working..
+if i change the cesetprioritylevel() call to use 132 instead of 116 (so it ' s 1 priority level lower than the kitl thread), i can still reproduce the hang but now i can use the kernel debugger to poke at the device
+yay -- progress
+[i ' m not having any luck getting symbols or breakpoints working, though
+this is partially a result of almost always breaking into some point in the kernel (for which i don ' t have symbols), but symbols for my mozilla build also seem to be missing
+the debugger seems to be very finicky, so i ' ll try again with a full debug build, maybe that will help.] looking at the system process/thread info is revealing, though
+the high-priority (132) process thread normally has a very low cpu user-time total (ie, it doesn ' t actually do much), and the main firefox thread (where we actually do almost everything) accumulates cpu user-time as it ' s used
+but in the hang conditions, the high-priority thread accumulates cpu rapidly while all the other threads ' counters stay frozen
+so, this very much looks like one thread is spinning on the cpu and starving everything else
+there seems to be a potential loop between nsssliolayerpoll() and nssslthread
+requestpoll() -- the last line of requestpoll() is actually calling nsssliolayerpoll() again, so it ' s possible the code is relying on something else being scheduled in between.
+kaie, are you familiar with this code
+lots of history in this bug, but the last paragraph of comment 7 seems to be the key
+it certainly looks suspicious, but perhaps i ' m missing something.
+created attachment 394972
+patch v.1 (remove cesetthreadpriority)
+comment on attachment 394972 patch v.1 (remove cesetthreadpriority) get rid of the #include < windows.h > at the top of the file as well
+it got added for this, iirc.
+ssl thread is used to decouple mozilla ' s single-threaded network engine and the ssl read/write calls (which may sometimes blocked with an ui prompt)
+the " request..
+" functions are called by the main/network thread to make decisions what i/o requests are ok to be sent to the decoupled ssl thread
+a pollable event is used by ssl thread to wake up the network thread when some previously requested i/o is ready to be fetched
+important question
+on your platform, did ssl thread succeed to create a " pollable event "
+in other words, is nsssliolayerhelpers
+msharedpollableevent null or non-null
+on platforms where we fail to get a pollable event we need to live with a busy loop while waiting for i/o to complete
+but we use sleep calls to reduce that effect
+see want_sleep_and_wakeup_on_any_socket_activity
+you said
+> the last line of requestpoll() is actually > calling nsssliolayerpoll() again yes, but only in some limited scenarios
+you should see that in most scenarios the poll call is not reached but function requestpoll will " return early "
+question 2
+can you test
+in your busy loop, does requestpoll call poll (often)?
+pushed patch v.1
+http://hg.mozilla.org/mozilla-central/rev/30a01dc450d7 (leaving open for the moment)
+pushed to 192
+http://hg.mozilla.org/releases/mozilla-1.9.2/rev/3b20798e3368
+Using Mozilla/5.0 (Windows; U; WindowsCE 6.0; en-US; rv:1.9.2a2pre)
+gecko/20090827 namoroka/3.6a2pre as well as yesterday ' s build, i visited a bunch of various ssl sites and encountered no issues.
+i think we can just call this fixed
+comment 11 indicates the busy-poll can be normal, so due to the high-priority we were assigning that thread nothing else would be able to run (including the network stack, most likely)
+good enough for me.

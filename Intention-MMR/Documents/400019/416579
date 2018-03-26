@@ -1,0 +1,9 @@
+user-agent: mozilla/5.0 (windows windows nt 5.1 en-us rv:1.9b2) gecko/2007121120 firefox/3.0b2
+build identifier: mozilla/5.0 (windows windows nt 5.1 en-us rv:1.9b2) gecko/2007121120 firefox/3.0b2
+when i go to add bookmark, the menu comes up
+if i click on the folder drop-down box, but then i click elsewhere on the menu without making a selection, the menu just closes
+reproducible: always steps to reproduce: 1.bookmarks => bookmark this page 2.select the folder drop-down box 3.click somewhere else on the bookmark menu without making a selection on the drop-down box
+actual results: the toolbar disappears, and you must reopen it
+expected results: the drop-down box should disappear with the bookmark toolbar still active
+the toolbar also closes if you click anywhere else on the screen.
+*** this bug has been marked as a duplicate of bug 400019 ***

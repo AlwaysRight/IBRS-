@@ -1,0 +1,62 @@
+i200711-0800
+it looks like the fuzz/guess stuff is broken
+when i apply a patch with guessed fuzz factor some new code is inserted at wrong locations
+steps to reproduce: 1
+start fresh workspace 2
+load org.eclipse.jface.text and org.eclipse.ui.workbench.texteditor from head 3
+make sure you have rev
+1.261 of abstracttexteditor 4
+select the contents of this patch: https://bugs.eclipse.org/bugs/attachment.cgi?id=84091 5
+team > apply patch..
+select clipboard 7
+click next 8
+exclude the changes that aren t in the two source projects loaded in step 2 9
+observe: abstracttexteditor.java has conflicts 10
+click guess ==> observe: abstracttexteditor.java has no conflicts anymore 11
+click finish ==> the code from line 4083 and 4091 has been inserted at completely wrong location
+it should be inside handlepreferencestorechanged(...)
+>i200711-0800
+should read i20071127-0800 using r3.3.1.1 the guessed factor is 5 and the conflict doesn t go away - not perfect but better than showing no conflict and produce broken code.
+i will try to answer fix the issue asap.
+when i enter 999 (or 5) manually into the fuzz factor field then it seems work as expected.
+created attachment 84408 test cases i ve created test cases based on dani s steps (i hope you don t mind using one of your classes)
+what i observed is that using fuzz factor greater than 2 doesn t solve the problem as expected
+the hunk mentioned by dani is in the right place (more-less), but there is a different one which is rather misplaced
+since the attachment is quite heavy i will try to isolate the issue into smaller files
+investigation in progress...
+i ve found the cause
+actually this bug is a duplicate of 207003, the only difference is that dani gave me a real-life example
+let me briefly explain what s happening: 1) using the guess button: the algorithm used when guessing the fuzz factor is quite simple: for each hunk try to match using a fuzz of 0 first before attempting to match with a 1 and finally 2
+at each stage, shifting is tried as well before increasing the fuzz factor
+in dani s patch there is a hunk which needs to applied with the fuzz equals 2
+since the 2 became the global fuzz factor for all the hunks it s used with other hunks as well
+the hunk which dani complained about was shifted up and applied with the fuzz equals 2, if the fuzz hadn t been used for that particular hunk it would be shifted down and applied without a fuzz
+2) entering the value for the fuzz factor manually (greater than 2) using value greater than 2 results in ignoring all the context lines and applying a hunk according to it s location coordinates and calculated shifting
+this is a tempting approach but it s very risky at the same time
+if you have any questions/suggestions please ask/share with me.
+i would suggest to mark this one as a duplicate of the bug 207003 and increase the bug 2007003 severity to major
+fine with me.
+re 2) why do we allow to enter the value if you claim it is very risky
+i would expect that even if i enter it manually that the wizard shows me conflicts if any.
+well, to be more precise it s very risky for additions as we loose all the context for a hunk, so there is no way to verify if it s applied in the right position
+for others (deletion, change) we can t rely on the context either as it s all gone, but at least we can check with the lines the hunk is made of
+the situation is slightly different when we have context lines inside the hunk..
+or context lines are just white spaces..
+but that s a different story
+i ve been thinking about showing some kind of warning when the value entered (or guessed) can result in a hunk inserted at wrong position
+i guess it s a good idea, don t you think?
+i think there are a couple of things to consider here: 1) now that we are actually doing the fuzz factor properly, it is actually more risky then it was before
+i wonder if a good strategy is to warn the user with a don t show me this again dialog to indicate that any match made with a fuzz factor needs to be looked at closely for acurracy
+2) additions seem particularly risky since the context lines define the match
+you definitely can t try mathing with a fizz factor greater than n-1 where n iis the number of context lines
+perhaps we could scan the file for multiple matches when using a fuzz factor, and, if mutliple matches are found, fail the match and rely on the improved hunk compare viewer you are working on ;-) i also wonder if it would be possible to use a matching strategy on a per hunk basis that always tries with a fuzz of 0 first and then progresively increases the fuzz by 1 until either the max is reached or a match is found
+that way, we would be sure to use context lines when they do allow a match and only start ignoring them for hunks that require it
+>any match made with a fuzz factor needs to be looked at closely for acurracy
+you mean fuzz > 0?
+(in reply to comment #11) > >any match made with a fuzz factor needs to be looked at closely for acurracy
+> you mean fuzz > 0
+i think that s what micheal meant
+yes, i meant in the case where a fuzz factor was used to match a hunk.
+dani, could you verify that after the patch for bug 2007003 has been released, the issue is gone
+*** this bug has been marked as a duplicate of bug 207003 ***
+verified in 3.4 m4.

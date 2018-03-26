@@ -1,0 +1,12 @@
+when accessing http://litmus.mozilla.org, the site and os will hang up
+system reboot required.
+str: 1) load up tegra device, firefox version: mozilla/5.0 (windows windowsce 6.0 en-us rv:1.9.1.2pre) gecko/20090717 firefox/3.6a1pre
+2) go to url
+3) verify system and browser hangs reboot needed.
+i see the same symptoms as in bug 504970 comment 3
+hangs happens right after site identity button turns blue, no favicon, kernel debugger is wedged
+perhaps a common ssl problem?
+i can t reproduce this in this local build that i just did, which has a fix for bug 508113 in it.
+er, sorry, meant that last comment for bug 504970, but i don t hang on litmus either.
+alas, i still get the hang on my oban board with the 504970 patch.
+*** this bug has been marked as a duplicate of bug 510627 ***

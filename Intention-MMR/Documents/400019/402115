@@ -1,0 +1,23 @@
+user-agent: mozilla/5.0 (windows windows nt 5.1 en-us rv:1.9a9pre) gecko/2007103103 minefield/3.0a9pre
+build identifier: mozilla/5.0 (windows windows nt 5.1 en-us rv:1.9a9pre) gecko/2007103103 minefield/3.0a9pre
+if you double-click the places star button, the edit bookmarks popup comes up
+if you use the menulist to pick a directory, the popup goes away, but it should wait until the user clicks done or delete
+reproducible: always
+confirming
+the first time i click on the menu list drop down button (within the bookmark popup) it opens and i see all the choices
+the second time i click on it, the menu list closes, but so does the popup.
+i m using mozilla/5.0 (windows windows nt 5.1 en-us rv:1.9a9pre) gecko/2007110112 minefield/3.0a9pre
+i haven t tried mac os x yet.
+yes, what seth said in comment #1: contrary to the initial bug description, i can actually pick a directory without it closing the popup
+in the bug description, s/if you use the menulist to pick a directory/if you open and close the menulist without picking/
+*** this bug has been marked as a duplicate of bug 400019 ***
+bug 451915 - move firefox/places bugs to firefox/bookmarks and history
+remove all bugspam from this move by filtering for the string places-to-b-and-h
+in thunderbird 3.0b, you do that as follows: tools | message filters make sure the correct account is selected
+click new conditions: body contains places-to-b-and-h change the action to delete message
+select manually run from the dropdown at the top
+click ok
+select the filter in the list, make sure inbox is selected at the bottom, and click run now
+this should delete all the bugspam
+you can then delete the filter
+gerv

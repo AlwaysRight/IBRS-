@@ -1,0 +1,59 @@
+i ' m not sure the exact situations in which this happens, i think it has to do with using multiple builds with the same profile, but i ' ve hit it three times in the past day
+what ends up happening is that the _buildsortedenginelist pre-allocates an array of a certain size, then fills the engine in order from the storage file
+if not all slots are full, then this._engines contains undefined items and iterating through the engine list later in the startup process fails, giving a " engine has no properties " error and a blank search dropdown
+i guess this could have happened when i ran a build including the " use storage " patch, which created the db, and then used an older build that didn ' t include that patch to install an engine
+when the newer build starts up, a new engine exists that doesn ' t have an entry in the db, which leaves the blank slot in the array
+to fix this, we should make sure that the resultant array from _buildsortedenginelist doesn ' t contain any undefined items.
+the patch in bug #340331 has a fix for this.
+*** bug 342122 has been marked as a duplicate of this bug ***
+Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9a1) Gecko/20060619 Minefield/3.0a1
+under unknown circumstances firefox becomes location-sensitive
+only a search in google works, although all plugins are present, also in the app directory
+error: uncaught exception[exception.." ' [javascript
+error: " engine has no properties "
+{file: "file:///C:/Docume~1/Ria/Bureau~1/trunk/firefox/components/nsSearchService.js" line: 2118}]'
+when calling method
+[nsibrowsersearchservice::getvisibleengines] "
+nsresult: " 0x80570021 (ns_error_xpc_javascript_error_with_details) "
+location: "JS frame :: chrome://browser/content/search/search.xml :: rebuildPopup :: line 256"  data: yes]
+when i copy the application to another place, suddenly the gray text and the plugins are working again.
+if the search component doesn ' t successfully load the first time you run a build after unzipping it (like when you remove the plugins folder), subsequent startups may also fail because firefox won ' t try to reload the search component again
+by moving the program folder, you ' re changing the last-modified date of the .autoreg file, which tells firefox to try reloading the component at the next startup.
+*** bug 342168 has been marked as a duplicate of this bug ***
+created attachment 226388
+respect the fact that _engines is no array
+as i see it, this is a regression from bug 335101 which initializes the _sortedengines array always with length 1 - which causes an undefined engine if there are none.
+comment on attachment 226388 respect the fact that _engines is no array i don ' t see how this helps, the array will still have holes if one of the earlier engines in the db sort order no longer exists
+i prefer the patch in bug 340331 (just filter the array once we ' ve gone through all db entries).
+even if it doesn ' t fix the general case, that bit of code is still wrong and should be fixed (_engines is an object and no array)
+would you prefer a new bug to check this fix in, should i mention the issue over at bug 340331 or will you reconsider fixing it here?
+this should be gone before beta1
+comment on attachment 226388 respect the fact that _engines is no array ah, you ' re right, sorry
+yes, we should take both this fix and the filter fix from bug 341986.
+comment on attachment 226388 respect the fact that _engines is no array a=darin on behalf of drivers (please land this on the mozilla_1_8_branch and add the fixed1.8.1 keyword to this bug)
+checked in on the branch and trunk
+i ' ll leave this open until bug 335102 lands because the problem isn ' t entirely fixed until then
+i can ' t mark it as depending on bug 335102, though, because bugzilla sucks (i wish bug 251556 was fixed)
+mozilla/browser/components/search/nssearchservice.js 1.1.2.37 mozilla/browser/components/search/nssearchservice.js 1.43
+i still see the problem that the menus are too large (too many items)
+- delete searchplugins everywhere (remove folders) - start firefox, double-click a word on a page, watch the context-menu
+(in reply to comment #14) > i still see the problem that the menus are too large (too many items)
+can you file another bug on that
+it ' s a separate issue - the context menu code should check for a null currentengine
+it ' s pretty unlikely to affect any " normal " user, though
+(in reply to comment #15) > filed bug 342643 for this.
+adding fixed1.8.1 flag since this patch has been landed on the mozilla_1_8_branch per comment #13
+i realize that we want bug 335102 to be fixed as well, but that one looks iffy for beta1.
+i think we should take the one line fix from that patch to fix this issue
+this bug sucks, and the fix is easy, so we shouldn ' t wait for bug 335102 to land to fix this.
+created attachment 228216 filter fix
+splitting the .filter fix out of my renaming patch, since renaming has been retargeted for beta2.
+comment on attachment 228216 filter fix > + // filter out any nulls for engines that may have been removed > + this._sortedengines = this._sortedengines.filter(function(a) { return a})
+i ' d kinda prefer " !!a " to make it clear it ' s the boolean value that matters
+put this right above the " // array for the remaining engines, alphabetically sorted " comment, too, since this isn ' t related to the alphaengines stuff.
+checking in browser/components/search/nssearchservice.js
+/cvsroot/mozilla/browser/components/search/nssearchservice.js,v < -- nssearchservice.js
+new revision: 1.49
+previous revision: 1.48 done
+comment on attachment 228216 filter fix requesting approval for low-risk high-reward fix, intentionally split off to be acceptable for beta1.
+mozilla/browser/components/search/nssearchservice.js 1.1.2.42

@@ -1,0 +1,37 @@
+starting with today ' s trunk build (20090630), pages scroll further/faster than they did in the 20090629 build.
+bug 493037 looks like a good candidate for causing this.
+another symptom
+if mouse wheel scrolling is set to a page at a time, the browser page will move to the top or bottom of the page
+i have to use the scroll bar to move to anywhere other than the top or bottom of the page if the page is more that two screen heights long.
+*** bug 501390 has been marked as a duplicate of this bug ***
+this also appears on windows 7.
+created attachment 386052
+wheel fix
+my refactor patch in 487245 split the wheel scroll event handling out into an event handler, which introduced a bug where aretvalue was not set correctly
+this patch addresses that and also adds some commenting to onwheelscroll to clearly explain what the handler does.
+this also appears on windows xp - mozilla/5.0 (windows
+windows nt 5.1
+en-us
+rv: 1.9.2a1pre)
+gecko/20090630 minefield/3.6a1pre (.net clr 3.5.21022)
+this is extremely annoying
+the middle-click-scroll speed is the same as it has always been, though.
+http://hg.mozilla.org/mozilla-central/rev/9b3b3169bf08
+verified fixed using hourly build
+mozilla/5.0 (windows
+windows nt 6.1
+en-us
+rv: 1.9.2a1pre)
+gecko/20090630 minefield/3.6a1pre firefox/3.0.11 id
+20090630122827 changeset
+http://hg.mozilla.org/mozilla-central/rev/0ebf4f99895e
+a unittest for this would be great
+(in reply to comment #9) > a unittest for this would be great
+i was wondering the same thing, why didn ' t a unit test pick this up
+maybe it ' s hard to do as mouse drivers are involved in defining scroll speeds.
+this still seems to be happening in 3.6 alpha 1
+i ' m running windows 7.
+(in reply to comment #11) > this still seems to be happening in 3.6 alpha 1
+i ' m running windows 7
+what you see is not this bug, but an intentional change in the scrolling behavior
+see http://margaret.mit.edu/2009/08/making-firefox-feel-faster/ for more details (bug 462809).

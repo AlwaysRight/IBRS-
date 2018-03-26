@@ -1,0 +1,14 @@
++++ this bug was initially created as a clone of bug #506722 +++ this could be a dupe of bug 506722
+please dupe if so
+when accessing http://addons.mozilla.org, the site and os will hang up
+system reboot required
+str: 1) install tegra build
+mozilla/5.0 (windows windowsce 6.0 en-us rv:1.9.2a1pre) gecko/20090804 minefield/3.6a1pre
+2) launch amo
+3) start typing in the search text box
+4) system hang.
+further, i noticed that when the device hangs, and then the device is rebooted, there is no keyboard or touchpad activity
+you need to restart the entire device a second time to get keyboard and touchpad activity back.
+i know for a fact that amo used to work just fine
+so either something changed in recent os/browser builds, or something changed on amo (eg bug 508408?).
+*** this bug has been marked as a duplicate of bug 510627 ***

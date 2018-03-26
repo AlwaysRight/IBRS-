@@ -1,0 +1,33 @@
+user-agent: mozilla/5.0 (windows windows nt 5.1 en-us rv:1.9b3pre) gecko/2007122705 minefield/3.0b3pre
+build identifier: mozilla/5.0 (windows windows nt 5.1 en-us rv:1.9b3pre) gecko/2007122705 minefield/3.0b3pre
+when specifying the details of a bookmark on the drop down window that appears when you bookmark this page , once the arrow within the folder: drop down menu is pressed and the menu is opened, pressing the arrow again (which one would presume closes the drop down menu) simply closes the entire add bookmark menu itself, while also adding the bookmark
+this causes problems because i ve noticed that newly created folders that are made in show all bookmarks (which might be more accurately named organize bookmarks) do not show up in this drop down menu until they are activated by actually placing a bookmark within them
+and so once a user realizes that the folder he is looking for is not listed, and wishes to back up..
+the entire window closes prematurely and the bookmark is added unfiled
+reproducible: always steps to reproduce: 1
+press bookmark this page 2
+click on the drop down arrow within the folder drop down text field 3
+click the drop down arrow again actual results: entire add bookmark edit window closes, while adding the bookmark to the end of the bookmarks list
+expected results: the drop down window within the field i am working in (in this case the folder drop down menu) closes nicely and allows me to continue working in the outer layer (the add bookmark edit drop down menu which contains the folder drop down menu within it)
+also, the delete button at the bottom of this main drop down add bookmark menu is somewhat misleading
+since one gets the impression that the bookmark has not yet been created, i think cancel would be more appropriate.
+thi is surely a dupe but i can t find it now...
+unless i m misunderstanding the steps, i can t reproduce this on the current mac nightly: mozilla/5.0 (macintosh intel mac os x 10.5 en-us rv:1.9b3pre) gecko/2007122804 minefield/3.0b3pre.
+i couldn t find an true dupe either
+i m going to confirm this to get it on radar
+it is broken in windows nightly builds
+mac nightly builds work as expected
+you can toggle the combo box menu again and again without the dialog closing.
+bug 400019, i think, though i tend not to be sure what enn s bugs are actually about.
+yes, i believe that s the one to dupe this to
+*** this bug has been marked as a duplicate of bug 400019 ***
+bug 451915 - move firefox/places bugs to firefox/bookmarks and history
+remove all bugspam from this move by filtering for the string places-to-b-and-h
+in thunderbird 3.0b, you do that as follows: tools | message filters make sure the correct account is selected
+click new conditions: body contains places-to-b-and-h change the action to delete message
+select manually run from the dropdown at the top
+click ok
+select the filter in the list, make sure inbox is selected at the bottom, and click run now
+this should delete all the bugspam
+you can then delete the filter
+gerv

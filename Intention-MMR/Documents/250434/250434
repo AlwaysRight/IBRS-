@@ -1,0 +1,12 @@
+in version 4:4.5~20100903.1171290-1maemo1.1171237 when looking at a section of the calendar in which appointments are present, rendering is broken (e.g. does not update areas)
+also, in this version i was never able to see an appointment (as red box, was possible previously).
+also affects the new month view, also only when looking at a time range containing events
+consistently happens on all devices with package installations, does not happen on my development phone with self-compiled applications, does also not happen on the desktop, making it very hard to debug
+svn commit 1173789 by vkrause
+disable opengl rendering for korg-mobile for now
+it seems that the calendar views trigger a bad misbehavior in the opengl stack on the n900, causing random rendering defects at best and device crashes at worst
+further details are still unknown, but not using opengl seems to make all those problems go away
+bug: 250434 m +1 -1 korganizer-mobile.sh
+websvn link: http://websvn.kde.org/?view=rev&revision=1173789
+fix confirmed for version 4:4.5~20100912.1174548-1maemo1.1173569 , closing.
+*** bug 248389 has been marked as a duplicate of this bug ***

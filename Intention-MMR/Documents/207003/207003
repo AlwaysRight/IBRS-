@@ -1,0 +1,23 @@
+created an attachment (id=80836) failing test case
+having bug 199846 released we can now use the fuzz factor
+currently, after calculating the fuzz factor has been done, the result will be used when applying the patch
+the problem is that the result can represent a bigger value than we actually need for some hunks
+this in combination with shifting can result in invalid hunks being applied
+in order to fix the issue, we should consider remembering the fuzz factor for each individual hunk (e.g. as a field in hunkresult class)
+i hope the attached test case illustrates the problem better than my description.
+the idea with the fuzz factor for each hunk is the way
+it is one of our priorities now.
+created an attachment (id=84655) patch
+patch that changes matching strategy so now a fuzz factor is set and used individually for each hunk
+moreover, the fuzz factor entered in the patch preview wizard is now treated as a maximum fuzz factor for applying a patch (calculating the fuzz for each hunk)
+ps
+i ' ve also smuggled some polished comments.
+created an attachment (id=84656)
+mylyn/context/zip
+created an attachment (id=84727)
+" can ' t find the fuzz " test case
+test case showing that by default the guess button only tries to find the fuzz factor less or equal to the maximum_fuzz_factor (2)
+the fuzz required by the patch to be applied is 3.
+the patch and both test cases released to head.
+*** bug 211750 has been marked as a duplicate of this bug ***
+verification based on the related tests results - all compare tests pass.

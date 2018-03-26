@@ -1,0 +1,36 @@
+open http://www.mozilla.org in one window
+drag the logo banner at the top (a link to http://www.mozilla.org) into another window
+the browser will try to load http://www.images.com/mozilla-banner.gif
+dragging to an xterm instead will drop " images/mozilla-banner.gif "
+this should obviously be dropping the absolute url of the link target, rather than the relative url for the image source
+i ' m seeing it on 0301 linux, and daa confirmed it on 0302 win32
+bad.
+this is a 0.9.9-critical issue, imo
+dragging and dropping of links is pretty important, and lots of links have images
+(dragging non-image links seems to work fine, btw.)
+linux cvs
+dragging logo from this bug to a new window loaded http://mozilla.org/images/mozilla-banner.gif
+dup of bug 128416?
+actually, i bet this is a problem in nscontentareadragdrop
+builddragdata, where we do
+findparentnode(draggednode, ns_literal_string( " a " ).get(), getter_addrefs(linknode))
+if ( linknode ) { *outisanchor = pr_true
+getanchorurl(draggednode, urlstring)
+createlinktext(urlstring, htmlstring, htmlstring)
+} don ' t we want to do getanchorurl(linknode, urlstring)
+so that we drag the url target
+i ' ll try a patch in a bit.
+yeah, that ' s money
+taking, will attach patch shortly.
+created attachment 72291 fix
+use linknode to fill urlstring if we ' re dragging image-within-link this works for me, and seems " obviously right "
+soliciting quick reviews and approval for 0.9.9 and 1.0.
+*** bug 128416 has been marked as a duplicate of this bug ***
+comment on attachment 72291 fix
+use linknode to fill urlstring if we ' re dragging image-within-link sr=ben@netscape.com
+comment on attachment 72291 fix
+use linknode to fill urlstring if we ' re dragging image-within-link r=bryner
+comment on attachment 72291 fix
+use linknode to fill urlstring if we ' re dragging image-within-link a=roc+moz for branch and trunk
+committed to trunk and branch
+thanks for the quick reviews and approvals.

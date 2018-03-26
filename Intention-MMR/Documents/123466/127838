@@ -1,0 +1,6 @@
+build i20060214-0800 - click on the select working sets button in the toolbar - create a new working set with label a working set with a long name - when unselected, the item shows the full label, but when selected it is truncated, e.g
+a working set..
+nick we just released a fix for this for the noon build
+cna you verify that your bug is fixed because we don t have a simple swt case
+*** this bug has been marked as a duplicate of 123466 ***
+looks good
