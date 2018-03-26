@@ -1,0 +1,2601 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<root>
+<BugReport ID="1">
+<Title>"(400019) mozilla - clicking panel should just close menulist inside it (toolbar bookmark menu)"</Title>
+<Turn>
+<Date>'2007-10-16 09:06:08'</Date>
+<From>'neil deakin'</From>
+<Text>
+<Sentence ID="1.1">steps to reproduce</Sentence>
+<Sentence ID="1.2">click star icon on address bar</Sentence>
+<Sentence ID="1.3">open the menulist</Sentence>
+<Sentence ID="1.4">click the bookmarks panel</Sentence>
+<Sentence ID="1.5">the menulist should close but the panel should stay open i think this might be a windows only regression</Sentence>
+<Sentence ID="1.6">the fix here seems to be to remove the extra check for wm_activate in nswindow::eventisinsidewindow</Sentence>
+<Sentence ID="1.7">that supposedly will break bug 45108 but i don ' t see that happening.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2007-11-02 05:09:20'</Date>
+<From>'neil deakin'</From>
+<Text>
+<Sentence ID="2.1">*** bug 402115 has been marked as a duplicate of this bug ***</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2007-11-02 09:01:39'</Date>
+<From>'moco'</From>
+<Text>
+<Sentence ID="3.1">changing os to windows, since we know it happens there</Sentence>
+<Sentence ID="3.2">if it really does happen on mac, we should change os to all</Sentence>
+<Sentence ID="3.3">seeking blocking (as i sought it for bug #402115)</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2007-11-02 10:39:38'</Date>
+<From>'mike connor'</From>
+<Text>
+<Sentence ID="4.1">mconnor and beltzner feel this is an important blocker for 1.9</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2007-12-03 06:21:28'</Date>
+<From>'neil deakin'</From>
+<Text>
+<Sentence ID="5.1">*** bug 403711 has been marked as a duplicate of this bug ***</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2007-12-03 08:59:40'</Date>
+<From>'bomfog'</From>
+<Text>
+<Sentence ID="6.1">*** bug 406207 has been marked as a duplicate of this bug ***</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2007-12-07 12:46:17'</Date>
+<From>'neil deakin'</From>
+<Text>
+<Sentence ID="7.1">*** bug 403209 has been marked as a duplicate of this bug ***</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2007-12-07 16:17:51'</Date>
+<From>'gabriel mayrand chadwick'</From>
+<Text>
+<Sentence ID="8.1">transferring p1 from bug 403209</Sentence>
+<Sentence ID="8.2">is this the good component/product ?</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2007-12-14 16:11:23'</Date>
+<From>'neil deakin'</From>
+<Text>
+<Sentence ID="9.1">created attachment 293233</Sentence>
+<Sentence ID="9.2">use a activateapp here instead</Sentence>
+<Sentence ID="9.3">this patch fixes this bug as well as bug 390197</Sentence>
+<Sentence ID="9.4">the change is to some code that was added by bug 45108 when windows+m is pressed to minimize all windows while hovering over the menu</Sentence>
+<Sentence ID="9.5">this code skipped checking if the event occured over a popup for the wm_activate event</Sentence>
+<Sentence ID="9.6">instead, we ' ll use the wm_activateapp event.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2007-12-14 16:13:44'</Date>
+<From>'neil deakin'</From>
+<Text>
+<Sentence ID="10.1">created attachment 293234</Sentence>
+<Sentence ID="10.2">this is a readable version of the patch</Sentence>
+<Sentence ID="10.3">is there a better reviewer here?</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2007-12-14 16:15:19'</Date>
+<From>'neil deakin'</From>
+<Text>
+<Sentence ID="11.1">maybe dougt might want to check this patch too?</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2007-12-21 01:24:20'</Date>
+<From>'jesse ruderman'</From>
+<Text>
+<Sentence ID="12.1">*** bug 409351 has been marked as a duplicate of this bug ***</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2007-12-28 09:23:44'</Date>
+<From>'doug turner'</From>
+<Text>
+<Sentence ID="13.1">comment on attachment 293234 this is a readable version of the patch</Sentence>
+<Sentence ID="13.2">ere should review this also</Sentence>
+<Sentence ID="13.3">you can comment out / remove the windows ce part of this</Sentence>
+<Sentence ID="13.4">there is no way to test this on the mozilla 1.9 trunk yet (wince doesn ' t build yet)</Sentence>
+<Sentence ID="13.5">when i get windows ce working again, i will investigate.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2008-01-02 08:32:30'</Date>
+<From>'ere maijala'</From>
+<Text>
+<Sentence ID="14.1">comment on attachment 293234 this is a readable version of the patch</Sentence>
+<Sentence ID="14.2">neil, did you check that there are no ill effects if config.trim_on_minimize is on?</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2008-01-02 09:03:29'</Date>
+<From>'doug turner'</From>
+<Text>
+<Sentence ID="15.1">comment on attachment 293234 this is a readable version of the patch</Sentence>
+<Sentence ID="15.2">+ on the wince part.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2008-01-04 13:29:41'</Date>
+<From>'neil deakin'</From>
+<Text>
+<Sentence ID="16.1">dougt, did you mean the patch is ok as is, or to remove the windows ce part entirely</Sentence>
+<Sentence ID="16.2">ere, i don ' t see anything different happening with that pref set, either visibly or to memory use</Sentence>
+<Sentence ID="16.3">the code being changed only gets executed when a popup is open though</Sentence>
+<Sentence ID="16.4">is there a specific case you were thinking might be a problem?</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2008-01-04 15:15:06'</Date>
+<From>'doug turner'</From>
+<Text>
+<Sentence ID="17.1">you can do either -- when wince is building again on trunk, i can look at this</Sentence>
+<Sentence ID="17.2">(hopefully in a few weeks).</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2008-01-07 09:23:38'</Date>
+<From>'ere maijala'</From>
+<Text>
+<Sentence ID="18.1">comment on attachment 293234 this is a readable version of the patch</Sentence>
+<Sentence ID="18.2">nevermind about the pref. r=me</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2008-01-16 12:44:45'</Date>
+<From>'tracy walker'</From>
+<Text>
+<Sentence ID="19.1">*** bug 410051 has been marked as a duplicate of this bug ***</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2008-01-25 10:30:06'</Date>
+<From>'gabriel mayrand chadwick'</From>
+<Text>
+<Sentence ID="20.1">patch as 3 reviews is it possible to land ?</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2008-01-25 18:38:46'</Date>
+<From>'neil deakin'</From>
+<Text>
+<Sentence ID="21.1">yes, but i won ' t have access to windows for a bit, so someone else should do it.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2008-01-26 01:28:30'</Date>
+<From>'henrik skupin'</From>
+<Text>
+<Sentence ID="22.1">neil, what should be done</Sentence>
+<Sentence ID="22.2">running a build with the patch and have tests</Sentence>
+<Sentence ID="22.3">if i understand it right and no-one can build it on windows we could use the tryserver therefor?</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2008-01-26 13:56:51'</Date>
+<From>'neil deakin'</From>
+<Text>
+<Sentence ID="23.1">there is no means of creating tests for this currently, it requires native messages to be sent</Sentence>
+<Sentence ID="23.2">testing involves making sure this and bug 390197 are fixed</Sentence>
+<Sentence ID="23.3">i ' m not too worried about that though</Sentence>
+<Sentence ID="23.4">i just won ' t be able to fix any problems that occur if the evil test machine fails.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2008-01-26 17:11:48'</Date>
+<From>'gabriel mayrand chadwick'</From>
+<Text>
+<Sentence ID="24.1">if someone sends me a build i can test it...</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2008-01-26 17:55:16'</Date>
+<From>'neil deakin'</From>
+<Text>
+<Sentence ID="25.1">we ' re not actually looking for someone to test it, but it would still be useful</Sentence>
+<Sentence ID="25.2">we ' re looking for someone to check it in and be able to monitor the tinderbox afterwards.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2008-01-26 20:44:29'</Date>
+<From>'reed loden'</From>
+<Text>
+<Sentence ID="26.1">checking in widget/src/windows/nswindow.cpp</Sentence>
+<Sentence ID="26.2">/cvsroot/mozilla/widget/src/windows/nswindow.cpp,v &lt; -- nswindow.cpp new revision: 3.723</Sentence>
+<Sentence ID="26.3">previous revision: 3.722 done</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2008-01-27 13:18:45'</Date>
+<From>'henrik skupin'</From>
+<Text>
+<Sentence ID="27.1">neil, we have the correct behavior now</Sentence>
+<Sentence ID="27.2">but i see another problem which seems to be raised by this patch</Sentence>
+<Sentence ID="27.3">when i click on the menulist the complete name field is highlighted</Sentence>
+<Sentence ID="27.4">it is reverted when closing the menulist again</Sentence>
+<Sentence ID="27.5">should i file a new bug for that issue</Sentence>
+<Sentence ID="27.6">i don ' t think that is expected.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2008-01-27 20:21:18'</Date>
+<From>'neil deakin'</From>
+<Text>
+<Sentence ID="28.1">(in reply to comment #26) &gt; should i file a new bug for that issue</Sentence>
+<Sentence ID="28.2">you should always file new bugs.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2008-02-09 13:59:19'</Date>
+<From>'ria klaassen'</From>
+<Text>
+<Sentence ID="29.1">*** bug 416579 has been marked as a duplicate of this bug ***</Sentence>
+</Text>
+</Turn>
+</BugReport>
+
+<BugReport ID="2">
+<Title>"(501379) mozilla - trunk build scrolling more area (scrolling faster) than it previously has"</Title>
+<Turn>
+<Date>'2009-06-30 08:51:47'</Date>
+<From>'kurt schultz'</From>
+<Text>
+<Sentence ID="1.1">starting with today ' s trunk build (20090630), pages scroll further/faster than they did in the 20090629 build.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2009-06-30 09:05:23'</Date>
+<From>'kurt schultz'</From>
+<Text>
+<Sentence ID="2.1">bug 493037 looks like a good candidate for causing this.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2009-06-30 09:19:41'</Date>
+<From>'ray murphy'</From>
+<Text>
+<Sentence ID="3.1">another symptom</Sentence>
+<Sentence ID="3.2">if mouse wheel scrolling is set to a page at a time, the browser page will move to the top or bottom of the page</Sentence>
+<Sentence ID="3.3">i have to use the scroll bar to move to anywhere other than the top or bottom of the page if the page is more that two screen heights long.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2009-06-30 09:35:02'</Date>
+<From>'nochum sossonko'</From>
+<Text>
+<Sentence ID="4.1">*** bug 501390 has been marked as a duplicate of this bug ***</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2009-06-30 09:43:16'</Date>
+<From>'mike pesce'</From>
+<Text>
+<Sentence ID="5.1">this also appears on windows 7.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2009-06-30 10:50:20'</Date>
+<From>'jim mathies'</From>
+<Text>
+<Sentence ID="6.1">created attachment 386052</Sentence>
+<Sentence ID="6.2">wheel fix</Sentence>
+<Sentence ID="6.3">my refactor patch in 487245 split the wheel scroll event handling out into an event handler, which introduced a bug where aretvalue was not set correctly</Sentence>
+<Sentence ID="6.4">this patch addresses that and also adds some commenting to onwheelscroll to clearly explain what the handler does.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2009-06-30 11:05:09'</Date>
+<From>'2pawnder'</From>
+<Text>
+<Sentence ID="7.1">this also appears on windows xp - mozilla/5.0 (windows</Sentence>
+<Sentence ID="7.2">windows nt 5.1</Sentence>
+<Sentence ID="7.3">en-us</Sentence>
+<Sentence ID="7.4">rv: 1.9.2a1pre)</Sentence>
+<Sentence ID="7.5">gecko/20090630 minefield/3.6a1pre (.net clr 3.5.21022)</Sentence>
+<Sentence ID="7.6">this is extremely annoying</Sentence>
+<Sentence ID="7.7">the middle-click-scroll speed is the same as it has always been, though.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2009-06-30 11:20:39'</Date>
+<From>'jim mathies'</From>
+<Text>
+<Sentence ID="8.1">http://hg.mozilla.org/mozilla-central/rev/9b3b3169bf08</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2009-06-30 14:10:11'</Date>
+<From>'jim jeffery not reading bug-mail 1/2/11'</From>
+<Text>
+<Sentence ID="9.1">verified fixed using hourly build</Sentence>
+<Sentence ID="9.2">mozilla/5.0 (windows</Sentence>
+<Sentence ID="9.3">windows nt 6.1</Sentence>
+<Sentence ID="9.4">en-us</Sentence>
+<Sentence ID="9.5">rv: 1.9.2a1pre)</Sentence>
+<Sentence ID="9.6">gecko/20090630 minefield/3.6a1pre firefox/3.0.11 id</Sentence>
+<Sentence ID="9.7">20090630122827 changeset</Sentence>
+<Sentence ID="9.8">http://hg.mozilla.org/mozilla-central/rev/0ebf4f99895e</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2009-07-01 10:19:23'</Date>
+<From>'ted mielczarek'</From>
+<Text>
+<Sentence ID="10.1">a unittest for this would be great</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2009-07-01 11:10:08'</Date>
+<From>'jim mathies'</From>
+<Text>
+<Sentence ID="11.1">(in reply to comment #9) &gt; a unittest for this would be great</Sentence>
+<Sentence ID="11.2">i was wondering the same thing, why didn ' t a unit test pick this up</Sentence>
+<Sentence ID="11.3">maybe it ' s hard to do as mouse drivers are involved in defining scroll speeds.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2009-08-08 23:46:42'</Date>
+<From>'matt cosentino'</From>
+<Text>
+<Sentence ID="12.1">this still seems to be happening in 3.6 alpha 1</Sentence>
+<Sentence ID="12.2">i ' m running windows 7.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2009-08-09 00:40:03'</Date>
+<From>'sylvain pasche'</From>
+<Text>
+<Sentence ID="13.1">(in reply to comment #11) &gt; this still seems to be happening in 3.6 alpha 1</Sentence>
+<Sentence ID="13.2">i ' m running windows 7</Sentence>
+<Sentence ID="13.3">what you see is not this bug, but an intentional change in the scrolling behavior</Sentence>
+<Sentence ID="13.4">see http://margaret.mit.edu/2009/08/making-firefox-feel-faster/ for more details (bug 462809).</Sentence>
+</Text>
+</Turn>
+</BugReport>
+
+<BugReport ID="3">
+<Title>"(510627) mozilla - windows ce hanging on some ssl sites"</Title>
+<Turn>
+<Date>'2009-08-14 17:29:39'</Date>
+<From>'justin dolske'</From>
+<Text>
+<Sentence ID="1.1">we ' ve found a number of bugs where the tegra device locks up hard (ie, mouse pointer frozen, kernel debugger can ' t connect to it) after visiting a ssl site</Sentence>
+<Sentence ID="1.2">not every ssl site does this, however.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2009-08-14 17:31:07'</Date>
+<From>'justin dolske'</From>
+<Text>
+<Sentence ID="2.1">*** bug 506722 has been marked as a duplicate of this bug ***</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2009-08-14 17:31:20'</Date>
+<From>'justin dolske'</From>
+<Text>
+<Sentence ID="3.1">*** bug 508478 has been marked as a duplicate of this bug ***</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2009-08-14 17:36:06'</Date>
+<From>'justin dolske'</From>
+<Text>
+<Sentence ID="4.1">*** bug 502230 has been marked as a duplicate of this bug ***</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2009-08-14 17:37:28'</Date>
+<From>'justin dolske'</From>
+<Text>
+<Sentence ID="5.1">*** bug 504970 has been marked as a duplicate of this bug ***</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2009-08-14 17:45:19'</Date>
+<From>'justin dolske'</From>
+<Text>
+<Sentence ID="6.1">created attachment 394606</Sentence>
+<Sentence ID="6.2">debugging info so far (from email)</Sentence>
+<Sentence ID="6.3">i ' ve previously sent some info out via email regarding this, appending here for posterity</Sentence>
+<Sentence ID="6.4">i took a spin through existing hang bugs, and verified that the workaround mentioned at the end of these email seems to make all the sites work fine</Sentence>
+<Sentence ID="6.5">so, it ' s most likely a common root cause, so i ' ve duped them all to this bug.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2009-08-16 23:41:33'</Date>
+<From>'justin dolske'</From>
+<Text>
+<Sentence ID="7.1">*** bug 510419 has been marked as a duplicate of this bug ***</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2009-08-17 17:52:36'</Date>
+<From>'justin dolske'</From>
+<Text>
+<Sentence ID="8.1">kalle noticed that the kernel ' s kitl thread has a priority level of 131, and our thread was setting a priority level of 116 (0 is the highest priority)</Sentence>
+<Sentence ID="8.2">this ends up being the reason that the kernel debugger wasn ' t working..</Sentence>
+<Sentence ID="8.3">if i change the cesetprioritylevel() call to use 132 instead of 116 (so it ' s 1 priority level lower than the kitl thread), i can still reproduce the hang but now i can use the kernel debugger to poke at the device</Sentence>
+<Sentence ID="8.4">yay -- progress</Sentence>
+<Sentence ID="8.5">[i ' m not having any luck getting symbols or breakpoints working, though</Sentence>
+<Sentence ID="8.6">this is partially a result of almost always breaking into some point in the kernel (for which i don ' t have symbols), but symbols for my mozilla build also seem to be missing</Sentence>
+<Sentence ID="8.7">the debugger seems to be very finicky, so i ' ll try again with a full debug build, maybe that will help.] looking at the system process/thread info is revealing, though</Sentence>
+<Sentence ID="8.8">the high-priority (132) process thread normally has a very low cpu user-time total (ie, it doesn ' t actually do much), and the main firefox thread (where we actually do almost everything) accumulates cpu user-time as it ' s used</Sentence>
+<Sentence ID="8.9">but in the hang conditions, the high-priority thread accumulates cpu rapidly while all the other threads ' counters stay frozen</Sentence>
+<Sentence ID="8.10">so, this very much looks like one thread is spinning on the cpu and starving everything else</Sentence>
+<Sentence ID="8.11">there seems to be a potential loop between nsssliolayerpoll() and nssslthread</Sentence>
+<Sentence ID="8.12">requestpoll() -- the last line of requestpoll() is actually calling nsssliolayerpoll() again, so it ' s possible the code is relying on something else being scheduled in between.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2009-08-17 17:56:26'</Date>
+<From>'justin dolske'</From>
+<Text>
+<Sentence ID="9.1">kaie, are you familiar with this code</Sentence>
+<Sentence ID="9.2">lots of history in this bug, but the last paragraph of comment 7 seems to be the key</Sentence>
+<Sentence ID="9.3">it certainly looks suspicious, but perhaps i ' m missing something.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2009-08-17 18:07:07'</Date>
+<From>'justin dolske'</From>
+<Text>
+<Sentence ID="10.1">created attachment 394972</Sentence>
+<Sentence ID="10.2">patch v.1 (remove cesetthreadpriority)</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2009-08-17 18:11:29'</Date>
+<From>'vladimir vukicevic'</From>
+<Text>
+<Sentence ID="11.1">comment on attachment 394972 patch v.1 (remove cesetthreadpriority) get rid of the #include &lt; windows.h &gt; at the top of the file as well</Sentence>
+<Sentence ID="11.2">it got added for this, iirc.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2009-08-18 17:59:50'</Date>
+<From>'kai engert'</From>
+<Text>
+<Sentence ID="12.1">ssl thread is used to decouple mozilla ' s single-threaded network engine and the ssl read/write calls (which may sometimes blocked with an ui prompt)</Sentence>
+<Sentence ID="12.2">the " request..</Sentence>
+<Sentence ID="12.3">" functions are called by the main/network thread to make decisions what i/o requests are ok to be sent to the decoupled ssl thread</Sentence>
+<Sentence ID="12.4">a pollable event is used by ssl thread to wake up the network thread when some previously requested i/o is ready to be fetched</Sentence>
+<Sentence ID="12.5">important question</Sentence>
+<Sentence ID="12.6">on your platform, did ssl thread succeed to create a " pollable event "</Sentence>
+<Sentence ID="12.7">in other words, is nsssliolayerhelpers</Sentence>
+<Sentence ID="12.8">msharedpollableevent null or non-null</Sentence>
+<Sentence ID="12.9">on platforms where we fail to get a pollable event we need to live with a busy loop while waiting for i/o to complete</Sentence>
+<Sentence ID="12.10">but we use sleep calls to reduce that effect</Sentence>
+<Sentence ID="12.11">see want_sleep_and_wakeup_on_any_socket_activity</Sentence>
+<Sentence ID="12.12">you said</Sentence>
+<Sentence ID="12.13">&gt; the last line of requestpoll() is actually &gt; calling nsssliolayerpoll() again yes, but only in some limited scenarios</Sentence>
+<Sentence ID="12.14">you should see that in most scenarios the poll call is not reached but function requestpoll will " return early "</Sentence>
+<Sentence ID="12.15">question 2</Sentence>
+<Sentence ID="12.16">can you test</Sentence>
+<Sentence ID="12.17">in your busy loop, does requestpoll call poll (often)?</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2009-08-20 15:23:16'</Date>
+<From>'justin dolske'</From>
+<Text>
+<Sentence ID="13.1">pushed patch v.1</Sentence>
+<Sentence ID="13.2">http://hg.mozilla.org/mozilla-central/rev/30a01dc450d7 (leaving open for the moment)</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2009-08-20 17:40:36'</Date>
+<From>'justin dolske'</From>
+<Text>
+<Sentence ID="14.1">pushed to 192</Sentence>
+<Sentence ID="14.2">http://hg.mozilla.org/releases/mozilla-1.9.2/rev/3b20798e3368</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2009-08-28 10:57:52'</Date>
+<From>'marcia knous'</From>
+<Text>
+<Sentence ID="15.1">Using Mozilla/5.0 (Windows; U; WindowsCE 6.0; en-US; rv:1.9.2a2pre)</Sentence>
+<Sentence ID="15.2">gecko/20090827 namoroka/3.6a2pre as well as yesterday ' s build, i visited a bunch of various ssl sites and encountered no issues.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2009-08-28 13:25:02'</Date>
+<From>'justin dolske'</From>
+<Text>
+<Sentence ID="16.1">i think we can just call this fixed</Sentence>
+<Sentence ID="16.2">comment 11 indicates the busy-poll can be normal, so due to the high-priority we were assigning that thread nothing else would be able to run (including the network stack, most likely)</Sentence>
+<Sentence ID="16.3">good enough for me.</Sentence>
+</Text>
+</Turn>
+</BugReport>
+
+<BugReport ID="4">
+<Title>"(389437) mozilla - crashes [@ nssamplewordbreaker::nextword] when using alt+arrow in text fields"</Title>
+<Turn>
+<Date>'2007-07-24 11:55:53'</Date>
+<From>'gavin sharp'</From>
+<Text>
+<Sentence ID="1.1">created attachment 273632 stack</Sentence>
+<Sentence ID="1.2">i ' ve recently been experiencing crashes when using alt+arrow to move the cursor around word-by-word in text boxes</Sentence>
+<Sentence ID="1.3">i ' ve noticed this most recently in the gmail compose window, although i ' m pretty sure i ' ve seen it in " normal " textareas/inputs as well</Sentence>
+<Sentence ID="1.4">i don ' t have a consistent set of steps to reproduce the issue, although i think it may be related to moving from one line to the next</Sentence>
+<Sentence ID="1.5">all i have is a stack from a mac opt build, i ' ll see if i can get one from a debug build with a line number.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2007-07-30 18:33:54'</Date>
+<From>'gavin sharp'</From>
+<Text>
+<Sentence ID="2.1">*** bug 390229 has been marked as a duplicate of this bug ***</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2007-07-30 18:37:41'</Date>
+<From>'benjamin smedberg'</From>
+<Text>
+<Sentence ID="3.1">http://crash-stats.mozilla.com/report/list?range_unit=weeks &amp; branch=1.9 &amp; range_value=2 &amp; signature=nssamplewordbreaker%3a%3anextword(unsigned+short+const+*%2cunsigned+int%2cunsigned+int%29 regression appears to have happened around 7/13</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2007-08-06 07:10:54'</Date>
+<From>'timeless'</From>
+<Text>
+<Sentence ID="4.1">xul!nssamplewordbreaker::nextword+0xb [e:\builds\tinderbox\fx-trunk\winnt_5.2_depend\mozilla\intl\lwbrk\src\nssamplewordbreaker.cpp @ 166]</Sentence>
+<Sentence ID="4.2">xul!clusteriterator::clusteriterator+0x10d [e:\builds\tinderbox\fx-trunk\winnt_5.2_depend\mozilla\layout\generic\nstextframethebes.cpp @ 4762]</Sentence>
+<Sentence ID="4.3">xul!nstextframe::peekoffsetword+0x5a [e:\builds\tinderbox\fx-trunk\winnt_5.2_depend\mozilla\layout\generic\nstextframethebes.cpp @ 4781]</Sentence>
+<Sentence ID="4.4">xul!nsiframe::peekoffset+0x3e6 [e:\builds\tinderbox\fx-trunk\winnt_5.2_depend\mozilla\layout\generic\nsframe.cpp @ 4839]</Sentence>
+<Sentence ID="4.5">xul!nsframeselection::movecaret+0x255 [e:\builds\tinderbox\fx-trunk\winnt_5.2_depend\mozilla\layout\generic\nsselection.cpp @ 1350]</Sentence>
+<Sentence ID="4.6">xul!nsframeselection::wordmove+0x18 [e:\builds\tinderbox\fx-trunk\winnt_5.2_depend\mozilla\layout\generic\nsselection.cpp @ 2765]</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2007-08-08 09:17:14'</Date>
+<From>'steve england'</From>
+<Text>
+<Sentence ID="5.1">gavin, do the steps in bug 391356 crash for you</Sentence>
+<Sentence ID="5.2">(that bug looks like a dup of this one)</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2007-08-08 09:30:32'</Date>
+<From>'gavin sharp'</From>
+<Text>
+<Sentence ID="6.1">(in reply to comment #4) &gt; gavin, do the steps in bug 391356 crash for you</Sentence>
+<Sentence ID="6.2">(that bug looks like a dup of &gt; this one) i can ' t seem to reproduce using those steps, but that bug does look like a dupe.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2007-08-08 09:31:35'</Date>
+<From>'gavin sharp'</From>
+<Text>
+<Sentence ID="7.1">oh, and i ' m testing mac - could be a platform difference that make your steps only work on windows, i guess.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2007-08-08 10:12:19'</Date>
+<From>'adam guthrie'</From>
+<Text>
+<Sentence ID="8.1">*** bug 391356 has been marked as a duplicate of this bug ***</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2007-08-08 14:44:13'</Date>
+<From>'daniel holbert'</From>
+<Text>
+<Sentence ID="9.1">(in reply to comment #6) &gt; oh, and i ' m testing mac - could be a platform difference that make your steps &gt; only work on windows, i guess</Sentence>
+<Sentence ID="9.2">not windows-specific -- i get a crash from following those steps under linux, at least.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2007-08-08 15:37:53'</Date>
+<From>'daniel holbert'</From>
+<Text>
+<Sentence ID="10.1">related issue</Sentence>
+<Sentence ID="10.2">we ' re don ' t correctly handle a trailing space character in gmail ' s compose box</Sentence>
+<Sentence ID="10.3">steps to show this</Sentence>
+<Sentence ID="10.4">1. open up a gmail compose window</Sentence>
+<Sentence ID="10.5">2. type " a " (no quotes, but with a single trailing space)</Sentence>
+<Sentence ID="10.6">3. press return key</Sentence>
+<Sentence ID="10.7">4. press left-arrow key ** notice that the cursor is immediately after " a " , hiding the fact that there ' s a space there</Sentence>
+<Sentence ID="10.8">5. press " b " ** notice that the space has reappeared, between " a " and " b "</Sentence>
+<Sentence ID="10.9">6. press backspace to delete the ' a ' ** notice that the space is hidden again</Sentence>
+<Sentence ID="10.10">7. press backspace to delete the invisible space</Sentence>
+<Sentence ID="10.11">** notice that cursor doesn ' t move as invisible space is deleted</Sentence>
+<Sentence ID="10.12">conclusion</Sentence>
+<Sentence ID="10.13">the space is there, sort of, but we ' re not showing it</Sentence>
+<Sentence ID="10.14">side note 1: not only are we not showing it, but the arrow keys don ' t seem to respect the space</Sentence>
+<Sentence ID="10.15">pressing left-arrow and right-arrow keys will skip right over the invisible space, as if it weren ' t there</Sentence>
+<Sentence ID="10.16">(as opposed to the backspace key, which does actually delete the invisible space without moving the cursor, as shown in the above steps) </Sentence>
+<Sentence ID="10.17">side note 2: - when coming at the invisible space from the left side, via pressing right-arrow, it ' s impossible to reach a position *immediately after* the invisible space</Sentence>
+<Sentence ID="10.18">- similarly, when coming at the invisible space from the following line, via pressing left-arrow, it ' s impossible to reach the position *immediately before* the invisible space</Sentence>
+<Sentence ID="10.19">(you can demonstrate this by navigating with the arrow keys, and then typing some text to see where you are with respect to the invisible space.)</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2007-08-26 16:13:28'</Date>
+<From>'martijn wargers'</From>
+<Text>
+<Sentence ID="11.1">created attachment 278339 testcase</Sentence>
+<Sentence ID="11.2">i get this crash when double-clicking the first word in the sentence of this testcase</Sentence>
+<Sentence ID="11.3">i get indeed a regression range between 2007-07-12 and 2007-07-13.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2007-09-05 17:22:35'</Date>
+<From>'robert o callahan'</From>
+<Text>
+<Sentence ID="12.1">created attachment 279826 fix</Sentence>
+<Sentence ID="12.2">the wordbreaker should be able to handle being passed apos==alength</Sentence>
+<Sentence ID="12.3">simon, who should sr this?</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2007-09-06 12:25:16'</Date>
+<From>'simon montagu'</From>
+<Text>
+<Sentence ID="13.1">comment on attachment 279826 fix r+moa=me, and intl policy is that you don ' t need sr if you have moa</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2007-09-06 14:31:20'</Date>
+<From>'robert o callahan'</From>
+<Text>
+<Sentence ID="14.1">comment on attachment 279826 fix need approval from m8 drivers right now</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2007-09-10 16:03:42'</Date>
+<From>'robert o callahan'</From>
+<Text>
+<Sentence ID="15.1">checked in</Sentence>
+</Text>
+</Turn>
+</BugReport>
+<BugReport ID="5">
+<Title>"(341981) mozilla - sporadic " engine has no properties " error on startup"</Title>
+<Turn>
+<Date>'2006-06-18 22:42:29'</Date>
+<From>'gavin sharp'</From>
+<Text>
+<Sentence ID="1.1">i ' m not sure the exact situations in which this happens, i think it has to do with using multiple builds with the same profile, but i ' ve hit it three times in the past day</Sentence>
+<Sentence ID="1.2">what ends up happening is that the _buildsortedenginelist pre-allocates an array of a certain size, then fills the engine in order from the storage file</Sentence>
+<Sentence ID="1.3">if not all slots are full, then this._engines contains undefined items and iterating through the engine list later in the startup process fails, giving a " engine has no properties " error and a blank search dropdown</Sentence>
+<Sentence ID="1.4">i guess this could have happened when i ran a build including the " use storage " patch, which created the db, and then used an older build that didn ' t include that patch to install an engine</Sentence>
+<Sentence ID="1.5">when the newer build starts up, a new engine exists that doesn ' t have an entry in the db, which leaves the blank slot in the array</Sentence>
+<Sentence ID="1.6">to fix this, we should make sure that the resultant array from _buildsortedenginelist doesn ' t contain any undefined items.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2006-06-19 11:19:26'</Date>
+<From>'joey minta'</From>
+<Text>
+<Sentence ID="2.1">the patch in bug #340331 has a fix for this.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2006-06-20 01:53:40'</Date>
+<From>'gavin sharp'</From>
+<Text>
+<Sentence ID="3.1">*** bug 342122 has been marked as a duplicate of this bug ***</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2006-06-20 02:32:39'</Date>
+<From>'ria klaassen'</From>
+<Text>
+<Sentence ID="4.1">Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9a1) Gecko/20060619 Minefield/3.0a1</Sentence>
+<Sentence ID="4.2">under unknown circumstances firefox becomes location-sensitive</Sentence>
+<Sentence ID="4.3">only a search in google works, although all plugins are present, also in the app directory</Sentence>
+<Sentence ID="4.4">error: uncaught exception[exception.." ' [javascript </Sentence>
+<Sentence ID="4.5">error: " engine has no properties " </Sentence>
+<Sentence ID="4.6">{file: "file:///C:/Docume~1/Ria/Bureau~1/trunk/firefox/components/nsSearchService.js" line: 2118}]'</Sentence>
+<Sentence ID="4.7">when calling method</Sentence>
+<Sentence ID="4.8">[nsibrowsersearchservice::getvisibleengines] "</Sentence>
+<Sentence ID="4.9">nsresult: " 0x80570021 (ns_error_xpc_javascript_error_with_details) "</Sentence>
+<Sentence ID="4.10">location: "JS frame :: chrome://browser/content/search/search.xml :: rebuildPopup :: line 256"  data: yes]</Sentence>
+<Sentence ID="4.11">when i copy the application to another place, suddenly the gray text and the plugins are working again.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2006-06-20 02:43:32'</Date>
+<From>'gavin sharp'</From>
+<Text>
+<Sentence ID="5.1">if the search component doesn ' t successfully load the first time you run a build after unzipping it (like when you remove the plugins folder), subsequent startups may also fail because firefox won ' t try to reload the search component again</Sentence>
+<Sentence ID="5.2">by moving the program folder, you ' re changing the last-modified date of the .autoreg file, which tells firefox to try reloading the component at the next startup.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2006-06-20 13:37:44'</Date>
+<From>'phil ringnalda'</From>
+<Text>
+<Sentence ID="6.1">*** bug 342168 has been marked as a duplicate of this bug ***</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2006-06-20 13:43:21'</Date>
+<From>'simon bnzli'</From>
+<Text>
+<Sentence ID="7.1">created attachment 226388</Sentence>
+<Sentence ID="7.2">respect the fact that _engines is no array</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2006-06-20 13:46:36'</Date>
+<From>'simon bnzli'</From>
+<Text>
+<Sentence ID="8.1">as i see it, this is a regression from bug 335101 which initializes the _sortedengines array always with length 1 - which causes an undefined engine if there are none.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2006-06-20 13:53:14'</Date>
+<From>'gavin sharp'</From>
+<Text>
+<Sentence ID="9.1">comment on attachment 226388 respect the fact that _engines is no array i don ' t see how this helps, the array will still have holes if one of the earlier engines in the db sort order no longer exists</Sentence>
+<Sentence ID="9.2">i prefer the patch in bug 340331 (just filter the array once we ' ve gone through all db entries).</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2006-06-20 14:11:04'</Date>
+<From>'simon bnzli'</From>
+<Text>
+<Sentence ID="10.1">even if it doesn ' t fix the general case, that bit of code is still wrong and should be fixed (_engines is an object and no array)</Sentence>
+<Sentence ID="10.2">would you prefer a new bug to check this fix in, should i mention the issue over at bug 340331 or will you reconsider fixing it here?</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2006-06-20 14:27:44'</Date>
+<From>'peter van der woude'</From>
+<Text>
+<Sentence ID="11.1">this should be gone before beta1</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2006-06-20 15:13:00'</Date>
+<From>'gavin sharp'</From>
+<Text>
+<Sentence ID="12.1">comment on attachment 226388 respect the fact that _engines is no array ah, you ' re right, sorry</Sentence>
+<Sentence ID="12.2">yes, we should take both this fix and the filter fix from bug 341986.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2006-06-23 14:19:45'</Date>
+<From>'darin fisher'</From>
+<Text>
+<Sentence ID="13.1">comment on attachment 226388 respect the fact that _engines is no array a=darin on behalf of drivers (please land this on the mozilla_1_8_branch and add the fixed1.8.1 keyword to this bug)</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2006-06-24 06:54:19'</Date>
+<From>'gavin sharp'</From>
+<Text>
+<Sentence ID="14.1">checked in on the branch and trunk</Sentence>
+<Sentence ID="14.2">i ' ll leave this open until bug 335102 lands because the problem isn ' t entirely fixed until then</Sentence>
+<Sentence ID="14.3">i can ' t mark it as depending on bug 335102, though, because bugzilla sucks (i wish bug 251556 was fixed)</Sentence>
+<Sentence ID="14.4">mozilla/browser/components/search/nssearchservice.js 1.1.2.37 mozilla/browser/components/search/nssearchservice.js 1.43</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2006-06-24 10:46:10'</Date>
+<From>'ria klaassen'</From>
+<Text>
+<Sentence ID="15.1">i still see the problem that the menus are too large (too many items)</Sentence>
+<Sentence ID="15.2">- delete searchplugins everywhere (remove folders) - start firefox, double-click a word on a page, watch the context-menu</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2006-06-24 12:50:59'</Date>
+<From>'gavin sharp'</From>
+<Text>
+<Sentence ID="16.1">(in reply to comment #14) &gt; i still see the problem that the menus are too large (too many items)</Sentence>
+<Sentence ID="16.2">can you file another bug on that</Sentence>
+<Sentence ID="16.3">it ' s a separate issue - the context menu code should check for a null currentengine</Sentence>
+<Sentence ID="16.4">it ' s pretty unlikely to affect any " normal " user, though</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2006-06-24 13:47:15'</Date>
+<From>'ria klaassen'</From>
+<Text>
+<Sentence ID="17.1">(in reply to comment #15) &gt; filed bug 342643 for this.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2006-07-05 13:24:34'</Date>
+<From>'darin fisher'</From>
+<Text>
+<Sentence ID="18.1">adding fixed1.8.1 flag since this patch has been landed on the mozilla_1_8_branch per comment #13</Sentence>
+<Sentence ID="18.2">i realize that we want bug 335102 to be fixed as well, but that one looks iffy for beta1.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2006-07-05 16:15:37'</Date>
+<From>'gavin sharp'</From>
+<Text>
+<Sentence ID="19.1">i think we should take the one line fix from that patch to fix this issue</Sentence>
+<Sentence ID="19.2">this bug sucks, and the fix is easy, so we shouldn ' t wait for bug 335102 to land to fix this.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2006-07-05 16:25:06'</Date>
+<From>'joey minta'</From>
+<Text>
+<Sentence ID="20.1">created attachment 228216 filter fix</Sentence>
+<Sentence ID="20.2">splitting the .filter fix out of my renaming patch, since renaming has been retargeted for beta2.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2006-07-05 16:29:42'</Date>
+<From>'gavin sharp'</From>
+<Text>
+<Sentence ID="21.1">comment on attachment 228216 filter fix &gt; + // filter out any nulls for engines that may have been removed &gt; + this._sortedengines = this._sortedengines.filter(function(a) { return a})</Sentence>
+<Sentence ID="21.2">i ' d kinda prefer " !!a " to make it clear it ' s the boolean value that matters</Sentence>
+<Sentence ID="21.3">put this right above the " // array for the remaining engines, alphabetically sorted " comment, too, since this isn ' t related to the alphaengines stuff.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2006-07-05 16:42:43'</Date>
+<From>'joey minta'</From>
+<Text>
+<Sentence ID="22.1">checking in browser/components/search/nssearchservice.js</Sentence>
+<Sentence ID="22.2">/cvsroot/mozilla/browser/components/search/nssearchservice.js,v &lt; -- nssearchservice.js</Sentence>
+<Sentence ID="22.3">new revision: 1.49</Sentence>
+<Sentence ID="22.4">previous revision: 1.48 done</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2006-07-05 16:43:36'</Date>
+<From>'joey minta'</From>
+<Text>
+<Sentence ID="23.1">comment on attachment 228216 filter fix requesting approval for low-risk high-reward fix, intentionally split off to be acceptable for beta1.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2006-07-05 19:45:47'</Date>
+<From>'gavin sharp'</From>
+<Text>
+<Sentence ID="24.1">mozilla/browser/components/search/nssearchservice.js 1.1.2.42</Sentence>
+</Text>
+</Turn>
+</BugReport>
+
+<BugReport ID="6">
+<Title>"(128682) mozilla - dragging linked images causes drop of relative image path, not absolute link target"</Title>
+<Turn>
+<Date>'2002-03-03 01:37:07'</Date>
+<From>'mike shaver'</From>
+<Text>
+<Sentence ID="1.1">open http://www.mozilla.org in one window</Sentence>
+<Sentence ID="1.2">drag the logo banner at the top (a link to http://www.mozilla.org) into another window</Sentence>
+<Sentence ID="1.3">the browser will try to load http://www.images.com/mozilla-banner.gif</Sentence>
+<Sentence ID="1.4">dragging to an xterm instead will drop " images/mozilla-banner.gif "</Sentence>
+<Sentence ID="1.5">this should obviously be dropping the absolute url of the link target, rather than the relative url for the image source</Sentence>
+<Sentence ID="1.6">i ' m seeing it on 0301 linux, and daa confirmed it on 0302 win32</Sentence>
+<Sentence ID="1.7">bad.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2002-03-03 01:38:29'</Date>
+<From>'mike shaver'</From>
+<Text>
+<Sentence ID="2.1">this is a 0.9.9-critical issue, imo</Sentence>
+<Sentence ID="2.2">dragging and dropping of links is pretty important, and lots of links have images</Sentence>
+<Sentence ID="2.3">(dragging non-image links seems to work fine, btw.)</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2002-03-03 01:52:08'</Date>
+<From>'r.k.aa.'</From>
+<Text>
+<Sentence ID="3.1">linux cvs</Sentence>
+<Sentence ID="3.2">dragging logo from this bug to a new window loaded http://mozilla.org/images/mozilla-banner.gif </Sentence>
+<Sentence ID="3.3">dup of bug 128416?</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2002-03-03 02:06:11'</Date>
+<From>'mike shaver'</From>
+<Text>
+<Sentence ID="4.1">actually, i bet this is a problem in nscontentareadragdrop</Sentence>
+<Sentence ID="4.2">builddragdata, where we do</Sentence>
+<Sentence ID="4.3">findparentnode(draggednode, ns_literal_string( " a " ).get(), getter_addrefs(linknode))</Sentence>
+<Sentence ID="4.4">if ( linknode ) { *outisanchor = pr_true</Sentence>
+<Sentence ID="4.5">getanchorurl(draggednode, urlstring)</Sentence>
+<Sentence ID="4.6">createlinktext(urlstring, htmlstring, htmlstring)</Sentence>
+<Sentence ID="4.7">} don ' t we want to do getanchorurl(linknode, urlstring)</Sentence>
+<Sentence ID="4.8">so that we drag the url target</Sentence>
+<Sentence ID="4.9">i ' ll try a patch in a bit.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2002-03-03 02:13:11'</Date>
+<From>'mike shaver'</From>
+<Text>
+<Sentence ID="5.1">yeah, that ' s money</Sentence>
+<Sentence ID="5.2">taking, will attach patch shortly.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2002-03-03 02:16:18'</Date>
+<From>'mike shaver'</From>
+<Text>
+<Sentence ID="6.1">created attachment 72291 fix</Sentence>
+<Sentence ID="6.2">use linknode to fill urlstring if we ' re dragging image-within-link this works for me, and seems " obviously right "</Sentence>
+<Sentence ID="6.3">soliciting quick reviews and approval for 0.9.9 and 1.0.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2002-03-03 02:17:39'</Date>
+<From>'mike shaver'</From>
+<Text>
+<Sentence ID="7.1">*** bug 128416 has been marked as a duplicate of this bug ***</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2002-03-03 02:26:16'</Date>
+<From>'ben goodger'</From>
+<Text>
+<Sentence ID="8.1">comment on attachment 72291 fix</Sentence>
+<Sentence ID="8.2">use linknode to fill urlstring if we ' re dragging image-within-link sr=ben@netscape.com</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2002-03-03 02:30:54'</Date>
+<From>'brian ryner'</From>
+<Text>
+<Sentence ID="9.1">comment on attachment 72291 fix</Sentence>
+<Sentence ID="9.2">use linknode to fill urlstring if we ' re dragging image-within-link r=bryner</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2002-03-03 11:45:33'</Date>
+<From>'robert o callahan'</From>
+<Text>
+<Sentence ID="10.1">comment on attachment 72291 fix</Sentence>
+<Sentence ID="10.2">use linknode to fill urlstring if we ' re dragging image-within-link a=roc+moz for branch and trunk</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2002-03-03 14:30:53'</Date>
+<From>'mike shaver'</From>
+<Text>
+<Sentence ID="11.1">committed to trunk and branch</Sentence>
+<Sentence ID="11.2">thanks for the quick reviews and approvals.</Sentence>
+</Text>
+</Turn>
+</BugReport>
+
+<BugReport ID="7">
+<Title>"(300087) mozilla - mac update fetches, but does not apply"</Title>
+<Turn>
+<Date>'2005-07-08 07:07:31'</Date>
+<From>'mike shaver'</From>
+<Text>
+<Sentence ID="1.1">when i update today (0708) from yesterday ' s nightly, i get to download the new build, but after restart it doesn ' t apply anything (no patching window comes up, no messages on the console or js console)</Sentence>
+<Sentence ID="1.2">i tried running updater.app by hand as well, and didn ' t get anything</Sentence>
+<Sentence ID="1.3">active-update.xml</Sentence>
+<Sentence ID="1.4">&lt; updates xmlns= " http://www.mozilla.org/2005/app-update " / &gt; updates.xml</Sentence>
+<Sentence ID="1.5">&lt; updates xmlns= " http://www.mozilla.org/2005/app-update " &gt; &lt; update type= " minor " name= " deer park 1.0+ " version= " 1.0+ " extensionversion= " 1.0+ " detailsurl= " undefined " licenseurl= " undefined " serviceurl= " </Sentence>
+<Sentence ID="1.6">https://aus-staging.mozilla.org:8711/update2/0/firefox/1.0%2b/2005070707/darwin_ppc-gcc3/en-us/update.xml " installdate= " 1120831182796 " statustext= " install pending " iscompleteupdate= " false " &gt; &lt; patch type= " complete " url= " </Sentence>
+<Sentence ID="1.7">http://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/2005-07-07-21-trunk/firefox-1.0+.en-us.mac.mar " hashfunction= " md5 " hashvalue= " f34d2966c30fb8f6bc51c1a1a9972886 " size= " 8490739 " selected= " true " state= " pending " / &gt; &lt; /update &gt; &lt; /updates &gt; </Sentence>
+<Sentence ID="1.8">not sure if this is just the server being mistaken about there being newer builds for me, or what, but i thought i ' d file it.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2005-07-21 05:36:54'</Date>
+<From>'mike shaver'</From>
+<Text>
+<Sentence ID="2.1">i ' m still seeing this</Sentence>
+<Sentence ID="2.2">after i restart, the update archive gets deleted, but i never get the " updating firefox " window, and the build is the same old one</Sentence>
+<Sentence ID="2.3">is there some kind of logging i can turn on?</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2005-07-22 06:20:10'</Date>
+<From>'mike beltzner'</From>
+<Text>
+<Sentence ID="3.1">mano tells me that this got fixed two days ago, but i can ' t find a duplicate bug tracking that fix</Sentence>
+<Sentence ID="3.2">at any rate, as of at least 2005-07-20 builds, this works now.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2005-07-22 06:23:51'</Date>
+<From>'mano'</From>
+<Text>
+<Sentence ID="4.1">point is, i ' m not aware of any mac-swu fix which was landed in that time frame (and i was able to reproduce this issue until two days ago or so).</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2005-07-28 06:36:05'</Date>
+<From>'mike beltzner'</From>
+<Text>
+<Sentence ID="5.1">i was apparently a little premature in filing this as worksforme</Sentence>
+<Sentence ID="5.2">what i ' m seeing now is that the update applies *once*, and then subsequent updates do not get applied</Sentence>
+<Sentence ID="5.3">is active-update.xml supposed to be deleted after the update is applied</Sentence>
+<Sentence ID="5.4">if so, that ' s the problem, since it ' s still there after an update</Sentence>
+<Sentence ID="5.5">1. get a day-before-today-nightly build</Sentence>
+<Sentence ID="5.6">2. check for updates</Sentence>
+<Sentence ID="5.7">3. restart &amp; apply updates</Sentence>
+<Sentence ID="5.8">4. look in deer park.app/contents/macos/</Sentence>
+<Sentence ID="5.9">5. check for updates again tomorrow (or modify the app.update.url to fake a previous build number by switching %build_id% to " 0 " and check today!)</Sentence>
+<Sentence ID="5.10">6. restart &amp; apply updates</Sentence>
+<Sentence ID="5.11">7. notice that they ' re not applied</Sentence>
+<Sentence ID="5.12">you ' ll see the active-update.xml ..</Sentence>
+<Sentence ID="5.13">i ' ll attach the one that was lying around in mine.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2005-07-28 06:38:38'</Date>
+<From>'mike beltzner'</From>
+<Text>
+<Sentence ID="6.1">created attachment 190834</Sentence>
+<Sentence ID="6.2">active-update.xml that was left around after applying updates</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2005-07-29 08:12:04'</Date>
+<From>'mike beltzner'</From>
+<Text>
+<Sentence ID="7.1">nominating for 1.8b4 blocker</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2005-07-29 16:50:05'</Date>
+<From>'darin fisher'</From>
+<Text>
+<Sentence ID="8.1">i just tried updating from a freshly downloaded 7/28 build to the 7/29 build on my mac, and it worked</Sentence>
+<Sentence ID="8.2">however, i also see that active-updates.xml is still in the application directory after the update</Sentence>
+<Sentence ID="8.3">i also see an active-updates.xml file under windows, but its contents are significantly different (just an empty xml tag).</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2005-07-29 18:58:44'</Date>
+<From>'mike beltzner'</From>
+<Text>
+<Sentence ID="9.1">(in reply to comment #7) &gt; i just tried updating from a freshly downloaded 7/28 build to the 7/29 build on &gt; my mac, and it worked</Sentence>
+<Sentence ID="9.2">however, i also see that active-updates.xml is still in &gt; the application directory after the update</Sentence>
+<Sentence ID="9.3">i also see an active-updates.xml &gt; file under windows, but its contents are significantly different (just an empty &gt; xml tag)</Sentence>
+<Sentence ID="9.4">hm</Sentence>
+<Sentence ID="9.5">i just tried removing active-updates.xml and that didn ' t seem to help</Sentence>
+<Sentence ID="9.6">in fact, i can ' t seem to find the .mar file from the second update cycle anywhere on my hdd.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2005-07-29 20:13:51'</Date>
+<From>'gary elshaw'</From>
+<Text>
+<Sentence ID="10.1">i ' ve been using the auto update feature for the last week</Sentence>
+<Sentence ID="10.2">strangely it has been working on alternate days</Sentence>
+<Sentence ID="10.3">updates for the 24/7, 26/7 and 28/7 versions of deer park were all fine.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2005-07-31 19:55:45'</Date>
+<From>'gary elshaw'</From>
+<Text>
+<Sentence ID="11.1">(in reply to comment #9) &gt; i ' ve been using the auto update feature for the last week</Sentence>
+<Sentence ID="11.2">strangely it has been &gt; working on alternate days</Sentence>
+<Sentence ID="11.3">updates for the 24/7, 26/7 and 28/7 versions of deer &gt; park were all fine</Sentence>
+<Sentence ID="11.4">it occurred to me the other day, but i wanted to be sure</Sentence>
+<Sentence ID="11.5">my experience seems to indicate dp can only be updated once</Sentence>
+<Sentence ID="11.6">day one</Sentence>
+<Sentence ID="11.7">download nightly .dmg, day two</Sentence>
+<Sentence ID="11.8">update it the next day via updates mechanism, day 3</Sentence>
+<Sentence ID="11.9">download via updates mechanism fails to overwrite</Sentence>
+<Sentence ID="11.10">i ' m guessing something is being written somewhere to prevent further updates</Sentence>
+<Sentence ID="11.11">i ' ve also tried scouring my hard drive for any signs of firefox-1.0+.en-us.mac.mar after a failed update and their doesn ' t appear to be any sign</Sentence>
+<Sentence ID="11.12">OS X 10.4.2 Mozilla/5.0 (Macintosh; U; PPC Mac OS X Mach-O; en-US; rv:1.8b4)Gecko/20050730 Firefox/1.0+</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2005-08-01 09:54:57'</Date>
+<From>'darin fisher'</From>
+<Text>
+<Sentence ID="12.1">&gt; i ' ve also tried scouring my hard drive for any signs of &gt; firefox-1.0+.en-us.mac.mar after a failed update and their doesn ' t appear to be &gt; any sign</Sentence>
+<Sentence ID="12.2">the file is actually downloaded to update.mar.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2005-08-01 15:01:07'</Date>
+<From>'darin fisher'</From>
+<Text>
+<Sentence ID="13.1">when i hit this problem today, i noticed that the updates/0/ folder contained a copy of updater.app</Sentence>
+<Sentence ID="13.2">there was nothing else left in the folder</Sentence>
+<Sentence ID="13.3">when i deleted the entire updates/ folder, the problem went away, and i was able to update from the 7/29 build to today ' s 8/1 build</Sentence>
+<Sentence ID="13.4">adding this to my bug list.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2005-08-01 15:23:17'</Date>
+<From>'gary elshaw'</From>
+<Text>
+<Sentence ID="14.1">(in reply to comment #12) &gt; adding this to my bug list</Sentence>
+<Sentence ID="14.2">thanks for the tip darin, i ' ll keep an eye open for it</Sentence>
+<Sentence ID="14.3">i successfully updated this morning after grabbing a nightly yesterday</Sentence>
+<Sentence ID="14.4">i notice two updater.app ' s in deerpark.app</Sentence>
+<Sentence ID="14.5">one in deerpark.app/contents/macos, and another in deerpark.app/contents/macos/updates/0/updater.app</Sentence>
+<Sentence ID="14.6">is this correct/normal or expected?</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2005-08-01 21:19:39'</Date>
+<From>'gary elshaw'</From>
+<Text>
+<Sentence ID="15.1">from the javascript console " error:[exception.." component returned failure code: 0x80004005 (ns_error_failure) [nsifile.remove] " nsresult: " 0x80004005 (ns_error_failure) " </Sentence>
+<Sentence ID="15.2">location: " js frame::file:///applications/deerpark.app/contents/macos/components/nsupdateservice.js::cleanupupdatesdir::line 318 " data: no]</Sentence>
+<Sentence ID="15.3">source file:</Sentence>
+<Sentence ID="15.4">file:///applications/deerpark.app/contents/macos/components/nsupdateservice.js line: 318 </Sentence>
+<Sentence ID="15.5">" line 318 is " updatedir.remove(false)</Sentence>
+<Sentence ID="15.6">OS X 10.4.2? Mozilla/5.0 (Macintosh; U; PPC Mac OS X Mach-O; en-US; rv:1.8b4)Gecko/20050801 Firefox/1.0+</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2005-08-01 22:00:52'</Date>
+<From>'darin fisher'</From>
+<Text>
+<Sentence ID="16.1">yeah, i think it ' s having trouble removing updates/0/updater.app/ because it does not expect that to be a directory</Sentence>
+<Sentence ID="16.2">under other systems (linux and windows), it is not a directory</Sentence>
+<Sentence ID="16.3">it is a simple executable</Sentence>
+<Sentence ID="16.4">the solution is probably to change nsupdateservice.js to pass |true| to the nsifile</Sentence>
+<Sentence ID="16.5">remove method.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2005-08-01 22:01:56'</Date>
+<From>'darin fisher'</From>
+<Text>
+<Sentence ID="17.1">*** bug 303024 has been marked as a duplicate of this bug ***</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2005-08-02 14:12:41'</Date>
+<From>'darin fisher'</From>
+<Text>
+<Sentence ID="18.1">created attachment 191407 v1 patch</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2005-08-02 14:48:24'</Date>
+<From>'ben goodger'</From>
+<Text>
+<Sentence ID="19.1">comment on attachment 191407 v1 patch r=ben@mozilla.org</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2005-08-02 15:50:53'</Date>
+<From>'mike beltzner'</From>
+<Text>
+<Sentence ID="20.1">will this land tonight</Sentence>
+<Sentence ID="20.2">i ' d love to be able to test it ..</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2005-08-02 17:25:28'</Date>
+<From>'darin fisher'</From>
+<Text>
+<Sentence ID="21.1">&gt; will this land tonight</Sentence>
+<Sentence ID="21.2">i ' d love to be able to test it .</Sentence>
+<Sentence ID="21.3">if someone will approve the patch, then i will land it.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2005-08-02 17:52:43'</Date>
+<From>'gary elshaw'</From>
+<Text>
+<Sentence ID="22.1">(in reply to comment #20) &gt; &gt; will this land tonight</Sentence>
+<Sentence ID="22.2">i ' d love to be able to test it .</Sentence>
+<Sentence ID="22.3">&gt; &gt; if someone will approve the patch, then i will land it</Sentence>
+<Sentence ID="22.4">...bless this patch which we are about to receive, for we are truly grateful.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2005-08-03 10:31:36'</Date>
+<From>'darin fisher'</From>
+<Text>
+<Sentence ID="23.1">fixed-on-trunk</Sentence>
+</Text>
+</Turn>
+</BugReport>
+
+<BugReport ID="8">
+<Title>"(213005) eclipse - can ' t use a new targeted runtime in the webproject creation wizard"</Title>
+<Turn>
+<Date>'2007-12-14 07:14:00'</Date>
+<From>'angel vera'</From>
+<Text>
+<Sentence ID="1.1">when creating a new webproject, i created a new runtime but i was unable to see in the drop down the newly created runtime</Sentence>
+<Sentence ID="1.2">i then created a second one, i was then able to see the first one, but not the second newly created runtime</Sentence>
+<Sentence ID="1.3">0. ensure you don ' t have any installed server (runtimes) defined</Sentence>
+<Sentence ID="1.4">1. open the create new dynamyc web project wizard</Sentence>
+<Sentence ID="1.5">2. enter the name for the web project</Sentence>
+<Sentence ID="1.6">3. using the target runtime " new " button, create a new runtime</Sentence>
+<Sentence ID="1.7">4. the runtime should be displayed in the combobox, but is not there</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2007-12-14 09:46:16'</Date>
+<From>'carl anderson'</From>
+<Text>
+<Sentence ID="2.1">*** bug 213006 has been marked as a duplicate of this bug***</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2008-01-03 14:58:40'</Date>
+<From>'konstantin komissarchik'</From>
+<Text>
+<Sentence ID="3.1">i was unable to reproduce this (using i20071221182137)</Sentence>
+<Sentence ID="3.2">which runtime type were you using?</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2008-01-03 15:32:23'</Date>
+<From>'angel vera'</From>
+<Text>
+<Sentence ID="4.1">i was using tomcat 5.5</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2008-01-04 08:28:15'</Date>
+<From>'angel vera'</From>
+<Text>
+<Sentence ID="5.1">i just tried this again today using the latest build available (20080104023442), and i am still able to recreate the problem</Sentence>
+<Sentence ID="5.2">the one thing i did noticed that i did is i skipped step 0, and instead added a step 2.1, where i just click on the drop down arrow of the target runtime (this way i ensure that there is nothing in the box), i then continue with step 3, using tomcat 5.5</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2008-01-04 11:46:37'</Date>
+<From>'konstantin komissarchik'</From>
+<Text>
+<Sentence ID="6.1">reproduced the problem using tomcat 5.5</Sentence>
+<Sentence ID="6.2">investigating now.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2008-01-04 17:46:53'</Date>
+<From>'angel vera'</From>
+<Text>
+<Sentence ID="7.1">*** bug 214404 has been marked as a duplicate of this bug ***</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2008-01-04 18:10:10'</Date>
+<From>'konstantin komissarchik'</From>
+<Text>
+<Sentence ID="8.1">raising severity to major since this can be a pretty confusing regression for the user to deal with</Sentence>
+<Sentence ID="8.2">whether this comes up or not depends on the implementation details of the server adapter</Sentence>
+<Sentence ID="8.3">i can reproduce with tomcat, but not with weblogic.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2008-01-04 18:12:11'</Date>
+<From>'konstantin komissarchik'</From>
+<Text>
+<Sentence ID="9.1">created an attachment (id=86250) patch v1</Sentence>
+<Sentence ID="9.2">i have a patch for this issue and bug 214375 (they are interconnected)</Sentence>
+<Sentence ID="9.3">both issues appear to be fixed by the patch, but due to the size of the change, this will need further testing/review before being released.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2008-01-08 14:59:36'</Date>
+<From>'konstantin komissarchik'</From>
+<Text>
+<Sentence ID="10.1">fix released to the m5 code stream.</Sentence>
+</Text>
+</Turn>
+</BugReport>
+
+<BugReport ID="9">
+<Title>"(207003) eclipse - [patch] wrong fuzz used after calculating the fuzz"</Title>
+<Turn>
+<Date>'2007-10-21 08:46:46'</Date>
+<From>'tomasz zarna'</From>
+<Text>
+<Sentence ID="1.1">created an attachment (id=80836) failing test case</Sentence>
+<Sentence ID="1.2">having bug 199846 released we can now use the fuzz factor</Sentence>
+<Sentence ID="1.3">currently, after calculating the fuzz factor has been done, the result will be used when applying the patch</Sentence>
+<Sentence ID="1.4">the problem is that the result can represent a bigger value than we actually need for some hunks</Sentence>
+<Sentence ID="1.5">this in combination with shifting can result in invalid hunks being applied</Sentence>
+<Sentence ID="1.6">in order to fix the issue, we should consider remembering the fuzz factor for each individual hunk (e.g. as a field in hunkresult class)</Sentence>
+<Sentence ID="1.7">i hope the attached test case illustrates the problem better than my description.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2007-12-04 10:19:19'</Date>
+<From>'szymon brandys'</From>
+<Text>
+<Sentence ID="2.1">the idea with the fuzz factor for each hunk is the way</Sentence>
+<Sentence ID="2.2">it is one of our priorities now.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2007-12-06 13:39:20'</Date>
+<From>'tomasz zarna'</From>
+<Text>
+<Sentence ID="3.1">created an attachment (id=84655) patch</Sentence>
+<Sentence ID="3.2">patch that changes matching strategy so now a fuzz factor is set and used individually for each hunk</Sentence>
+<Sentence ID="3.3">moreover, the fuzz factor entered in the patch preview wizard is now treated as a maximum fuzz factor for applying a patch (calculating the fuzz for each hunk)</Sentence>
+<Sentence ID="3.4">ps</Sentence>
+<Sentence ID="3.5">i ' ve also smuggled some polished comments.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2007-12-06 13:39:26'</Date>
+<From>'tomasz zarna'</From>
+<Text>
+<Sentence ID="4.1">created an attachment (id=84656)</Sentence>
+<Sentence ID="4.2">mylyn/context/zip</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2007-12-07 08:47:20'</Date>
+<From>'tomasz zarna'</From>
+<Text>
+<Sentence ID="5.1">created an attachment (id=84727)</Sentence>
+<Sentence ID="5.2">" can ' t find the fuzz " test case</Sentence>
+<Sentence ID="5.3">test case showing that by default the guess button only tries to find the fuzz factor less or equal to the maximum_fuzz_factor (2)</Sentence>
+<Sentence ID="5.4">the fuzz required by the patch to be applied is 3.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2007-12-07 16:34:46'</Date>
+<From>'tomasz zarna'</From>
+<Text>
+<Sentence ID="6.1">the patch and both test cases released to head.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2007-12-07 16:37:17'</Date>
+<From>'tomasz zarna'</From>
+<Text>
+<Sentence ID="7.1">*** bug 211750 has been marked as a duplicate of this bug ***</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2007-12-11 11:18:33'</Date>
+<From>'tomasz zarna'</From>
+<Text>
+<Sentence ID="8.1">verification based on the related tests results - all compare tests pass.</Sentence>
+</Text>
+</Turn>
+</BugReport>
+
+<BugReport ID="10">
+<Title>"(123466) eclipse - [viewers] strange dots in table item labels"</Title>
+<Turn>
+<Date>'2006-01-11 12:06:51'</Date>
+<From>'dani megert'</From>
+<Text>
+<Sentence ID="1.1">i20060110-1026 i can no longer click some elements in the packages view and suddenly the label gets corrupted into" org.ec.."</Sentence>
+<Sentence ID="1.2">test case</Sentence>
+<Sentence ID="1.3">1. start attached workspace</Sentence>
+<Sentence ID="1.4">2. select project ' foo ' in the package explorer</Sentence>
+<Sentence ID="1.5">3. select ' org.eclipse.jface.text ' in the packages view</Sentence>
+<Sentence ID="1.6">3. expand ' foo ' in the package explorer</Sentence>
+<Sentence ID="1.7">4. select ' src ' == &gt; strange label " org.ec..</Sentence>
+<Sentence ID="1.8">this works with i200605-0800 plus jdt ' s build input for i20060110-1026</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2006-01-11 12:14:38'</Date>
+<From>'dani megert'</From>
+<Text>
+<Sentence ID="2.1">created an attachment (id=32846) test workspace</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2006-01-13 08:41:12'</Date>
+<From>'kim horne'</From>
+<Text>
+<Sentence ID="3.1">this used to happen back in the 3.0 days (bug 56593) when we explicitly set the font on a particular item...</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2006-01-13 09:14:44'</Date>
+<From>'boris bokowski'</From>
+<Text>
+<Sentence ID="4.1">moving to swt since this looks like a regression at the swt level</Sentence>
+<Sentence ID="4.2">i did not change anything related to labels recently.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2006-01-13 09:19:50'</Date>
+<From>'dani megert'</From>
+<Text>
+<Sentence ID="5.1">boris, i saw that a new labledecorator got added with i20060110-1026</Sentence>
+<Sentence ID="5.2">i don ' t know the details about it but thought it might be related.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2006-01-13 09:44:33'</Date>
+<From>'boris bokowski'</From>
+<Text>
+<Sentence ID="6.1">tod, could it be that this was caused by the patch from bug 121623?</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2006-01-13 10:08:27'</Date>
+<From>'tod creasey'</From>
+<Text>
+<Sentence ID="7.1">no i wouldn ' t think so - bug 121623 is just a way of passing context but it doesn ' t change how decoration is done</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2006-01-24 06:19:32'</Date>
+<From>'dani megert'</From>
+<Text>
+<Sentence ID="8.1">any update on this one?</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2006-01-31 05:45:19'</Date>
+<From>'dani megert'</From>
+<Text>
+<Sentence ID="9.1">ping.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2006-01-31 13:54:04'</Date>
+<From>'beatriz iaderoza'</From>
+<Text>
+<Sentence ID="10.1">would you be able to send me a screenshot of the bug</Sentence>
+<Sentence ID="10.2">i opened your workspace with the latest built (20060118-1600) and i don ' t get the strange label problem you do</Sentence>
+<Sentence ID="10.3">thanks.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2006-02-01 04:11:08'</Date>
+<From>'dani megert'</From>
+<Text>
+<Sentence ID="11.1">&gt; would you be able to send me a screenshot of the bug</Sentence>
+<Sentence ID="11.2">i opened your workspace &gt; with the latest built (20060118-1600) sure, but as far as i know the latest build is i20060131-1200</Sentence>
+<Sentence ID="11.3">here my steps again</Sentence>
+<Sentence ID="11.4">1. download eclipse sdk build i20060131-1200 for windowsxp</Sentence>
+<Sentence ID="11.5">2. extract the attached workspace to c:</Sentence>
+<Sentence ID="11.6">3. start eclipse using -data c:\tmp == &gt; picture 1 </Sentence>
+<Sentence ID="11.7">4. execute step 2 to 4 from comment 0 == &gt; picture 2</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2006-02-01 04:11:48'</Date>
+<From>'dani megert'</From>
+<Text>
+<Sentence ID="12.1">created an attachment (id=33926) picture 1</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2006-02-01 04:12:14'</Date>
+<From>'dani megert'</From>
+<Text>
+<Sentence ID="13.1">created an attachment (id=33927) picture 2</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2006-02-01 15:00:54'</Date>
+<From>'beatriz iaderoza'</From>
+<Text>
+<Sentence ID="14.1">thanks for the screenshots</Sentence>
+<Sentence ID="14.2">you were right, the labels are appearing strange</Sentence>
+<Sentence ID="14.3">it seems to be modifying the name that was last selected before clicking on another view</Sentence>
+<Sentence ID="14.4">note:Also tested with Version: 3.1.1, Build id: M20050929-0840 and the bug is not present.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2006-02-02 02:27:34'</Date>
+<From>'dani megert'</From>
+<Text>
+<Sentence ID="15.1">&gt; Note: Also tested with Version: 3.1.1, Build id: M20050929-0840 and the bug is not present.</Sentence>
+<Sentence ID="15.2">mmh, i never said it didn ' t work there, did i</Sentence>
+<Sentence ID="15.3">i first saw the bug in i20060110-1026, as indicated in comment 0</Sentence>
+<Sentence ID="15.4">once the dots appear i often can ' t select the top item any longer.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2006-02-02 09:16:35'</Date>
+<From>'beatriz iaderoza'</From>
+<Text>
+<Sentence ID="16.1">no you did not, we usually add comments to the bug to save time for the person that is fixing it.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2006-02-03 10:47:46'</Date>
+<From>'markus keller'</From>
+<Text>
+<Sentence ID="17.1">*** bug 124850 has been marked as a duplicate of this bug ***</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2006-02-03 12:03:54'</Date>
+<From>'markus keller'</From>
+<Text>
+<Sentence ID="18.1">we already had something like that in bug 54057, which has probably been solved by the fix for bug 57426</Sentence>
+<Sentence ID="18.2">could it be that the support for background images has a similarly adverse effect as the support for fonts had?</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2006-02-03 13:13:03'</Date>
+<From>'steve northover'</From>
+<Text>
+<Sentence ID="19.1">yes, there have been many changes since 3.1.x.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2006-02-15 00:23:46'</Date>
+<From>'steve northover'</From>
+<Text>
+<Sentence ID="20.1">i have a handle on this one</Sentence>
+<Sentence ID="20.2">it was caused by the fix for bug 117700.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2006-02-15 22:48:48'</Date>
+<From>'steve northover'</From>
+<Text>
+<Sentence ID="21.1">actually, it turned out to be caused by the fix for bug 119207.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2006-02-15 22:53:42'</Date>
+<From>'steve northover'</From>
+<Text>
+<Sentence ID="22.1">fixed &gt; 20060215 vi, we should consider this for m5.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2006-02-16 11:32:09'</Date>
+<From>'veronika irvine'</From>
+<Text>
+<Sentence ID="23.1">*** bug 127838 has been marked as a duplicate of this bug ***</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2006-02-20 11:09:32'</Date>
+<From>'dani megert'</From>
+<Text>
+<Sentence ID="24.1">verified in 3.2 m5 (i20060217-1115).</Sentence>
+</Text>
+</Turn>
+</BugReport>
+
+<BugReport ID="11">
+<Title>"(219570) eclipse - [sync view] " link with editor " for synchronize view"</Title>
+<Turn>
+<Date>'2008-02-20 05:16:48'</Date>
+<From>'dani megert'</From>
+<Text>
+<Sentence ID="1.1">i20080219-1124 due to low bandwidth i often start my update or commit work by clicking on several files in the synchronize view</Sentence>
+<Sentence ID="1.2">this way other files load and comparison starts while i review the changes of the first file</Sentence>
+<Sentence ID="1.3">now, my problem is that when i switch to another compare editor, the file is not automatically selected in the synchronize view</Sentence>
+<Sentence ID="1.4">there are two feature i ' d like to see</Sentence>
+<Sentence ID="1.5">add the synchronize view as ' show in ' target 2</Sentence>
+<Sentence ID="1.6">add the commonly known ' link with editor ' tool bar button and/or view menu item</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2008-02-20 09:10:11'</Date>
+<From>'tomasz zarna'</From>
+<Text>
+<Sentence ID="2.1">(in reply to comment #0) &gt; i20080219-1124 &gt; &gt; due to low bandwidth i often start my update or commit work by clicking on &gt; several files in the synchronize view</Sentence>
+<Sentence ID="2.2">this way other files load and comparison &gt; starts while i review the changes of the first file</Sentence>
+<Sentence ID="2.3">&gt; &gt; now, my problem is that when i switch to another compare editor, the file is not &gt; automatically selected in the synchronize view</Sentence>
+<Sentence ID="2.4">if i ' ve understood you correctly after you switch to another compare editor the several files you clicked on in the sync view are still selected</Sentence>
+<Sentence ID="2.5">would you like to loose the selection</Sentence>
+<Sentence ID="2.6">&gt; there are two feature i ' d like to see</Sentence>
+<Sentence ID="2.7">&gt; 1. add the synchronize view as ' show in ' target </Sentence>
+<Sentence ID="2.8">&gt; 2. add the commonly known ' link with editor ' tool bar button and/or view menu &gt; item would you like them to have in both compare and non-compare editors?</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2008-02-20 09:20:16'</Date>
+<From>'dani megert'</From>
+<Text>
+<Sentence ID="3.1">&gt; if i ' ve understood you correctly after you switch to another compare editor the &gt; several files you clicked on in the sync view are still selected</Sentence>
+<Sentence ID="3.2">would you &gt; like to loose the selection</Sentence>
+<Sentence ID="3.3">yes, exactly as it works in all other views that allow linking</Sentence>
+<Sentence ID="3.4">i don ' t have &gt; 1 selected as i clicked each of them to open the compare editor and hence only the last one was selected</Sentence>
+<Sentence ID="3.5">&gt; would you like them to have in both compare and non-compare editors</Sentence>
+<Sentence ID="3.6">i ' m happy if it works with the compare editor but normally back-linking works for all editor parts.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2009-07-21 03:58:45'</Date>
+<From>'szymon brandys'</From>
+<Text>
+<Sentence ID="4.1">*** bug 284083 has been marked as a duplicate of this bug ***</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2009-08-11 05:26:56'</Date>
+<From>'corneliud dirmeier'</From>
+<Text>
+<Sentence ID="5.1">due to style-guidelines 7.21 and 13.3 both features should be implemented.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2009-10-01 07:27:13'</Date>
+<From>'tomasz zarna'</From>
+<Text>
+<Sentence ID="6.1">created an attachment (id=148515) fix v01</Sentence>
+<Sentence ID="6.2">patch that adds linking when sync ' ed using workspace model (i guess with models turned off it will work as well)</Sentence>
+<Sentence ID="6.3">it ' s a working copy, so do not apply</Sentence>
+<Sentence ID="6.4">it ' s still missing couple of things</Sentence>
+<Sentence ID="6.5">* ishowintarget is not implemented yet</Sentence>
+<Sentence ID="6.6">* linking doesn ' t work for editors that do not adapt to ifile.class</Sentence>
+<Sentence ID="6.7">* only ifile or istorageeditorinput based elements are selected in the sync tree when linking, won ' t work for java workspace sync for instance</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2009-10-01 07:27:19'</Date>
+<From>'tomasz zarna'</From>
+<Text>
+<Sentence ID="7.1">created an attachment (id=148516)</Sentence>
+<Sentence ID="7.2">mylyn/context/zip</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2009-10-01 10:13:00'</Date>
+<From>'tomasz zarna'</From>
+<Text>
+<Sentence ID="8.1">do you think that making the " link with editor " action enabled only for non-model or workspace model synchronizations is acceptable</Sentence>
+<Sentence ID="8.2">for other types i would disable the action (for now) and file a separate bug to address it</Sentence>
+<Sentence ID="8.3">this would make the fix, in it ' s current shape, available pretty soon.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2009-10-01 10:18:49'</Date>
+<From>'dani megert'</From>
+<Text>
+<Sentence ID="9.1">&gt; do you think that making the " link with editor " action enabled only for &gt; non-model or workspace model synchronizations is acceptable</Sentence>
+<Sentence ID="9.2">for me yes, and since it ' s limited scope i would probably not even add a toolbar button but simply add it to the view menu.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2009-10-01 10:30:41'</Date>
+<From>'tomasz zarna'</From>
+<Text>
+<Sentence ID="10.1">sounds good to me</Sentence>
+<Sentence ID="10.2">and put it back on the toolbar with the other bug as soon as linking starts to work for all synchronizations (i.e. including models)?</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2009-10-01 10:53:21'</Date>
+<From>'tomasz zarna'</From>
+<Text>
+<Sentence ID="11.1">created an attachment (id=148537) fix v02</Sentence>
+<Sentence ID="11.2">sync view as " show in " target available in synchronize perspective.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2009-10-01 12:04:33'</Date>
+<From>'dani megert'</From>
+<Text>
+<Sentence ID="12.1">(in reply to comment #9) &gt; sounds good to me</Sentence>
+<Sentence ID="12.2">and put it back on the toolbar with the other bug as soon as &gt; linking starts to work for all synchronizations (i.e. including models)</Sentence>
+<Sentence ID="12.3">yes, though i could also live without that button</Sentence>
+<Sentence ID="12.4">i doubt people are going to toggle this frequently.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2009-10-02 02:08:46'</Date>
+<From>'corneliud dirmeier'</From>
+<Text>
+<Sentence ID="13.1">(in reply to comment #11) &gt; (in reply to comment #9) &gt; &gt; sounds good to me</Sentence>
+<Sentence ID="13.2">and put it back on the toolbar with the other bug as soon as &gt; &gt; linking starts to work for all synchronizations (i.e. including models)</Sentence>
+<Sentence ID="13.3">&gt; yes, though i could also live without that button</Sentence>
+<Sentence ID="13.4">i doubt people are going to &gt; toggle this frequently</Sentence>
+<Sentence ID="13.5">in other views like package-explorer i use this button frequently</Sentence>
+<Sentence ID="13.6">so a button in view-toolbar would be useful</Sentence>
+<Sentence ID="13.7">for first iteration a menu entry is admissible.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2009-10-02 02:16:11'</Date>
+<From>'dani megert'</From>
+<Text>
+<Sentence ID="14.1">&gt; in other views like package-explorer i use this button frequently</Sentence>
+<Sentence ID="14.2">yes me too, but i guess i won ' t toggle it often in the sync view, e.g. i also never disable it in the history view</Sentence>
+<Sentence ID="14.3">anyway, i also don ' t care if it ' s there by default</Sentence>
+<Sentence ID="14.4">just make sure to put it into an action set so, that i can remove it.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2009-10-02 04:36:39'</Date>
+<From>'dani megert'</From>
+<Text>
+<Sentence ID="15.1">&gt; i also don ' t care if it ' s there by default</Sentence>
+<Sentence ID="15.2">just make sure to put it into an &gt; action set so, that i can remove it</Sentence>
+<Sentence ID="15.3">forget this</Sentence>
+<Sentence ID="15.4">action sets are only for the main toolbar.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2009-10-02 11:34:46'</Date>
+<From>'tomasz zarna'</From>
+<Text>
+<Sentence ID="16.1">created an attachment (id=148657) fix v03</Sentence>
+<Sentence ID="16.2">this is an updated version of the patch that imo is ready to be committed</Sentence>
+<Sentence ID="16.3">however, it ' s still missing bunch of things (see bug 291212, bug 291213, bug 291214, bug 291215) so if you think any of these is a no-go for this patch to be applied please let me know.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2009-10-02 12:31:13'</Date>
+<From>'markus keller'</From>
+<Text>
+<Sentence ID="17.1">i have not tried the patch, but when i glanced though it, i didn ' t see any command id being used for the togglelinkingaction</Sentence>
+<Sentence ID="17.2">iworkbenchcommandconstants.navigate_toggle_link_with_editor should be used as actiondefinitionid</Sentence>
+<Sentence ID="17.3">in the package explorer, we handle activation in packageexploreractiongroup.setglobalactionhandlers(iactionbars).</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2009-10-05 03:47:29'</Date>
+<From>'tomasz zarna'</From>
+<Text>
+<Sentence ID="18.1">*** bug 249919 has been marked as a duplicate of this bug ***</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2009-10-05 04:32:05'</Date>
+<From>'tomasz zarna'</From>
+<Text>
+<Sentence ID="19.1">created an attachment (id=148740) fix v04</Sentence>
+<Sentence ID="19.2">added iworkbenchcommandconstants.navigate_toggle_link_with_editor as actiondefinitionid for togglelinkingaction.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2009-10-05 06:26:44'</Date>
+<From>'dani megert'</From>
+<Text>
+<Sentence ID="20.1">&gt; so if you think any of these is a no-go for this patch to &gt; be applied please let me know</Sentence>
+<Sentence ID="20.2">for me it ' s useless given the current limitations as</Sentence>
+<Sentence ID="20.3">1. my main use case is to link from compare editor to view and not the other way around (not working due to bug 291213)</Sentence>
+<Sentence ID="20.4">2. i use the old non-model based sync (bug 291215)</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2009-10-05 07:18:08'</Date>
+<From>'tomasz zarna'</From>
+<Text>
+<Sentence ID="21.1">all right, at least i now know which bugs i should fix first</Sentence>
+<Sentence ID="21.2">thanks for the comment.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2009-10-16 06:14:12'</Date>
+<From>'tomasz zarna'</From>
+<Text>
+<Sentence ID="22.1">created an attachment (id=149732) fix v05</Sentence>
+<Sentence ID="22.2">final version of the patch to be committed simultaneously with fixes for bug 291215, bug 291214 and bug 291213.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2009-10-16 06:52:20'</Date>
+<From>'tomasz zarna'</From>
+<Text>
+<Sentence ID="23.1">applied to head, available in builds &gt; n20091015-2000</Sentence>
+<Sentence ID="23.2">bug 291213 no longer blocks this one.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2009-10-28 04:40:26'</Date>
+<From>'dani megert'</From>
+<Text>
+<Sentence ID="24.1">verified in i20091027-0100</Sentence>
+<Sentence ID="24.2">works great</Sentence>
+<Sentence ID="24.3">remaining issue</Sentence>
+<Sentence ID="24.4">the view menu action has not mnemonic (bug 293542 ).</Sentence>
+</Text>
+</Turn>
+</BugReport>
+
+<BugReport ID="12">
+<Title>"(337925) Gnome - AttributeError: NoneType object has no attribute split "</Title>
+<Turn>
+<Date>'2006-04-10 12:13:52'</Date>
+<From>'christian kirbach'</From>
+<Text>
+<Sentence ID="1.1">happens with at least the following jhbuild gnome 2.14 modules</Sentence>
+<Sentence ID="1.2">gedit, zenity, file-roller, rhythmbox traceback (most recent call last)</Sentence>
+<Sentence ID="1.3">make[2]: *** [es/rhythmbox.xml] fehler 1</Sentence>
+<Sentence ID="1.4">make[2]: verlasse verzeichnis ?/cvs/gnome/rhythmbox/help?</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2006-04-10 13:33:04'</Date>
+<From>'christian kirbach'</From>
+<Text>
+<Sentence ID="2.1">&lt;kmaraas&gt; nazgul, i got the same problem as you in gnome-panel</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2006-04-10 13:35:28'</Date>
+<From>'kjartan maraas'</From>
+<Text>
+<Sentence ID="3.1">and i found that if i continued the build outside of jhbuild it passed (or it could be that running it a second time would make it pass too, but i didn t check that)</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2006-04-10 13:51:18'</Date>
+<From>'christian kirbach'</From>
+<Text>
+<Sentence ID="4.1">a second run does not change anything i acknowledge</Sentence>
+<Sentence ID="4.2">it compiles for me as well using the system-wide xml2po</Sentence>
+<Sentence ID="4.3">playing with python_path environment variable did not remedy.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2006-04-10 18:26:33'</Date>
+<From>'eloi primaux'</From>
+<Text>
+<Sentence ID="5.1">got the same for gnome-applet, gedit and perhaps more with jhbuild is smth changed in xml2po</Sentence>
+<Sentence ID="5.2">last week it was working correctly..</Sentence>
+<Sentence ID="5.3">i have no system wide xml2po and playing with the environment fix nothing</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2006-04-11 13:36:41'</Date>
+<From>'danilo segan'</From>
+<Text>
+<Sentence ID="6.1">created an attachment (id=63236)</Sentence>
+<Sentence ID="6.2">fix handling of untranslated translators-credits</Sentence>
+<Sentence ID="6.3">yes, something has changed in xml2po (we allow marking of untranslated strings now, it was a recent bugfix, and this introduced a problem with untranslated translator-credits )</Sentence>
+<Sentence ID="6.4">please commit this for me (i don t have my ssh key here)</Sentence>
+<Sentence ID="6.5">2006-04-11 danilo ?egan &lt;danilo@gnome.org&gt; </Sentence>
+<Sentence ID="6.6">* modes/docbook.py: check if translators-credits is translated</Sentence>
+<Sentence ID="6.7">note to self: add more regression tests involving docbook mode and real data.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2006-04-11 13:47:02'</Date>
+<From>'danilo segan'</From>
+<Text>
+<Sentence ID="7.1">*** bug 338031 has been marked as a duplicate of this bug ***</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2006-04-11 13:59:46'</Date>
+<From>'christian kirbach'</From>
+<Text>
+<Sentence ID="8.1">fix works for me.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2006-04-11 15:42:01'</Date>
+<From>'danilo segan'</From>
+<Text>
+<Sentence ID="9.1">can anyone commit it for me</Sentence>
+<Sentence ID="9.2">thanks</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2006-04-11 16:19:58'</Date>
+<From>'elijah newren'</From>
+<Text>
+<Sentence ID="10.1">sure</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2006-04-11 16:34:29'</Date>
+<From>'christian kirbach'</From>
+<Text>
+<Sentence ID="11.1">*** bug 338096 has been marked as a duplicate of this bug ***</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2006-04-19 20:28:50'</Date>
+<From>'danilo segan'</From>
+<Text>
+<Sentence ID="12.1">*** bug 338388 has been marked as a duplicate of this bug ***</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2006-06-02 17:30:52'</Date>
+<From>'danilo segan'</From>
+<Text>
+<Sentence ID="13.1">*** bug 337015 has been marked as a duplicate of this bug ***</Sentence>
+</Text>
+</Turn>
+</BugReport>
+
+<BugReport ID="13">
+<Title>"(331732) Gnome - playlist entries do not always get removed"</Title>
+<Turn>
+<Date>'2006-02-19 01:51:19'</Date>
+<From>'christian kirbach'</From>
+<Text>
+<Sentence ID="1.1">purge playlist</Sentence>
+<Sentence ID="1.2">add two files</Sentence>
+<Sentence ID="1.3">play the first entry</Sentence>
+<Sentence ID="1.4">right-lick it and select eleminate</Sentence>
+<Sentence ID="1.5">playback skips to the next song but the entry is not visibly removed</Sentence>
+<Sentence ID="1.6">this leads to a crash when the first entry is played again and attempted to eleminate.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2006-02-19 03:16:32'</Date>
+<From>'alex lancaster'</From>
+<Text>
+<Sentence ID="2.1">can t duplicate this with head as of today</Sentence>
+<Sentence ID="2.2">i suspect this is a duplicate of bug #131150 which just got fixed today</Sentence>
+<Sentence ID="2.3">marking as such</Sentence>
+<Sentence ID="2.4">re-open if this still isn t fixed</Sentence>
+<Sentence ID="2.5">*** this bug has been marked as a duplicate of 131150 ***</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2006-02-19 15:00:13'</Date>
+<From>'christian kirbach'</From>
+<Text>
+<Sentence ID="3.1">hmm i still can reproduce it</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2006-02-19 16:40:26'</Date>
+<From>'alex lancaster'</From>
+<Text>
+<Sentence ID="4.1">with cvs head</Sentence>
+<Sentence ID="4.2">what do you mean by eliminate, you mean remove or move to trash</Sentence>
+<Sentence ID="4.3">i can t duplicate this.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2006-03-06 15:49:05'</Date>
+<From>'christian kirbach'</From>
+<Text>
+<Sentence ID="5.1">yes with cvs head</Sentence>
+<Sentence ID="5.2">still there with cvs build from today</Sentence>
+<Sentence ID="5.3">i mean remove from playlist (the minus symbol)</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2006-03-10 14:45:46'</Date>
+<From>'jonathan matthew'</From>
+<Text>
+<Sentence ID="6.1">created an attachment (id=61038)</Sentence>
+<Sentence ID="6.2">delay rhythmdb entry-deleted signal until commit</Sentence>
+<Sentence ID="6.3">this was happening because the entry was being deleted while it still had outstanding changes</Sentence>
+<Sentence ID="6.4">the deletion signal was emitted immediately (removing the entry from all sources), then the changes were emitted on the next rhythmdb_commit, which re-added the entry to any sources it had been in</Sentence>
+<Sentence ID="6.5">this patch delays the entry deleted signal until the next rhythmdb_commit, like all other changes</Sentence>
+<Sentence ID="6.6">all rhythmdb_entry_delete calls except one already had rhythmdb_commit calls immediately afterwards</Sentence>
+<Sentence ID="6.7">this patch adds the missing commit.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2006-03-11 00:35:15'</Date>
+<From>'james "doc" livingston'</From>
+<Text>
+<Sentence ID="7.1">looks good to me.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2006-03-11 04:01:32'</Date>
+<From>'jonathan matthew'</From>
+<Text>
+<Sentence ID="8.1">committed, with some small changes to add a reference on entries in the deleted-entries list, and free the list in rhythmdb_commit_internal.</Sentence>
+</Text>
+</Turn>
+</BugReport>
+
+<BugReport ID="14">
+<Title>"(644020) Gnome - Needs a 256x256 size icon"</Title>
+<Turn>
+<Date>'2011-03-06 13:39:24'</Date>
+<From>'andreas nilsson'</From>
+<Text>
+<Sentence ID="1.1">we need a 256x256 variant for various places in gnome shell</Sentence>
+<Sentence ID="1.2">would be good to have for the os x port as well i guess.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2011-03-06 13:47:43'</Date>
+<From>'andreas nilsson'</From>
+<Text>
+<Sentence ID="2.1">created an attachment (id=182607) icons in all sizes</Sentence>
+<Sentence ID="2.2">also included is source svg using the one canvas approach.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2011-03-06 13:59:21'</Date>
+<From>'lapo calamandrei'</From>
+<Text>
+<Sentence ID="3.1">plese note that the source svg needs to be kept in the repository, no need to ship it with the tomboy source package tho.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2011-03-16 12:07:48'</Date>
+<From>'lapo calamandrei'</From>
+<Text>
+<Sentence ID="4.1">any progress on this one?</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2011-04-08 15:58:25'</Date>
+<From>'lapo calamandrei'</From>
+<Text>
+<Sentence ID="5.1">created an attachment (id=185534) icons + source svg</Sentence>
+<Sentence ID="5.2">slightly refesh d version with more contrast and better canvas usage on the 256x256.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2011-04-08 15:58:56'</Date>
+<From>'lapo calamandrei'</From>
+<Text>
+<Sentence ID="6.1">*** bug 647174 has been marked as a duplicate of this bug ***</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2011-11-15 13:43:36'</Date>
+<From>'andreas nilsson'</From>
+<Text>
+<Sentence ID="7.1">ping?</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2011-11-28 00:36:43'</Date>
+<From>'jared jennings'</From>
+<Text>
+<Sentence ID="8.1">created an attachment (id=202264) adds 256x256 icon support</Sentence>
+<Sentence ID="8.2">tested with my opensuse 12.1 gnome 3.2 build.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2011-11-28 00:37:02'</Date>
+<From>'jared jennings'</From>
+<Text>
+<Sentence ID="9.1">hopefully this can be approved quickly</Sentence>
+<Sentence ID="9.2">(in reply to comment #6) &gt; ping?</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2011-11-28 03:22:44'</Date>
+<From>'jared jennings'</From>
+<Text>
+<Sentence ID="10.1">committed r50006f367b34</Sentence>
+</Text>
+</Turn>
+</BugReport>
+
+<BugReport ID="15">
+<Title>"(57562) KDE - cannot create mail folder in imap account"</Title>
+<Turn>
+<Date>'2003-04-22 18:37:55'</Date>
+<From>'vkoch'</From>
+<Text>
+<Sentence ID="1.1">version: 1.5.1 (using kde kde 3.1.1a) </Sentence>
+<Sentence ID="1.2">installed from: suse rpms </Sentence>
+<Sentence ID="1.3">os: linux </Sentence>
+<Sentence ID="1.4">i just upgraded from kde 3.1.0 to 3.1.1.a</Sentence>
+<Sentence ID="1.5">now i am not able to create a new mail folder on my imap account</Sentence>
+<Sentence ID="1.6">all the folders i create end up in the local mail tree</Sentence>
+<Sentence ID="1.7">in the dialog box the button belongs to only offers top level which apparently is the local mail tree</Sentence>
+<Sentence ID="1.8">no choice for the imap account is given</Sentence>
+<Sentence ID="1.9">this is also true if i want to generate subfolders of any already existing folders on the imap account</Sentence>
+<Sentence ID="1.10">i had no problems like this prior to upgrading to 3.1.1a</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2003-04-22 19:52:25'</Date>
+<From>'carsten burghardt'</From>
+<Text>
+<Sentence ID="2.1">it definitely works in the current 3_1_branch</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2003-04-22 20:24:10'</Date>
+<From>''</From>
+<Text>
+<Sentence ID="3.1">subject: re: cannot create mail folder in imap account </Sentence>
+<Sentence ID="3.2">it definitely does not work using kdenetwork3-3.1.1-45 biuld on 02 april 2003 by suse</Sentence>
+<Sentence ID="3.3">volker on tuesday 22 april 2003 10:52, you wrote</Sentence>
+<Sentence ID="3.4">&gt; ------- you are receiving this mail because ------- </Sentence>
+<Sentence ID="3.5">&gt; you reported the bug, or are watching the reporter</Sentence>
+<Sentence ID="3.6">&gt; &gt; http://bugs.kde.org/show_bug.cgi?id=57562 </Sentence>
+<Sentence ID="3.7">&gt; burghardt@kde.org changed</Sentence>
+<Sentence ID="3.8">&gt; &gt; what |removed |added &gt; --------------------------------------------------------------------------- &gt;- status|unconfirmed |resolved &gt; resolution| |fixed &gt; &gt; &gt;</Sentence>
+<Sentence ID="3.9">&gt; ------- additional comments from burghardt@kde.org 2003-04-22 19:52</Sentence>
+<Sentence ID="3.10">&gt; ------- it definitely works in the current 3_1_branch</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2003-04-22 20:52:30'</Date>
+<From>''</From>
+<Text>
+<Sentence ID="4.1">subject: re: cannot create mail folder in imap account </Sentence>
+<Sentence ID="4.2">ok, so it works with kdenetwork3-3.1.1-34 but not with but not with kdenetwork3-3.1.1-45 bravo</Sentence>
+<Sentence ID="4.3">probably the suse guys who messed this one up volker on tuesday 22 april 2003 10:52, you wrote</Sentence>
+<Sentence ID="4.4">&gt; ------- you are receiving this mail because -------</Sentence>
+<Sentence ID="4.5">&gt; you reported the bug, or are watching the reporter</Sentence>
+<Sentence ID="4.6">&gt; &gt; http://bugs.kde.org/show_bug.cgi?id=57562 </Sentence>
+<Sentence ID="4.7">&gt; burghardt@kde.org changed</Sentence>
+<Sentence ID="4.8">&gt; &gt; what |removed |added &gt; --------------------------------------------------------------------------- &gt;- status|unconfirmed |resolved &gt; resolution| |fixed &gt; &gt; &gt;</Sentence>
+<Sentence ID="4.9">&gt; ------- additional comments from burghardt@kde.org 2003-04-22 19:52</Sentence>
+<Sentence ID="4.10">&gt; ------- it definitely works in the current 3_1_branch</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2003-04-23 00:21:10'</Date>
+<From>'ingo kl?cker'</From>
+<Text>
+<Sentence ID="5.1">subject: re: new: cannot create mail folder in imap account</Sentence>
+<Sentence ID="5.2">i m pretty sure that it s a suse only problem (they want to prevent the user from trying to move a local folder to an imap account)</Sentence>
+<Sentence ID="5.3">please report the bug to them</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2003-04-23 01:36:23'</Date>
+<From>''</From>
+<Text>
+<Sentence ID="6.1">subject: re: cannot create mail folder in imap account</Sentence>
+<Sentence ID="6.2">done already v</Sentence>
+<Sentence ID="6.3">on tuesday 22 april 2003 15:21, you wrote</Sentence>
+<Sentence ID="6.4">&gt; ------- you are receiving this mail because -------</Sentence>
+<Sentence ID="6.5">&gt; you reported the bug, or are watching the reporter</Sentence>
+<Sentence ID="6.6">&gt; &gt; http://bugs.kde.org/show_bug.cgi?id=57562 </Sentence>
+<Sentence ID="6.7">&gt; &gt; &gt; &gt; &gt; ------- additional comments from kloecker@kde.org 2003-04-23 00:21 -------</Sentence>
+<Sentence ID="6.8">&gt; subject: re: new: cannot create mail folder in imap account</Sentence>
+<Sentence ID="6.9">&gt; &gt; i m pretty sure that it s a suse only problem (they want to prevent the &gt; user from trying to move a local folder to an imap account)</Sentence>
+<Sentence ID="6.10">please &gt; report the bug to them</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2003-04-23 11:18:38'</Date>
+<From>'stephan kulow'</From>
+<Text>
+<Sentence ID="7.1">yes, it s a suse patch</Sentence>
+<Sentence ID="7.2">because originally you could move folders to nirvana when changing the belongs option of local folders to a imap location</Sentence>
+<Sentence ID="7.3">i m not sure how to fix that ;(</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2003-04-23 11:34:54'</Date>
+<From>'stephan kulow'</From>
+<Text>
+<Sentence ID="8.1">what are the chances of having the real bug fixed for 3.1.2</Sentence>
+<Sentence ID="8.2">then suse could take out that workaround</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2003-04-23 17:33:42'</Date>
+<From>'datschge'</From>
+<Text>
+<Sentence ID="9.1">is there a bug report already for the real bug</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2003-04-23 20:58:23'</Date>
+<From>'carsten burghardt'</From>
+<Text>
+<Sentence ID="10.1">subject: re: cannot create mail folder </Sentence>
+<Sentence ID="10.2">in imap account am mittwoch, 23 april 2003 11:34 schrieb stephan kulow</Sentence>
+<Sentence ID="10.3">&gt; ------- you are receiving this mail because ------- </Sentence>
+<Sentence ID="10.4">&gt; you are the assignee for the bug, or are watching the assignee</Sentence>
+<Sentence ID="10.5">&gt; &gt; http://bugs.kde.org/show_bug.cgi?id=57562</Sentence>
+<Sentence ID="10.6">&gt; &gt; &gt; &gt; &gt; ------- additional comments from coolo@kde.org 2003-04-23 11:34 ------- </Sentence>
+<Sentence ID="10.7">&gt; what are the chances of having the real bug fixed for 3.1.2</Sentence>
+<Sentence ID="10.8">then suse &gt; could take out that workaround i would propose the attached better workaround for 3.1 that doesn</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2003-04-24 00:11:33'</Date>
+<From>'ingo kl?cker'</From>
+<Text>
+<Sentence ID="11.1">subject: re: cannot create mail folder in imap account </Sentence>
+<Sentence ID="11.2">the chances for having a real bug fix for 3.1.2 are pretty good since i just committed carsten s patch</Sentence>
+<Sentence ID="11.3">for 3.2 i have cleaned up kmfolderdia.cpp quite a bit</Sentence>
+<Sentence ID="11.4">there s still a minor problem which prevents me from committing it to head</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2003-05-16 13:19:48'</Date>
+<From>'stephan kulow'</From>
+<Text>
+<Sentence ID="12.1">*** bug 58565 has been marked as a duplicate of this bug ***</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2003-06-13 09:30:03'</Date>
+<From>'david jander'</From>
+<Text>
+<Sentence ID="13.1">i am using kmail-1.5.2 on kde 3.1.2 (suse-packages)</Sentence>
+<Sentence ID="13.2">and i still can t create folders on an imap account</Sentence>
+<Sentence ID="13.3">do i have to wait until 3.2 or should i report this to suse</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2003-06-13 09:54:31'</Date>
+<From>'stephan kulow'</From>
+<Text>
+<Sentence ID="14.1">subject: re: cannot create mail folder in imap account </Sentence>
+<Sentence ID="14.2">on friday 13 june 2003 09:30, ddjander@yahoo.com wrote</Sentence>
+<Sentence ID="14.3">&gt; ------- you are receiving this mail because -------</Sentence>
+<Sentence ID="14.4">&gt; you are the assignee for the bug, or are watching the assignee</Sentence>
+<Sentence ID="14.5">&gt; &gt; http://bugs.kde.org/show_bug.cgi?id=57562 </Sentence>
+<Sentence ID="14.6">&gt; &gt; &gt; &gt; &gt; ------- additional comments from ddjander@yahoo.com 2003-06-13 09:30 ------- </Sentence>
+<Sentence ID="14.7">&gt; i am using kmail-1.5.2 on kde 3.1.2 (suse-packages)</Sentence>
+<Sentence ID="14.8">and i still can t create folders on an &gt; imap account</Sentence>
+<Sentence ID="14.9">&gt; do i have to wait until 3.2 or should i report this to suse</Sentence>
+<Sentence ID="14.10">if you re sure you have 3.1.2 for kdenetwork3-mail, then it s nothing suse specific greetings, stephan</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2003-06-14 21:37:25'</Date>
+<From>''</From>
+<Text>
+<Sentence ID="15.1">well i just upgraded to the suse packages myself kdenetwork3-3.1.2-3</Sentence>
+<Sentence ID="15.2">same problem</Sentence>
+<Sentence ID="15.3">no way to create folder on imap</Sentence>
+<Sentence ID="15.4">just as before</Sentence>
+<Sentence ID="15.5">maybe someone should tell suse</Sentence>
+<Sentence ID="15.6">i don t find the bug-report e-mail address</Sentence>
+<Sentence ID="15.7">but then again, didn t help last time...</Sentence>
+<Sentence ID="15.8">maybe time to switch</Sentence>
+<Sentence ID="15.9">&gt;i am using kmail-1.5.2 on kde 3.1.2 (suse-packages)</Sentence>
+<Sentence ID="15.10">and i still can t create &gt;folders on an &gt; imap account</Sentence>
+<Sentence ID="15.11">do i have to wait until 3.2 or should i report this to suse</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2003-06-15 20:52:45'</Date>
+<From>'ingo kl?cker'</From>
+<Text>
+<Sentence ID="16.1">subject: re: cannot create mail folder in imap account</Sentence>
+<Sentence ID="16.2">on saturday 14 june 2003 21:37, vkoch@lbl.gov wrote</Sentence>
+<Sentence ID="16.3">&gt; well i just upgraded to the suse packages myself &gt; kdenetwork3-3.1.2-3</Sentence>
+<Sentence ID="16.4">did you also upgrade kdenetwork3-mail (which contains kmail)</Sentence>
+<Sentence ID="16.5">kdenetwork3 only contains a few libraries used by some of the kde network applications</Sentence>
+<Sentence ID="16.6">regards, ingo</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2003-06-18 02:06:06'</Date>
+<From>'ingo kl?cker'</From>
+<Text>
+<Sentence ID="17.1">*** bug 59956 has been marked as a duplicate of this bug ***</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2003-06-18 20:46:10'</Date>
+<From>'j'</From>
+<Text>
+<Sentence ID="18.1">hi, i can confirm that the bug still exists with the following suse packages installed</Sentence>
+<Sentence ID="18.2">kdenetwork3-query-3.1.2-7 kdenetwork3-lan-3.1.2-7 kdenetwork3-vnc-3.1.2-7 kdenetwork3-devel-3.1.2-7 kdenetwork3-chat-3.1.2-7 kdenetwork3-lisa-3.1.2-7 kdenetwork3-news-3.1.2-7 kdenetwork3-3.1.2-7 kdenetwork3-mail-3.1.2-7 kdenetwork3-dialup-3.1.2-7</Sentence>
+<Sentence ID="18.3">as i remember i had no problem creating imap folders with the original kde 3.1.1 packages from suse 8.2 greetings, joerg</Sentence>
+</Text>
+</Turn>
+</BugReport>
+
+<BugReport ID="16">
+<Title>"(29984) KDE - Change numerically the permits of the files on Konqueror"</Title>
+<Turn>
+<Date>'2001-07-29 13:33:30'</Date>
+<From>'josep febrer'</From>
+<Text>
+<Sentence ID="1.1">(*** this bug was imported into bugs.kde.org ***)</Sentence>
+<Sentence ID="1.2">package: konqueror</Sentence>
+<Sentence ID="1.3">version: 2.1</Sentence>
+<Sentence ID="1.4">severity: wishlist</Sentence>
+<Sentence ID="1.5">installed from: debian package 4:2.1.2-2 (testing/unstable)</Sentence>
+<Sentence ID="1.6">compiler: gcc version 2.95.4.20010319 (debian prerelease)</Sentence>
+<Sentence ID="1.7">os: linux 2.4.4 i686</Sentence>
+<Sentence ID="1.8">to also change numerically the permits of the files on konqueror</Sentence>
+<Sentence ID="1.9">for a lot of people it is easier and quick to change the permits of the files with the values chmod in numbers that to mark the stalls</Sentence>
+<Sentence ID="1.10">i would be very happy if this option was included when making click in properties permits in a file with the konqueror</Sentence>
+<Sentence ID="1.11">i think that under the options of the stalls it could have an option that allowed to insert the numeric values of the permits of the file.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2003-04-15 19:11:07'</Date>
+<From>'paulo fidalgo'</From>
+<Text>
+<Sentence ID="2.1">i m here because i will report this wish too, but i will add one thing, when selecting the file permissions, the numerical number sould appear</Sentence>
+<Sentence ID="2.2">it s nothing essencial, but it helps to complete kde</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2003-05-15 14:33:02'</Date>
+<From>''</From>
+<Text>
+<Sentence ID="3.1">subject: [patch] #29984 change file permission using octal numbers </Sentence>
+<Sentence ID="3.2">hello, i wrote a patch to close the feature requested in bug #29984 http://bugs.kde.org/show_bug.cgi?id=29984</Sentence>
+<Sentence ID="3.3">the patch adds a line edit to the permission page of the properties dialog</Sentence>
+<Sentence ID="3.4">the user can enter any octal number in the line edit to change the file permission like he would do when using chmod</Sentence>
+<Sentence ID="3.5">additionally the file permissions selected by the user are shown as an octal number</Sentence>
+<Sentence ID="3.6">the attached patch is tested against head and works flawlessly for me when applied to kdelibs</Sentence>
+<Sentence ID="3.7">may i commit it</Sentence>
+<Sentence ID="3.8">are there any comments for improvements</Sentence>
+<Sentence ID="3.9">cu dom created an attachment (id=1582) kpropertiesdialog.diff</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2003-05-15 16:45:25'</Date>
+<From>''</From>
+<Text>
+<Sentence ID="4.1">subject: re: [patch] #29984 change file permission using octal numbers</Sentence>
+<Sentence ID="4.2">hello, am donnerstag, 15 mai 2003 16:20 schrieb scott wheeler</Sentence>
+<Sentence ID="4.3">&gt; on thursday 15 may 2003 14:32, dominik seichter wrote</Sentence>
+<Sentence ID="4.4">&gt; &gt; the patch adds a line edit to the permission page of the properties &gt; &gt; dialog</Sentence>
+<Sentence ID="4.5">the user can enter any octal number in the line edit to change &gt; &gt; the file permission like he would do when using chmod</Sentence>
+<Sentence ID="4.6">additionally the &gt; &gt; file permissions selected by the user are shown as an octal number</Sentence>
+<Sentence ID="4.7">&gt; &gt; hmm, to me it just doesn t seem like this belongs in the gui -- certainly &gt; not simply with the string permissions</Sentence>
+<Sentence ID="4.8">well, you are right</Sentence>
+<Sentence ID="4.9">the string permission should be changed</Sentence>
+<Sentence ID="4.10">i simply had no idea for a better, more descriptive string</Sentence>
+<Sentence ID="4.11">maybe octal permissions would be better or chmod permissions</Sentence>
+<Sentence ID="4.12">&gt; i think understanding unix &gt; permissions is confusing as is, but allowing for setting the octal mode &gt; would just add another widget to the general confusion</Sentence>
+<Sentence ID="4.13">this would seem &gt; roughly like being prompted for command line switches when dragging and &gt; dropping a file because it s more powerful that way</Sentence>
+<Sentence ID="4.14">the additional widget might help the user to better understand the concept of unix permissions numbers, because the number is updated in real time, as soon as the user clicks on one of the checkboxes</Sentence>
+<Sentence ID="4.15">maybe there is a possibility to make it more obvious to the user that s/he has not to change anything in this line edit</Sentence>
+<Sentence ID="4.16">i can t think of any better way right now</Sentence>
+<Sentence ID="4.17">&gt; anyway -- just my opinion</Sentence>
+<Sentence ID="4.18">we ll see what others think..</Sentence>
+<Sentence ID="4.19">cu dom</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2003-05-15 17:07:47'</Date>
+<From>'stephan kulow'</From>
+<Text>
+<Sentence ID="5.1">subject: re: change numerically the permits of the files</Sentence>
+<Sentence ID="5.2">on konqueror on thursday 15 may 2003 16:45, domseichter@web.de wrote</Sentence>
+<Sentence ID="5.3">&gt; &gt; &gt; i think understanding unix &gt; &gt; permissions is confusing as is, but allowing for setting the octal mode &gt; &gt; would just add another widget to the general confusion</Sentence>
+<Sentence ID="5.4">this would seem &gt; &gt; roughly like being prompted for command line switches when dragging and &gt; &gt; dropping a file because it s more powerful that way</Sentence>
+<Sentence ID="5.5">&gt; the additional widget might help the user to better understand the concept of &gt; unix permissions numbers, because the number is updated in real time, as soon &gt; as the user clicks on one of the checkboxes</Sentence>
+<Sentence ID="5.6">maybe there is a possibility to &gt; make it more obvious to the user that s/he has not to change anything in this &gt; line edit</Sentence>
+<Sentence ID="5.7">i can t think of any better way right now</Sentence>
+<Sentence ID="5.8">well, if that s the goal</Sentence>
+<Sentence ID="5.9">why is your patch missing massive whatsthis help</Sentence>
+<Sentence ID="5.10">greetings, stephan</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2005-06-05 17:59:58'</Date>
+<From>'maksim orlovich'</From>
+<Text>
+<Sentence ID="6.1">*** bug 106836 has been marked as a duplicate of this bug ***</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2009-08-04 12:04:30'</Date>
+<From>'finex'</From>
+<Text>
+<Sentence ID="7.1">@peter: what do you think about this wish</Sentence>
+<Sentence ID="7.2">could be interesting to implement it on dolphin?</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2009-08-04 12:50:29'</Date>
+<From>'peter penz'</From>
+<Text>
+<Sentence ID="8.1">@finex: the corresponding file where the change must be done is in kdelibs and out of scope of dolphin</Sentence>
+<Sentence ID="8.2">from my point of view i m strongly against this feature</Sentence>
+<Sentence ID="8.3">the file properties dialog is used by a lot of users (bug #185551 gives an indication about this)</Sentence>
+<Sentence ID="8.4">adding a line editor to the ui that can be used and is understood by only by a very, very small user group should not be part of a ui that is used by other user groups too</Sentence>
+<Sentence ID="8.5">i even don t see a benefit for the advanced users in this case</Sentence>
+<Sentence ID="8.6">i think it is more effort to right click an item, select properties..., select permissions , fokus the line editor, type in the permissions instead of pressing f4 to open the konsole and type one line chmod...</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2009-08-04 12:51:57'</Date>
+<From>'peter penz'</From>
+<Text>
+<Sentence ID="9.1">ah, in the last sentence i meant i think it is not efficient to right click ..</Sentence>
+<Sentence ID="9.2">sorry!</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2009-08-04 13:21:38'</Date>
+<From>'finex'</From>
+<Text>
+<Sentence ID="10.1">thanks peter</Sentence>
+<Sentence ID="10.2">i agree with you</Sentence>
+<Sentence ID="10.3">i ll move the request to kdelibs even if i m against too.</Sentence>
+</Text>
+</Turn>
+</BugReport>
+
+<BugReport ID="17">
+<Title>"(137982) KDE - Fit to window zoom action doesn t scale images that are smaller to the window size [KDE4.1]"</Title>
+<Turn>
+<Date>'2006-11-27 21:08:40'</Date>
+<From>'josep febrer'</From>
+<Text>
+<Sentence ID="1.1">version: 1.4.1 (using kde kde 3.5.5)</Sentence>
+<Sentence ID="1.2">installed from: compiled from sources</Sentence>
+<Sentence ID="1.3">compiler: gcc version 4.1.2 20061115 (prerelease) (debian 4.1.1-20)</Sentence>
+<Sentence ID="1.4">os: linux</Sentence>
+<Sentence ID="1.5">in gwenview 1.4.1 when i select the zoom option fit to window it doesn t work on an image that is smaller to the image window size, however it works if the image is bigger than the image window size</Sentence>
+<Sentence ID="1.6">also, the zoom options fit to width and fit to height are working correctly with images that are smaller to the image window size and they are scaled acording to the option selected</Sentence>
+<Sentence ID="1.7">thanks.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2007-12-12 16:34:36'</Date>
+<From>'josep febrer'</From>
+<Text>
+<Sentence ID="2.1">i checked with a current build of the kde4 version, and this issue is still present, when an image it is smaller than the gwenview s image view area and the zoom to fit toolbar button is pressed the image isn t scaled to fit the image view area and it s showed exaclty like if actual size button were pressed.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2007-12-13 00:02:49'</Date>
+<From>'aurelien gateau'</From>
+<Text>
+<Sentence ID="3.1">in fact, there is an option to do what you want in gwenview 1.4</Sentence>
+<Sentence ID="3.2">it s in the configuration dialog, go to image view , then check enlarge small images when auto zoom is activated</Sentence>
+<Sentence ID="3.3">unfortunately, i haven t ported that option to gwenview 2.0 and since we are freezing for kde4.0, it won t be there</Sentence>
+<Sentence ID="3.4">you will probably have to wait for kde4.1.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2007-12-16 11:38:33'</Date>
+<From>'jos poortvliet'</From>
+<Text>
+<Sentence ID="4.1">would love to have it in 4.1 for sure, and imho it should be on by default (for the sake of simplicity, i wouldn t even make it an option).</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2007-12-16 23:02:51'</Date>
+<From>'aurelien gateau'</From>
+<Text>
+<Sentence ID="5.1">marking as kde4.1</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2007-12-17 11:57:15'</Date>
+<From>'josep febrer'</From>
+<Text>
+<Sentence ID="6.1">thanks, aurelien i don t know how i missed this option in 1.4.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2008-03-29 01:40:40'</Date>
+<From>'aurelien gateau'</From>
+<Text>
+<Sentence ID="7.1">*** bug 159608 has been marked as a duplicate of this bug ***</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2008-04-27 12:16:51'</Date>
+<From>'aurelien gateau'</From>
+<Text>
+<Sentence ID="8.1">*** bug 161035 has been marked as a duplicate of this bug ***</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2008-04-27 14:22:31'</Date>
+<From>'aurelien gateau'</From>
+<Text>
+<Sentence ID="9.1">svn commit 801676 by gateau</Sentence>
+<Sentence ID="9.2">new option to enlarge smaller images in zoom to fit mode</Sentence>
+<Sentence ID="9.3">bug: 137982 m +42 -2 app/configdialog.ui m +4 -0 lib/gwenviewconfig.kcfg m +15 -1 lib/imageview.cpp m +2 -0 lib/imageview.h m +1 -0 part/gvpart.cpp</Sentence>
+<Sentence ID="9.4">websvn link: http://websvn.kde.org/?view=rev&amp;revision=801676</Sentence>
+</Text>
+</Turn>
+</BugReport>
+
+<BugReport ID="18">
+<Title>"(250434) KDE - Regression: Calendar View Rendering broken when appointment in current selection"</Title>
+<Turn>
+<Date>'2010-09-07 12:43:25'</Date>
+<From>'felix wolfsteller'</From>
+<Text>
+<Sentence ID="1.1">in version 4:4.5~20100903.1171290-1maemo1.1171237 when looking at a section of the calendar in which appointments are present, rendering is broken (e.g. does not update areas)</Sentence>
+<Sentence ID="1.2">also, in this version i was never able to see an appointment (as red box, was possible previously).</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2010-09-09 16:30:28'</Date>
+<From>'volker krause'</From>
+<Text>
+<Sentence ID="2.1">also affects the new month view, also only when looking at a time range containing events</Sentence>
+<Sentence ID="2.2">consistently happens on all devices with package installations, does not happen on my development phone with self-compiled applications, does also not happen on the desktop, making it very hard to debug</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2010-09-10 15:11:25'</Date>
+<From>'volker krause'</From>
+<Text>
+<Sentence ID="3.1">svn commit 1173789 by vkrause</Sentence>
+<Sentence ID="3.2">disable opengl rendering for korg-mobile for now</Sentence>
+<Sentence ID="3.3">it seems that the calendar views trigger a bad misbehavior in the opengl stack on the n900, causing random rendering defects at best and device crashes at worst</Sentence>
+<Sentence ID="3.4">further details are still unknown, but not using opengl seems to make all those problems go away</Sentence>
+<Sentence ID="3.5">bug: 250434 m +1 -1 korganizer-mobile.sh</Sentence>
+<Sentence ID="3.6">websvn link: http://websvn.kde.org/?view=rev&amp;revision=1173789</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2010-09-13 11:37:41'</Date>
+<From>'felix wolfsteller'</From>
+<Text>
+<Sentence ID="4.1">fix confirmed for version 4:4.5~20100912.1174548-1maemo1.1173569 , closing.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2010-09-15 14:57:57'</Date>
+<From>'volker krause'</From>
+<Text>
+<Sentence ID="5.1">*** bug 248389 has been marked as a duplicate of this bug ***</Sentence>
+</Text>
+</Turn>
+</BugReport>
+<BugReport ID="19">
+<Title>"(80789) KDE - shortcut for rename should be F2 for consistency with konqueror"</Title>
+<Turn>
+<Date>'2004-05-02 15:13:13'</Date>
+<From>'janis blechert'</From>
+<Text>
+<Sentence ID="1.1">version: 0.11.9 (using kde 3.2.2, gentoo) </Sentence>
+<Sentence ID="1.2">compiler: gcc version 3.3.3 20040217 (gentoo linux 3.3.3, propolice-3.3-7) </Sentence>
+<Sentence ID="1.3">os: linux (i686) release 2.6.5-gentoo </Sentence>
+<Sentence ID="1.4">as usual the titel says it all</Sentence>
+<Sentence ID="1.5">i meant the renaming of the cd ( k3b data project , etc), but possible the normal file renaming uses ctrl+r aswell, which is inconsistent with konqueror</Sentence>
+<Sentence ID="1.6">-janis blechert</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2004-11-30 17:01:21'</Date>
+<From>'stephan binner'</From>
+<Text>
+<Sentence ID="2.1">*** bug 81915 has been marked as a duplicate of this bug ***</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2004-11-30 17:01:32'</Date>
+<From>'stephan binner'</From>
+<Text>
+<Sentence ID="3.1">*** bug 81699 has been marked as a duplicate of this bug ***</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2004-12-23 18:16:33'</Date>
+<From>'gilles schintgen'</From>
+<Text>
+<Sentence ID="4.1">*** this bug has been confirmed by popular vote ***</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2005-05-18 08:19:15'</Date>
+<From>'mohd asif ali rizwaan'</From>
+<Text>
+<Sentence ID="5.1">make it work with ctrl+r and f2 key</Sentence>
+<Sentence ID="5.2">i really find it annoying to use ctrl+r, cause it is difficult to press the combination</Sentence>
+<Sentence ID="5.3">f2 is quick</Sentence>
+<Sentence ID="5.4">please make it consistent.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2005-05-23 18:50:52'</Date>
+<From>'sebastian trueg'</From>
+<Text>
+<Sentence ID="6.1">currently doing it and using this bug to log into this system</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2005-05-23 18:55:00'</Date>
+<From>'sebastian trueg'</From>
+<Text>
+<Sentence ID="7.1">*** bug has been marked as fixed ***.</Sentence>
+</Text>
+</Turn>
+<Turn>
+<Date>'2005-06-27 19:26:23'</Date>
+<From>'mohd asif ali rizwaan'</From>
+<Text>
+<Sentence ID="8.1">thanks a million sebastian trueg</Sentence>
+<Sentence ID="8.2">i really appreciate k3b and its ease of use.</Sentence>
+</Text>
+</Turn>
+</BugReport>
+</root>

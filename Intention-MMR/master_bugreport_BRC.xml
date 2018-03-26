@@ -1,0 +1,1679 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<root>
+<BugReport ID = "1">
+<Title>"(403907) Thunderbird - Moving (+ delete/rename) a folder/subfolder [...] take a lot of CPU and one to two minutes of processing"</Title>
+<Turn>
+<Date>'2007-11-15 08:24:07'</Date>
+<From>'Jean-Michel Reghem'</From>
+<Text>
+<Sentence ID = "1.1"> For some time (2 months? more?, i don't remember) i have this problem:</Sentence>
+<Sentence ID = "1.2"> --&amp;gt; if i drag and drop a folder from a location to an other, cpu use for thunderbird process is more than 50%.</Sentence>
+<Sentence ID = "1.3"> --&amp;gt; Even if the folder is empty</Sentence>
+<Sentence ID = "1.4"> --&amp;gt; It occurs with subfolder move inside Local Folders</Sentence>
+<Sentence ID = "1.5"> --&amp;gt; It occurs with folder move inside a pop account (for example moving Inbox-&amp;gt;test to Draft-&amp;gt;test</Sentence>
+<Sentence ID = "1.6"> --&amp;gt; It DOESN'T occurs when moving a folder from a pop account to an other (for example moving AccoutA --&amp;gt; Inbox --&amp;gt; test to AccountB --&amp;gt; Inbox --&amp;gt;test ... Butin this case, by design, folder is copied, not moved --&amp;gt; it seems that this is</Sentence>
+<Sentence ID = "1.7"> the delete which is the problem</Sentence>
+<Sentence ID = "1.8"> Other Facts</Sentence>
+<Sentence ID = "1.9"> ============</Sentence>
+<Sentence ID = "1.10"> - Memory doesn't change during the move time ... only a high level of cpu use</Sentence>
+<Sentence ID = "1.11"> - Delete key or Right-click delete (so move to trash) got the same bad result</Sentence>
+<Sentence ID = "1.12"> - Renaming a folder take a long time too</Sentence>
+<Sentence ID = "1.13"> - Checking pop account take more resources than before ... 10 to 20\" of high cpu resource for checking mail, slowing a lot of windows applications</Sentence>
+<Sentence ID = "1.14"> - Same thing for RSS folders ...</Sentence>
+<Sentence ID = "1.15"> Hardware and Software information</Sentence>
+<Sentence ID = "1.16"> =================================</Sentence>
+<Sentence ID = "1.17"> Computer: Dell Latitude D820 laptop, Core 2 Duo 2GHz, 2Go Ram, 100Go HD 7200rpm</Sentence>
+<Sentence ID = "1.18"> OS: Windows Vista Business</Sentence>
+<Sentence ID = "1.19"> Thunderbird: TB nightly 2.0.0.10pre (2007111403) ... but problem occurs since long time</Sentence>
+<Sentence ID = "1.20"> Profile: profile.ini modified to have the profile files on D:\\Thunderbird\\JMR.profil. </Sentence>
+<Sentence ID = "1.21"> All emails account store on D:\\Thunderbird\\ (13 pop account + 69 RSS feeds)</Sentence>
+<Sentence ID = "1.22"> D:\\Thunderbird: 2.3Go</Sentence>
+<Sentence ID = "1.23"> Bigger file: 384Mo</Sentence>
+<Sentence ID = "1.24"> Configuration: each pop has its own folder (inbox, etc ...) but rules filters lot of mails to subfolder in local folder directory</Sentence>
+<Sentence ID = "1.25"> I've check bugzilla for similar bug, event Mozillazine forum, but never seen something like this</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2007-11-15 08:24:43'</Date>
+<From>'Jean-Michel Reghem'</From>
+<Text>
+<Sentence ID = "2.1"> Additional information: Running in safe mode: same problem</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2007-12-04 00:58:00'</Date>
+<From>'Jean-Michel Reghem'</From>
+<Text>
+<Sentence ID = "3.1">   ohoh ... thus bug seems related to my 10000 temp files in temp folder: tmprules-xxx.dat</Sentence>
+<Sentence ID = "3.2"> I've deleted all of them --&amp;gt; filters works again AND this bug seems solved by removing them</Sentence>
+<Sentence ID = "3.3"> bad news: new tmprules begin to appairs ...</Sentence>
+<Sentence ID = "3.4"> So, this bug is a dup of bug 362539</Sentence>
+<Sentence ID = "3.5"> *** This bug has been marked as a duplicate of bug 362539 ***</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2007-12-04 01:10:41'</Date>
+<From>'Jean-Michel Reghem'</From>
+<Text>
+<Sentence ID = "4.1"> I guess the really low perf behaviour was coming that TB parsed all 10000 rules files for all received mail ...</Sentence>
+<Sentence ID = "4.2"> same thing when moving a folder, it parsed the 10000 rules files to see if these have to be updated after the move</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2007-12-04 07:56:21'</Date>
+<From>'RDL'</From>
+<Text>
+<Sentence ID = "5.1"> (In reply to comment #2)</Sentence>
+<Sentence ID = "5.2"> &amp;gt; ohoh ... thus bug seems related to my 10000 temp files in temp folder: tmprules-xxx.dat</Sentence>
+<Sentence ID = "5.3"> &amp;gt; </Sentence>
+<Sentence ID = "5.4"> &amp;gt; I've deleted all of them --&amp;gt; filters works again  AND this bug seems solved by removing them</Sentence>
+<Sentence ID = "5.5"> &amp;gt; </Sentence>
+<Sentence ID = "5.6"> &amp;gt; bad news: new tmprules begin to appairs ...</Sentence>
+<Sentence ID = "5.7"> &amp;gt; </Sentence>
+<Sentence ID = "5.8"> &amp;gt; So, this bug is a dup of bug 362539</Sentence>
+<Sentence ID = "5.9"> &amp;gt; </Sentence>
+<Sentence ID = "5.10"> &amp;gt; *** This bug has been marked as a duplicate of bug 362539 ***</Sentence>
+<Sentence ID = "5.11"> &amp;gt; </Sentence>
+<Sentence ID = "5.12"> This bug is not a duplicate of bug 362539.</Sentence>
+<Sentence ID = "5.13"> Reason:</Sentence>
+<Sentence ID = "5.14"> 1) Although the underlying cause may be the same, the symptoms of the two bugs are very different.</Sentence>
+<Sentence ID = "5.15"> 2) Since the description attached to bug 362539 does not include the symptoms of this bug, it does not properly include this reported problem.</Sentence>
+<Sentence ID = "5.16"> 3) When users search for this problem, now that this bug is closed, they probably will not find this description. </Sentence>
+<Sentence ID = "5.17"> Nor will they find bug 362539 since it does not include these symptoms at the top level. </Sentence>
+<Sentence ID = "5.18"> Hence they will not find the circumvention.</Sentence>
+<Sentence ID = "5.19"> 4) Therefore, please re-open this bug report.</Sentence>
+<Sentence ID = "5.20"> 5) Please do not attempt to amend the description of bug 362539. </Sentence>
+<Sentence ID = "5.21"> Please leave that decision, as well as that of closure, to one of the Bugzilla 'monitors'</Sentence>
+<Sentence ID = "5.22"> who will know whether that is appropriate and, if so, how to do it cleanly, without obscuring user access to information.</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2007-12-04 12:44:15'</Date>
+<From>'Jean-Michel Reghem'</From>
+<Text>
+<Sentence ID = "6.1"> you're right ... </Sentence>
+<Sentence ID = "6.2"> this bug depends of 362539 and not a dupe</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2007-12-04 13:06:50'</Date>
+<From>'RDL'</From>
+<Text>
+<Sentence ID = "7.1"> (In reply to comment #5)</Sentence>
+<Sentence ID = "7.2"> &amp;gt; you're right ... this bug depends of 362539 and not a dupe</Sentence>
+<Sentence ID = "7.3"> &amp;gt; </Sentence>
+<Sentence ID = "7.4"> Thank you.</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2008-01-08 02:24:19'</Date>
+<From>'WADA'</From>
+<Text>
+<Sentence ID = "8.1"> Adding \"tmprules-N.dat\" in bug summary, for ease of search &amp; understanding bug.</Sentence>
+<Sentence ID = "8.2"> (It looks to be too long. Please modify to appropriate one.)</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2008-01-17 02:43:21'</Date>
+<From>'Jean-Michel Reghem'</From>
+<Text>
+<Sentence ID = "9.1"> Resolved fixed as bug 375292 is fixed on branch 1.8 and trunk</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2008-11-17 11:29:04'</Date>
+<From>'Wayne Mery'</From>
+<Text>
+<Sentence ID = "10.1"> *** Bug 410739 has been marked as a duplicate of this bug. ***</Sentence>
+</Text>
+</Turn>
+
+</BugReport>
+<BugReport ID = "2">
+<Title>"(296655) Thunderbird -  selection of multiple mailboxes/folders in the folders pane is possible but not usable  "</Title>
+<Turn>
+<Date>'2005-06-04 17:11:09'</Date>
+<From>'Elliotte Rusty Harold'</From>
+<Text>
+<Sentence ID = "1.1"> User-Agent:       Mozilla/5.0 (Macintosh; U; PPC Mac OS X Mach-O; en-US;rv:1.8b2) Gecko/20050528 Firefox/1.0+</Sentence>
+<Sentence ID = "1.2"> Build Identifier: Mozilla/5.0 (Macintosh; U; PPC Mac OS X Mach-O; en-US;rv:1.8b2) Gecko/20050528 Firefox/1.0+</Sentence>
+<Sentence ID = "1.3"> The folders pane in Thunderbird that lists my e-mail accounts and local folders does not allow me to select several folders at once. </Sentence>
+<Sentence ID = "1.4"> For instance I should be able to click on my James folder to select it, shift-click on my John folder to select it without deselecting the James folder, and then drag them *both* into my Friends folder. </Sentence>
+<Sentence ID = "1.5"> Currently I have to do this one at a time.</Sentence>
+<Sentence ID = "1.6"> Reproducible: Always</Sentence>
+<Sentence ID = "1.7"> Steps to Reproduce:</Sentence>
+<Sentence ID = "1.8"> 1. Click on a local folder</Sentence>
+<Sentence ID = "1.9"> 2. Shift-click on a different local folder</Sentence>
+<Sentence ID = "1.10"> Actual Results:  </Sentence>
+<Sentence ID = "1.11"> The first folder is deselected. </Sentence>
+<Sentence ID = "1.12"> Expected Results:  </Sentence>
+<Sentence ID = "1.13"> Kept both selected. </Sentence>
+<Sentence ID = "1.14"> Possibly there's a difference here between shift and command-clicking (on a Mac). </Sentence>
+<Sentence ID = "1.15"> Shift click should perhaps select everything between the clicked folder and the currently selected folder. </Sentence>
+<Sentence ID = "1.16"> Command-clicking normally selects only the folders you explicitly click on. </Sentence>
+<Sentence ID = "1.17"> Possibly there are other conventions on other platforms for multiple selections. </Sentence>
+<Sentence ID = "1.18"> But multiple selections should be possible,</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2005-09-27 01:50:03'</Date>
+<From>'Gervase Markham'</From>
+<Text>
+<Sentence ID = "2.1"> This is an automated message, with ID \"auto-resolve01\".</Sentence>
+<Sentence ID = "2.2"> This bug has had no comments for a long time. </Sentence>
+<Sentence ID = "2.3"> Statistically, we have found that bug reports that have not been confirmed by a second user after three months are</Sentence>
+<Sentence ID = "2.4"> highly unlikely to be the source of a fix to the code.</Sentence>
+<Sentence ID = "2.5"> While your input is very important to us, our resources are limited and so we are asking for your help in focussing our efforts. </Sentence>
+<Sentence ID = "2.6"> If you can still reproduce this problem in the latest version of the product (see below for how to obtain a copy) or, for feature requests, if it's not present in the latest version and you still believe we should implement it, please visit the URL of this bug (given at the top of this mail) and add a comment to that effect, giving more reproduction information if you have it.</Sentence>
+<Sentence ID = "2.7"> If it is not a problem any longer, you need take no action. </Sentence>
+<Sentence ID = "2.8"> If this bug is not changed in any way in the next two weeks, it will be automatically resolved.</Sentence>
+<Sentence ID = "2.9"> Thank you for your help in this matter.</Sentence>
+<Sentence ID = "2.10"> The latest beta releases can be obtained from:</Sentence>
+<Sentence ID = "2.11"> Firefox:     http://www.mozilla.org/projects/firefox/</Sentence>
+<Sentence ID = "2.12"> Thunderbird: http://www.mozilla.org/products/thunderbird/releases/1.5beta1.html</Sentence>
+<Sentence ID = "2.13"> Seamonkey:   http://www.mozilla.org/projects/seamonkey/</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2005-09-29 04:39:24'</Date>
+<From>'Mike Cowperthwaite'</From>
+<Text>
+<Sentence ID = "3.1"> *** Bug 310352 has been marked as a duplicate of this bug. ***</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2005-09-29 04:40:42'</Date>
+<From>'Mike Cowperthwaite'</From>
+<Text>
+<Sentence ID = "4.1"> Suite bug 50767.</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2006-11-07 08:49:32'</Date>
+<From>'Rob Campbell'</From>
+<Text>
+<Sentence ID = "5.1"> This is highly-desirable in my opinion. </Sentence>
+<Sentence ID = "5.2"> I would like to see this implemented for easier management of RSS subscriptions.</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2007-01-12 08:49:07'</Date>
+<From>'Magnus Melin'</From>
+<Text>
+<Sentence ID = "6.1"> *** Bug 366757 has been marked as a duplicate of this bug. ***</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2007-02-06 09:26:27'</Date>
+<From>'SteveC'</From>
+<Text>
+<Sentence ID = "7.1"> I would love to see this closed, and also dragging up and down the folder pane much faster.</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2007-10-09 09:48:18'</Date>
+<From>'Magnus Melin'</From>
+<Text>
+<Sentence ID = "8.1"> *** Bug 398712 has been marked as a duplicate of this bug. ***</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2007-11-19 03:01:54'</Date>
+<From>'Alex Deriziotis'</From>
+<Text>
+<Sentence ID = "9.1"> This is pretty basic stuff. </Sentence>
+<Sentence ID = "9.2"> It's been a bit of a showstopper when migrating Outlook users over to Thunderbird since heavy users often have tons of folders to organise their emails. </Sentence>
+<Sentence ID = "9.3"> Importing their mail just dumps these folders into Local Folders and then they can't be re-organised in their inbox without going through them all one-by-one, which is just silly.</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2008-10-31 01:24:22'</Date>
+<From>'Przemyslaw Bialik'</From>
+<Text>
+<Sentence ID = "10.1"> On latest trunk multiple folders can be selected but there is completely no benefit of it: on drag and drop only 1 folder is moved, CM shows only 3 entries (open, open in new tab, properties) and even they are useless ;) (nothing happens / empty tab).</Sentence>
+<Sentence ID = "10.2"> Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.1b2pre) Gecko/20081030 Lightning/1.0pre Shredder/3.0b1pre</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2008-10-31 01:41:22'</Date>
+<From>'Przemyslaw Bialik'</From>
+<Text>
+<Sentence ID = "11.1"> blockingâ€‘thunderbird3 ?</Sentence>
+<Sentence ID = "11.2"> Multiple selection should be either useful or not possible at all.</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2008-11-11 11:36:55'</Date>
+<From>'Przemyslaw Bialik'</From>
+<Text>
+<Sentence ID = "12.1"> Adjusting description.</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2008-11-12 11:09:52'</Date>
+<From>'Magnus Melin'</From>
+<Text>
+<Sentence ID = "13.1"> Marking as regression as in 2.0 you couldn't select more than one folder at a time.</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2008-12-20 05:20:22'</Date>
+<From>'Magnus Melin'</From>
+<Text>
+<Sentence ID = "14.1"> Would be great if someone went through and made context commands work where it should, but at the very least we should make commands unavailable when they won't work anyway. </Sentence>
+<Sentence ID = "14.2"> blocking-tb3+ to at least get the minimal fix in.</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2009-01-21 22:44:54'</Date>
+<From>'David Ascher'</From>
+<Text>
+<Sentence ID = "15.1"> Magnus, care to own this bug?</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2009-02-08 11:47:06'</Date>
+<From>'Magnus Melin'</From>
+<Text>
+<Sentence ID = "16.1"> Sure, though if someone want's to take it on it's up for grabs.</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2009-03-03 02:10:00'</Date>
+<From>'Mark Banner'</From>
+<Text>
+<Sentence ID = "17.1"> *** Bug 481159 has been marked as a duplicate of this bug. ***</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2009-04-13 22:29:25'</Date>
+<From>'Bryan W Clark'</From>
+<Text>
+<Sentence ID = "18.1"> I'll put this up for m5 since it's not active right now</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2009-04-25 12:08:51'</Date>
+<From>'Magnus Melin'</From>
+<Text>
+<Sentence ID = "19.1"> Created an attachment (id=374607) [details]</Sentence>
+<Sentence ID = "19.2"> proposed fix</Sentence>
+<Sentence ID = "19.3"> The items that I think make sense for multi select:</Sentence>
+<Sentence ID = "19.4"> Get Messages</Sentence>
+<Sentence ID = "19.5">  o if only servers, or it's only newsgroups/feeds </Sentence>
+<Sentence ID = "19.6"> Open </Sentence>
+<Sentence ID = "19.7">  o though I question that we should have this item *at all*</Sentence>
+<Sentence ID = "19.8"> Open in new Tab</Sentence>
+<Sentence ID = "19.9"> Unsubscribe</Sentence>
+<Sentence ID = "19.10">  o if it's newsgroups only</Sentence>
+<Sentence ID = "19.11"> Delete </Sentence>
+<Sentence ID = "19.12">  o would have been useful, but the confirmation dialogs are not in js, we have multiple delete models etc so i gave up and just disabled it for multi selection</Sentence>
+<Sentence ID = "19.13"> Compact</Sentence>
+<Sentence ID = "19.14"> Mark Folder/s Read</Sentence>
+<Sentence ID = "19.15"> Mark Newsgroup/s Read</Sentence>
+<Sentence ID = "19.16"> ---</Sentence>
+<Sentence ID = "19.17"> Other notes:</Sentence>
+<Sentence ID = "19.18">  - hitting delete on ng to unsubscribe was broken (confirmUnsubscribe vs ConfirmUnsubscribe)</Sentence>
+<Sentence ID = "19.19">  - new saved search wasn't enabled for news - but you can create one</Sentence>
+<Sentence ID = "19.20">  - moving away from GetSelectedMsgFolders() to gFolderTreeView.getSelectedFolders()</Sentence>
+<Sentence ID = "19.21"> Still to do (maybe in another bug...):</Sentence>
+<Sentence ID = "19.22">  - fix tools menu folder commands</Sentence>
+<Sentence ID = "19.23">  - drag'n'drop (disable for multi?)</Sentence>
+<Sentence ID = "19.24"> ---</Sentence>
+<Sentence ID = "19.25"> Phil: got bandwidth for this?</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2009-04-26 12:32:57'</Date>
+<From>'Phil Ringnalda'</From>
+<Text>
+<Sentence ID = "20.1"> (From update of attachment 374607 [details])</Sentence>
+<Sentence ID = "20.2"> Looks good to me, except</Sentence>
+<Sentence ID = "20.3"> &amp;gt;+   * Compacts either or all folders for accounts that the given folders belong to, or for accounts of the currently selected folders.</Sentence>
+<Sentence ID = "20.4"> That's hard enough to parse even without the stray or in \"either or\" ;)</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2009-05-07 14:21:40'</Date>
+<From>'Bryan W Clark'</From>
+<Text>
+<Sentence ID = "21.1"> (From update of attachment 374607 [details])</Sentence>
+<Sentence ID = "21.2"> sounds good from the description</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2009-05-08 17:52:17'</Date>
+<From>'Bryan W Clark'</From>
+<Text>
+<Sentence ID = "22.1"> I was going to add the checkin-needed keyword but you probably want to fix the nits first</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2009-05-09 05:07:46'</Date>
+<From>'Magnus Melin'</From>
+<Text>
+<Sentence ID = "23.1"> changeset:   2593:2f6ef8daa83e</Sentence>
+<Sentence ID = "23.2"> http://hg.mozilla.org/comm-central/rev/2f6ef8daa83e</Sentence>
+<Sentence ID = "23.3"> -&amp;gt;FIXED</Sentence>
+<Sentence ID = "23.4"> Note to testers: now that this landed the commands of the folder context menu should work for multiple folders, if the are shown (and enabled). </Sentence>
+<Sentence ID = "23.5"> There's a lot of different possible combinations of folders/servers of different kinds possible so it would be good if people could make sure all cases work as they should for them.</Sentence>
+</Text>
+</Turn>
+
+</BugReport>
+
+<BugReport ID = "3">
+<Title>"(69350) Eclipse - Accessibility : Group title is not taken into account by Window-Eyes 4.5"</Title>
+<Turn>
+<Date>'2004-07-06 06:31:00'</Date>
+<From>'lucas bigeardel'</From>
+<Text>
+<Sentence ID = "1.1"> Group title is not taken into account by Window-Eyes 4.5.</Sentence>
+<Sentence ID = "1.2"> The group title should be pronouced before radio buttons or other controls.</Sentence>
+<Sentence ID = "1.3"> It is not, this is bug since blid users cannont know what the group content is dealing about.</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2004-08-23 17:50:11'</Date>
+<From>'Carolyn MacLeod'</From>
+<Text>
+<Sentence ID = "2.1"> Interesting. </Sentence>
+<Sentence ID = "2.2"> Both Window-Eyes and JAWS will read a Group title IF the Group has a single child that does not have an obvious name, for example, a text or a list or a combo box.</Sentence>
+<Sentence ID = "2.3"> But neither screen reader will read a Group title if it groups a set of radio buttons or check boxes, say. </Sentence>
+<Sentence ID = "2.4"> (Or, I assume, if it is surrounding something that has an obvious label to read instead, like a button, and if the child control takes focus).</Sentence>
+<Sentence ID = "2.5"> We have several dialogs - notably, the search and find/replace dialogs, that have groups with radio/checkbox children. </Sentence>
+<Sentence ID = "2.6"> The screen readers do not read the group titles in these dialogs.</Sentence>
+<Sentence ID = "2.7"> I will bring this to the attention of the screen reader developers.</Sentence>
+<Sentence ID = "2.8"> For now, an extreme, but sort-of useable work-around in Window-Eyes is to tell it to read every control in a newly-opened dialog. </Sentence>
+<Sentence ID = "2.9"> You can do this with:</Sentence>
+<Sentence ID = "2.10"> Global -&amp;gt; Verbosity -&amp;gt; Activated... Entire Window if Dialog</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2004-08-27 02:37:16'</Date>
+<From>'Carolyn MacLeod'</From>
+<Text>
+<Sentence ID = "3.1"> CCing Frank and Lin.</Sentence>
+<Sentence ID = "3.2"> Here are 2 examples of eclipse dialogs where a group title is not read:</Sentence>
+<Sentence ID = "3.3"> 1) Click on the flashlight (Search) tool in the main toolbar. </Sentence>
+<Sentence ID = "3.4"> Click on any of the tabs in the notebook. </Sentence>
+<Sentence ID = "3.5"> All of the pages have a \"Scope\" group. </Sentence>
+<Sentence ID = "3.6"> Some of the pages have a \"Search For\" group or a \"Limit To\" group. </Sentence>
+<Sentence ID = "3.7"> None of these titles are read by JAWS.</Sentence>
+<Sentence ID = "3.8"> 2) Open an editor on any file, and then select Edit -&amp;gt; Find/Replace... (or type ctrl+F) to get the Find/Replace dialog. </Sentence>
+<Sentence ID = "3.9"> The \"Direction\", \"Scope\", and \"Options\" group titles are never read.</Sentence>
+<Sentence ID = "3.10"> I think the best thing would be if these were read when one of the radio or checkbox controls gets focus (i.e. when the dialog is activated, and when the user tabs to a new group or clicks on a control in another group.</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2004-08-31 15:40:47'</Date>
+<From>'Lin Ma'</From>
+<Text>
+<Sentence ID = "4.1"> Today, Frank and Lin tested with JAWS 5.0, 5.1 and 6.0 beta, we found both the dialogue from flashlight and Find/Replace from the Edit group titles are spoken correctly.</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2004-09-01 16:55:52'</Date>
+<From>'Carolyn MacLeod'</From>
+<Text>
+<Sentence ID = "5.1"> Created an attachment (id=14333) [details]</Sentence>
+<Sentence ID = "5.2"> GroupTests.java</Sentence>
+<Sentence ID = "5.3"> It is not working for me, so either I didn't make the problem clear enough, or you have some JAWS settings set that I do not have set. </Sentence>
+<Sentence ID = "5.4"> I just installed JAWS 5.1, and in the installation process, it asked if I wanted to keep settings from my previous JAWS version. </Sentence>
+<Sentence ID = "5.5"> I said \"No\", because I want my JAWS 5.1 to be \"out-of-the-box\". So I have NO settings in my JAWS 5.1, so no surprises.</Sentence>
+<Sentence ID = "5.6"> I will attach a little code snippet here that shows the problem very simply.</Sentence>
+<Sentence ID = "5.7"> Copy the attachment into your snippets directory, refresh your snippets project, select GroupTests.java, and Run -&amp;gt; Java Application. </Sentence>
+<Sentence ID = "5.8"> What I hear when I tab or down/up arrow is \"green\" or \"blue\", depending on who has focus.</Sentence>
+<Sentence ID = "5.9"> What I want to hear is \"Foreground - green\" and \"Background - blue\".</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2004-09-08 11:25:35'</Date>
+<From>'Carolyn MacLeod'</From>
+<Text>
+<Sentence ID = "6.1"> Created an attachment (id=14443) [details]</Sentence>
+<Sentence ID = "6.2"> GroupTests.java</Sentence>
+<Sentence ID = "6.3"> Sorry - Bugzilla defaulted to saving the java file as octet-stream, which isn't very useful. </Sentence>
+<Sentence ID = "6.4"> I am attaching it again, and specifying type \"text\". </Sentence>
+<Sentence ID = "6.5"> Please ignore the previous attachment and get this new one.</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2004-09-28 15:50:14'</Date>
+<From>'Frank DiPalermo'</From>
+<Text>
+<Sentence ID = "7.1"> Carolyn, Sorry, but I used your code snippet and I do indeed hear the group box names along with the individual radio buttons.  </Sentence>
+<Sentence ID = "7.2"> I am using JAWS 5.1.383.</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2004-10-07 16:38:14'</Date>
+<From>'Carolyn MacLeod'</From>
+<Text>
+<Sentence ID = "8.1"> I am also using JAWS 5.10.383, and I still don't hear \"Foreground\" or \"Background\". </Sentence>
+<Sentence ID = "8.2"> we must have different settings somehow.</Sentence>
+<Sentence ID = "8.3"> I will attach my default.jcf (I believe that it is \"straight from the factory\". </Sentence>
+<Sentence ID = "8.4"> I do not have a javaw.jcf. </Sentence>
+<Sentence ID = "8.5"> Maybe we can figure out what setting you have set that I don't have set.</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2004-10-07 16:39:51'</Date>
+<From>'Carolyn MacLeod'</From>
+<Text>
+<Sentence ID = "9.1"> Created an attachment (id=15052) [details]</Sentence>
+<Sentence ID = "9.2"> C:\\JAWS510\\SETTINGS\\enu\\Default.JCF</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2004-10-15 15:34:37'</Date>
+<From>'Carolyn MacLeod'</From>
+<Text>
+<Sentence ID = "10.1"> After further investigation, we determined that the problem only happens on Windows XP with the javaw.exe.manifest installed in jre/bin (this tells WinXP to use the WinXP common controls - version 6.0 - instead of the Win2K common </Sentence>
+<Sentence ID = "10.2"> controls - version 5.x).</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2004-12-13 10:19:05'</Date>
+<From>'Frank DiPalermo'</From>
+<Text>
+<Sentence ID = "11.1"> This problem is solved in JAWS.  </Sentence>
+<Sentence ID = "11.2"> The window class for this object has been reassigned internally in JAWS.  </Sentence>
+<Sentence ID = "11.3"> This fix will be reflected in JAWS version 6.0 which is due out shortly.</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2005-04-13 17:03:08'</Date>
+<From>'Carolyn MacLeod'</From>
+<Text>
+<Sentence ID = "12.1"> Verified that this now works in JAWS 6.0.</Sentence>
+<Sentence ID = "12.2"> Thank-you, Frank!</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2005-04-13 17:04:24'</Date>
+<From>'Carolyn MacLeod'</From>
+<Text>
+<Sentence ID = "13.1"> *** Bug 51963 has been marked as a duplicate of this bug. ***</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2008-01-31 16:17:19'</Date>
+<From>'lucas bigeardel'</From>
+<Text>
+<Sentence ID = "14.1"> close</Sentence>
+</Text>
+</Turn>
+</BugReport>
+
+<BugReport ID = "4">
+<Title>"(223734) Eclipse - Incorrect deprecation comments in Platform class"</Title>
+<Turn>
+<Date>'2008-03-24 17:36:00'</Date>
+<From>'Angel Vera'</From>
+<Text>
+<Sentence ID = "1.1"> According to the javaDoc in Platform.getResourceString(Bundle,String), this method has been deprecated and one should use the NLS class or the BundleFinder.find(). </Sentence>
+<Sentence ID = "1.2"> I was able to find the NLS class but I didn't find the BundleFinder class. </Sentence>
+<Sentence ID = "1.3"> Is the javaDoc correct? </Sentence>
+<Sentence ID = "1.4"> if it is a hint on where to find the BundleFinder class would help.</Sentence>
+<Sentence ID = "1.5"> The NLS class doesn't seem to provide me with the same functionality that Platform.getResourceString does, so I am assuming that BundleFinder would do the job that I need.</Sentence>
+<Sentence ID = "1.6"> Please provide me with more information on where to find the BundleFinder and improve the javaDoc.</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2008-03-25 09:57:01'</Date>
+<From>'Oleg Besedin'</From>
+<Text>
+<Sentence ID = "2.1"> I don't think that replacement functionality was ever implemented.</Sentence>
+<Sentence ID = "2.2"> Pascal, you added bunch of comments like that to the Platform ver. 1.92. </Sentence>
+<Sentence ID = "2.3"> As there are no current plans to act on them (and there has been no actions done in the last 2 years) I think we need to remove those comments - they make a rather confusing Javadoc.</Sentence>
+<Sentence ID = "2.4"> There are 21 \"XXX\" comments that should be removed from Javadoc or acted upon.</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2008-03-25 09:59:06'</Date>
+<From>'Oleg Besedin'</From>
+<Text>
+<Sentence ID = "3.1"> Adding M7 as a milestone to remind to remove those comments.</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2008-03-25 11:55:35'</Date>
+<From>'Angel Vera'</From>
+<Text>
+<Sentence ID = "4.1"> (In reply to comment #1)</Sentence>
+<Sentence ID = "4.2"> &amp;gt; I don't think that replacement functionality was ever implemented. </Sentence>
+<Sentence ID = "4.3"> &amp;gt; Pascal, you added bunch of comments like that to the Platform ver. 1.92. </Sentence>
+<Sentence ID = "4.4"> &amp;gt; As there are no current plans to act on them (and there has been no actions done &amp;gt; in the last 2 years) I think we need to remove those comments - they make a rather confusing Javadoc.</Sentence>
+<Sentence ID = "4.5"> &amp;gt; There are 21 \"XXX\" comments that should be removed from Javadoc or acted upon.</Sentence>
+<Sentence ID = "4.6"> &amp; </Sentence>
+<Sentence ID = "4.7"> So are you saying that the support for using getResourceString has just been droppped, and that no replacement will be available? </Sentence>
+<Sentence ID = "4.8"> that concerns me because WTP has a code that uses this method, and I am sure that there is plenty of adopters that are currently using that function as well.</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2008-03-25 13:27:23'</Date>
+<From>'Oleg Besedin'</From>
+<Text>
+<Sentence ID = "5.1"> The method Platform.getResourceString(Bundle,String) is not deprecated at this time; </Sentence>
+<Sentence ID = "5.2"> the comments should have been added to the implementation code or to a bug report, not to the Javadoc of the Platform class. </Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2008-05-23 04:29:23'</Date>
+<From>'Philippe Mulet'</From>
+<Text>
+<Sentence ID = "6.1"> Please adjust the target milestone, so it does not point at a closed milestone in the past.</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2008-09-24 16:17:37'</Date>
+<From>'Oleg Besedin'</From>
+<Text>
+<Sentence ID = "7.1"> From bug 247983 other tagged methods:</Sentence>
+<Sentence ID = "7.2"> -getResourceBundle(Bundle)</Sentence>
+<Sentence ID = "7.3"> -getResourceString(Bundle, String)</Sentence>
+<Sentence ID = "7.4"> -getResourceString(Bundle, String, ResourceBundle)</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2008-09-24 16:18:04'</Date>
+<From>'Oleg Besedin'</From>
+<Text>
+<Sentence ID = "8.1"> *** Bug 247983 has been marked as a duplicate of this bug. ***</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2008-09-24 16:42:07'</Date>
+<From>'Oleg Besedin'</From>
+<Text>
+<Sentence ID = "9.1"> Removed incorrect comments from the Platform class.</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2008-09-24 16:49:49'</Date>
+<From>'John Arthome'</From>
+<Text>
+<Sentence ID = "10.1"> We collided, I just made the same changes. </Sentence>
+<Sentence ID = "10.2"> The only difference is that I moved the comments to InternalPlatform. </Sentence>
+<Sentence ID = "10.3"> Also I deprecated Platform#endSplash since this has been replaced with IApplicationContext#applicationRunning().</Sentence>
+</Text>
+</Turn>
+
+</BugReport>
+
+<BugReport ID = "5">
+<Title>"(326962) GIMP - Quick swapping between x and 1/x aspect ratio in crop and resize tool"</Title>
+<Turn>
+<Date>'2006-01-14 13:51:03'</Date>
+<From>'bruno'</From>
+<Text>
+<Sentence ID = "1.1"> It would be usefull to add a \"Swap\" button to quickly change the aspect ratio between portrait and landscape. </Sentence>
+<Sentence ID = "1.2"> This is needed when extracting a portrait from a landscape photo.</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2006-05-21 19:31:19'</Date>
+<From>'weskaggs'</From>
+<Text>
+<Sentence ID = "2.1"> Since there is no sign that this is going to happen for 2.4, I am bumping the target to Future.</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2006-09-13 06:04:37'</Date>
+<From>'Sven Neumann'</From>
+<Text>
+<Sentence ID = "3.1"> *** Bug 355694 has been marked as a duplicate of this bug. ***</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2006-09-13 22:33:51'</Date>
+<From>'weskaggs '</From>
+<Text>
+<Sentence ID = "4.1"> I'm going to reset this to 2.4 because I expect to implement this very soon.</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2006-12-14 01:54:14'</Date>
+<From>'Albert Cahalan'</From>
+<Text>
+<Sentence ID = "5.1"> An easier and much faster user interface: swap between portrait and landscape based on mouse movement.</Sentence>
+<Sentence ID = "5.2"> You already have to move the mouse to make your selection. </Sentence>
+<Sentence ID = "5.3"> You'll likely do something that is approximately the right ratio. </Sentence>
+<Sentence ID = "5.4"> If that's closer to portrait, then portrait should get used, otherwise landscape should get used.</Sentence>
+<Sentence ID = "5.5"> Another way to explain this:</Sentence>
+<Sentence ID = "5.6"> When the user makes the selection, select landscape mode if the horizontal mouse movement is greater than the vertical mouse movement, otherwise select portrait mode.</Sentence>
+<Sentence ID = "5.7"> That's one less confusing button occupying screen space.</Sentence>
+<Sentence ID = "5.8"> That's one less button to press. </Sentence>
+<Sentence ID = "5.9"> You can work faster, with less hand/finger/wrist pain.</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2006-12-14 07:01:52'</Date>
+<From>'Sven Neumann'</From>
+<Text>
+<Sentence ID = "6.1"> Albert, you completely misunderstood this. </Sentence>
+<Sentence ID = "6.2"> The point is being able to flip the aspect ratio after you have created your rectangle selection.</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2006-12-14 13:18:50'</Date>
+<From>'Simon Budig'</From>
+<Text>
+<Sentence ID = "7.1"> Really? I found Alberts comment spot on. </Sentence>
+<Sentence ID = "7.2"> It basically would eliminate the need for this kind of button, since both x and 1/x would work equivalently in the GUI.</Sentence>
+<Sentence ID = "7.3"> I don't see much point in being able to flip the aspect *after* the creation of the rectangle. </Sentence>
+<Sentence ID = "7.4"> The placement of the resulting rectangle would need readjusting anyways (what is the fixed point of the rectangle while flipping?) and it sounds much more natural to me to be able to switch the orientation on-the-fly while creating the rectangle.</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2006-12-14 13:44:00'</Date>
+<From>'bruno'</From>
+<Text>
+<Sentence ID = "8.1"> I'm the reporter of the wish. </Sentence>
+<Sentence ID = "8.2"> Sven is right, I meant that it would be usefull to have the swap option after the creation of the rectangle selection. </Sentence>
+<Sentence ID = "8.3"> I do it \"by hand\" often in that case :</Sentence>
+<Sentence ID = "8.4">  I've a landscape photo that contains an interesting flower for example. </Sentence>
+<Sentence ID = "8.5"> I want to print a photo that have the same proportions as the original, but in a portrait format, more adapted to my flower.</Sentence>
+<Sentence ID = "8.6">  1. I first \"take a shhot of the aspect ratio\" by selecting all the original landscape photo.</Sentence>
+<Sentence ID = "8.7">  2. I freeze the aspect ratio (with the appropriate checkbox)</Sentence>
+<Sentence ID = "8.8">  3. I shrink the rectangle to permit him to be rotated by 90Â°</Sentence>
+<Sentence ID = "8.9">  4. I \"rotate\" him by taking my calculator, and calculating 1/[aspect ratio], and putting it by hand</Sentence>
+<Sentence ID = "8.10">  5. I've now a perfect portrait zone wich I can adapt freely to my flower; and I'm happy :)</Sentence>
+<Sentence ID = "8.11">  I don't know if adding a toolButton just to do it is a problem, but I really think I'm not the only one to do that sort of cropping on a photo.</Sentence>
+<Sentence ID = "8.12"> Thanks for interest !</Sentence>
+<Sentence ID = "8.13"> Bruno</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2006-12-14 13:57:16'</Date>
+<From>'Jeffery Small'</From>
+<Text>
+<Sentence ID = "9.1"> I agree that Albert's idea makes sense.  </Sentence>
+<Sentence ID = "9.2"> Have gimp assume a landscape or portrait orientation automatically depending on whether the rectangular area swept out by the user is wider or higher.  </Sentence>
+<Sentence ID = "9.3"> This might only be problematic when the aspect ratio was nearly, but not exactly square, but even here the user could control the proper aspect by exaggerating the motion in the larger of the two directions.</Sentence>
+<Sentence ID = "9.4"> If a swap button is maintained as in 2.3.12, then register the initial point used to sweep out the rectangular area and use that as the anchor rather than the upper-left corner as is now used.  </Sentence>
+<Sentence ID = "9.5"> It is very likely that the first point selected by the user will be a desired point and this will not be the upper-left corner unless this happens to be where they started.</Sentence>
+<Sentence ID = "9.6"> As I stated elsewhere, it would also be great if the aspect ratio was automatically set to the initial aspect of the image being loaded.  </Sentence>
+<Sentence ID = "9.7"> You might provide a \"lock\" button to force the current aspect ratio to be retained upon subsequent loading of images for those times when someone wants to crop a series of pictures to the same proportions.  </Sentence>
+<Sentence ID = "9.8"> Maybe the current Fix button could be a toggle that switched between \"Lock\" (lock the aspect ratio - current behavior) \"Set\" (automatically set the aspect ratio for each new image and then locks it) \"Auto\"(the Set behavior combined with the behavior suggested by Albert) or \"None\".</Sentence>
+<Sentence ID = "9.9"> Having said this, I do appreciate having a toggle button at all.  Thanks.</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2006-12-14 19:30:49'</Date>
+<From>'Sven Neumann'</From>
+<Text>
+<Sentence ID = "10.1"> Making this depend on the user's mouse action is not discoverable. </Sentence>
+<Sentence ID = "10.2"> There wouldn't be any way for the user to find out how to swap the aspect ratio. </Sentence>
+<Sentence ID = "10.3"> No way.</Sentence>
+<Sentence ID = "10.4"> It might make sense to determine the initial aspect ratio this way. </Sentence>
+<Sentence ID = "10.5"> But there still needs to be a button to swap it. </Sentence>
+<Sentence ID = "10.6"> Comment #7 is exactly the usage scenario for this.</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2007-02-10 12:25:58'</Date>
+<From>'Sven Neumann'</From>
+<Text>
+<Sentence ID = "11.1"> This is now implemented in trunk and seems to work reasonably well. </Sentence>
+<Sentence ID = "11.2"> Closing as FIXED.</Sentence>
+</Text>
+</Turn>
+</BugReport>
+
+<BugReport ID = "6">
+<Title>"(153211) KDE - Keyboard didn\'t respond anymore after I press Alt+Shift+Tab"</Title>
+<Turn>
+<Date>'2007-12-01 13:53:43'</Date>
+<From>'Josep Febrer'</From>
+<Text>
+<Sentence ID = "1.1"> While using Alt+Tab for switching between applications works fine in my KDE4 post RC1 version, when I try to use Alt+Shift+Tab shortcut the keyboard did not respond anymore and I don't know how to get it back.</Sentence>
+<Sentence ID = "1.2"> However the mouse it is still working properlly, so I can logout with the mouse and I when I log back the keyboard it also works.</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2007-12-05 17:41:05'</Date>
+<From>'Andreas Pakulat'</From>
+<Text>
+<Sentence ID = "2.1"> I just hit this bug as well. </Sentence>
+<Sentence ID = "2.2"> But unfortunately I can't re-trigger it at the moment. </Sentence>
+<Sentence ID = "2.3"> While alt-shift-tab doesn't do anything here, the keyboard is still accessible.</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2007-12-05 22:28:30'</Date>
+<From>'Andreas Pakulat'</From>
+<Text>
+<Sentence ID = "3.1"> This is really a serious problem. </Sentence>
+<Sentence ID = "3.2"> It seems that if I hit Alt+Shift+tab directly I always get the problem. </Sentence>
+<Sentence ID = "3.3"> And if I just hit Alt+Tab and then Alt+Shift+tab and release I get it as well, so I have to make sure I always hit Alt+Tab as last thing.</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2007-12-06 23:06:22'</Date>
+<From>'Matt Williams'</From>
+<Text>
+<Sentence ID = "4.1"> In KDE 3, Alt+Shift+Tab is one of the possible shortcuts used for switching keyboard layouts (keyboard layout kcm -&amp;gt; xkb options -&amp;gt; layout switching tree item). </Sentence>
+<Sentence ID = "4.2"> Even though I don't have that box ticked, it still persists in changing the layout with that shortcut. </Sentence>
+<Sentence ID = "4.3"> Perhaps, the shortcut is being sent to the same place but is causing a crash due to some bitrot?</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2007-12-06 23:46:31'</Date>
+<From>'Andreas Pakulat'</From>
+<Text>
+<Sentence ID = "5.1"> While editing kglobalaccelsrc to change the shortcut does help, killing kxkb doesn't help at all and thus I don't think its kxkb causing the problem.</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2007-12-06 23:47:54'</Date>
+<From>'Andreas Pakulat'</From>
+<Text>
+<Sentence ID = "6.1"> *** Bug 153495 has been marked as a duplicate of this bug. ***</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2007-12-07 00:18:11'</Date>
+<From>'GaÃ«l de Chalendar'</From>
+<Text>
+<Sentence ID = "7.1"> I confirm. </Sentence>
+<Sentence ID = "7.2"> I had to reboot. </Sentence>
+<Sentence ID = "7.3"> Note that the mouse was behaving has if the Shift key was pressed: it was extending the selection when clicking with the left button. </Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2007-12-08 20:23:44'</Date>
+<From>'Andreas Pakulat'</From>
+<Text>
+<Sentence ID = "8.1"> The problem is in KGlobalAccel, it doesn't release the grab when a shortcut is set that isn't triggered. </Sentence>
+<Sentence ID = "8.2"> Which is the case for Alt+Shift+Tab, the shortcut that is actually send by X11 is Alt+Shift+Backtab. </Sentence>
+<Sentence ID = "8.3"> Re-Assigning.</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2007-12-09 23:24:50'</Date>
+<From>'Matt Williams'</From>
+<Text>
+<Sentence ID = "9.1"> *** Bug 153754 has been marked as a duplicate of this bug. ***</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2007-12-11 11:27:41'</Date>
+<From>'Andreas Pakulat'</From>
+<Text>
+<Sentence ID = "10.1"> SVN commit 747205 by apaku:</Sentence>
+<Sentence ID = "10.2"> Add a hotfix for Bug #153211, also ungrab the keyboard when Alt+Shift+Backtab was hit CCBUG:153211</Sentence>
+<Sentence ID = "10.3">  M  +5 -1      kglobalaccel_x11.cpp  </Sentence>
+<Sentence ID = "10.4"> WebSVN link: http://websvn.kde.org/?view=rev&amp;revision=747205</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2007-12-12 11:20:13'</Date>
+<From>'Josep Febrer'</From>
+<Text>
+<Sentence ID = "11.1"> Thanks, your hotfix fixed this problem, however on the past KrushDay someone mentioned a similar issue pressing Alt+PrintScr which is still present for me.</Sentence>
+<Sentence ID = "11.2"> I don't know if this is related with the original issue, but if not you can close this bug.</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2007-12-12 12:03:33'</Date>
+<From>'Andreas Pakulat'</From>
+<Text>
+<Sentence ID = "12.1"> It could be, I'll check later today. </Sentence>
+<Sentence ID = "12.2"> IIRC Alt+Print Screen is some snapshot function right? </Sentence>
+<Sentence ID = "12.3"> You can easily check wether its the same issue by doing the following:</Sentence>
+<Sentence ID = "12.4"> Open $HOME/.kde4/share/config/kglobalshortcutsrc and find the action there.</Sentence>
+<Sentence ID = "12.5"> Then open any shortcut dialog in any application and change one of the shortcuts. </Sentence>
+<Sentence ID = "12.6"> When you're asked for pressing the new keyboard combination press the Alt+Print keys and check wether the label of the shortcut button is now the same as that in the rc-file. </Sentence>
+<Sentence ID = "12.7"> If they differ its the same problem and that means we need a different fix for this problem, than the hotfix I comitted.</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2007-12-12 13:48:56'</Date>
+<From>'Josep Febrer'</From>
+<Text>
+<Sentence ID = "13.1"> In kglobalshortcutsrc I have assigned Alt+Print to kwin, and also Alt+Shift+Tab to kwin. </Sentence>
+<Sentence ID = "13.2"> But if in one application like Konqueror or Konsole I assing a new shortcurt to Alt+Print it get's changed automatically to Alt+Shift+Print, so I can't assign another Alt+Print shortcut.</Sentence>
+<Sentence ID = "13.3"> However I can assign Alt+Shift+Tab shortcut, but besides it is still showing it in shortcut settings it doesn't work, and also it doesn't appear in kglobalshortcutsrc apart from the old one already existing and assigned to kwin.</Sentence>
+<Sentence ID = "13.4"> Also I don't know if is my setup but in 'kcmshell4 keys' I can't modify any shortcut, in fact, it doesn't show any, but that can be another bug.</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2007-12-12 14:02:30'</Date>
+<From>'Andreas Pakulat'</From>
+<Text>
+<Sentence ID = "14.1"> Ok  as far as I can see this is the same problem, namely that the keys Alt+Print don't produce the X11 keysequence that is expected. </Sentence>
+<Sentence ID = "14.2"> In particular Alt+Shift+Tab creates a Qt key sequence of Alt+Shift+Backtab and seemingly Alt+Print creates Alt+Shift+Print in Qt key sequence. </Sentence>
+<Sentence ID = "14.3"> So this is indeed the same problem.</Sentence>
+<Sentence ID = "14.4"> Regarding the keys kcm: Thats \"expected\", the kcm hasn't been properly ported.</Sentence>
+<Sentence ID = "14.5"> I've already posted a patch for a minimal port to the kde-core list. </Sentence>
+<Sentence ID = "14.6"> That one will get comitted next monday, unless I get objections.</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2007-12-12 16:21:52'</Date>
+<From>'Josep Febrer'</From>
+<Text>
+<Sentence ID = "15.1"> I discovered another similar shortcut which is Ctrl+PrintScrn but this doesn't suffer this problem and works as expected.</Sentence>
+<Sentence ID = "15.2"> To my knowledge, only Alt+Shift+Print and Alt+Print are triggered by this bug.</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2007-12-29 21:26:29'</Date>
+<From>'Andreas Pakulat'</From>
+<Text>
+<Sentence ID = "16.1"> *** Bug 154692 has been marked as a duplicate of this bug. ***</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2008-01-18 09:43:38'</Date>
+<From>'Andreas Pakulat'</From>
+<Text>
+<Sentence ID = "17.1"> *** Bug 156069 has been marked as a duplicate of this bug. ***</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2008-01-18 18:27:22'</Date>
+<From>'Lubos Lunak'</From>
+<Text>
+<Sentence ID = "18.1"> SVN commit 763132 by lunakl:</Sentence>
+<Sentence ID = "18.2"> Since calling directly Xlib's XGrabKeyboard() is very unlikely and even probably undesired in kded, make KGlobalAccel again ungrab when there's no Qt caused grab.</Sentence>
+<Sentence ID = "18.3"> BUG: 153211</Sentence>
+<Sentence ID = "18.4">  M  +0 -7      kdedglobalaccel.cpp  </Sentence>
+<Sentence ID = "18.5">  M  +1 -4      kdedglobalaccel.h  </Sentence>
+<Sentence ID = "18.6">  M  +11 -11    kglobalaccel_x11.cpp  </Sentence>
+<Sentence ID = "18.7"> WebSVN link: http://websvn.kde.org/?view=rev&amp;revision=763132</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2008-01-23 19:38:13'</Date>
+<From>'Andreas Pakulat'</From>
+<Text>
+<Sentence ID = "19.1"> *** Bug 156434 has been marked as a duplicate of this bug. ***</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2009-01-05 22:47:48'</Date>
+<From>'Mathieu Jobin'</From>
+<Text>
+<Sentence ID = "20.1"> this bug should still be open. </Sentence>
+<Sentence ID = "20.2"> I am running 4.2 beta 2 and this problem is still there.</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2009-02-12 10:52:27'</Date>
+<From>'Mikael Gerdin'</From>
+<Text>
+<Sentence ID = "21.1"> I've found this bug in KDE 4.2 too. </Sentence>
+<Sentence ID = "21.2"> I don't know if there is any specific key-combination that triggers it, but KWin acts as if I'm holding down the ALT-key, moving windows when I click and drag in them.</Sentence>
+<Sentence ID = "21.3"> (Kubuntu 8.10 (intrepid) packages from kubuntu-experimental)</Sentence>
+</Text>
+</Turn>
+</BugReport>
+
+<BugReport ID = "7">
+<Title>"(188311) KDE - The applet panel should not overlap applets "</Title>
+<Turn>
+<Date>'2009-03-28 11:35:10'</Date>
+<From>'mangus'</From>
+<Text>
+<Sentence ID = "1.1"> version:           svn (using Devel)</Sentence>
+<Sentence ID = "1.2"> OS:                Linux</Sentence>
+<Sentence ID = "1.3"> Installed from:    Compiled sources</Sentence>
+<Sentence ID = "1.4"> In amarok2-svn I like the the new contextview , but I found the new bottom bar for managing applets annoying , as it covers parts of other applets sometimes , like lyrics one , so that you miss a part of it. </Sentence>
+<Sentence ID = "1.5"> Could be handy to have it appear and desappear onmouseover.</Sentence>
+<Sentence ID = "1.6"> thanks</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2009-03-28 14:53:55'</Date>
+<From>'Dan Meltzer'</From>
+<Text>
+<Sentence ID = "2.1"> The real solution is to make it not cover applets, not make it appear/disappear on mouse over.</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2009-03-29 14:34:53'</Date>
+<From>'Leo Franchi'</From>
+<Text>
+<Sentence ID = "3.1"> i dont understand your point, dan... how do we make it not cover applets?</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2009-03-29 16:32:22'</Date>
+<From>'Dan Meltzer'</From>
+<Text>
+<Sentence ID = "4.1"> Thats your problem to solve :)</Sentence>
+<Sentence ID = "4.2"> The toolbar should be like the panel in kde, it gets it's own area to draw in (a strut in window manager terms). </Sentence>
+<Sentence ID = "4.3"> The applets should not consider the space the toolbar takes up to be theirs to play in, but rather end at the top of it.</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2009-03-29 17:26:09'</Date>
+<From>'Leo Franchi'</From>
+<Text>
+<Sentence ID = "5.1"> well if i move a window on my desktop down, the panel does cover it. </Sentence>
+<Sentence ID = "5.2"> so i still don't understand...</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2009-03-29 18:19:23'</Date>
+<From>'Dan Meltzer'</From>
+<Text>
+<Sentence ID = "6.1"> right, but new windows placed on the desktop do not get placed under the panel, and maximizing windows doesn't put them under the panel either.  </Sentence>
+<Sentence ID = "6.2"> You need to explicitely place the window under the panel, and I considder it a bug that it's possible (but that's not what this debate is about).]</Sentence>
+<Sentence ID = "6.3"> The panel should not obfuscate applets by default.</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2009-03-29 18:53:15'</Date>
+<From>'Mark Kretschmann'</From>
+<Text>
+<Sentence ID = "7.1"> I fully agree with Dan here, and I also fully admit that I don't have the slightest clue on how to implement this technically :)</Sentence>
+<Sentence ID = "7.2"> But I really think that what he wrote makes a lot of sense, if feasible.</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2009-03-29 19:39:03'</Date>
+<From>'mangus'</From>
+<Text>
+<Sentence ID = "8.1"> Created an attachment (id=32462) [details]</Sentence>
+<Sentence ID = "8.2"> amarok-svn toolbar overlap</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2009-03-29 19:39:39'</Date>
+<From>'mangus'</From>
+<Text>
+<Sentence ID = "9.1"> Me and Dan are meaning this.. a screen is better then words sometimes :-)</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2009-03-29 19:44:35'</Date>
+<From>'Leo Franchi'</From>
+<Text>
+<Sentence ID = "10.1"> i know what it looks like, 've been staring at it all day. btw, that screenshot is outdated now :)</Sentence>
+<Sentence ID = "10.2"> i still don't see how else you guys plan to visualize it. </Sentence>
+<Sentence ID = "10.3"> do you just want a border for the applet area, so instead of hitting the panel directly, it ends at the border? </Sentence>
+<Sentence ID = "10.4"> i mean, applets *will* be logically under the location of the panel---all the applets that a user can  have will not fit on the screen at the same time---so how else to show it?</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2009-03-29 19:50:43'</Date>
+<From>'Dan Meltzer'</From>
+<Text>
+<Sentence ID = "11.1"> The applet should end where the toolbar begins.  </Sentence>
+<Sentence ID = "11.2"> Applets should not be larger than the viewable area, if there's an applet above it, then the lower applet should get a smaller sizehint, and resize if necessary when it's the active applet (and therefore the only one on the screen)</Sentence>
+<Sentence ID = "11.3"> Basically, no applet should continue on off the screen, it should end at the panel.</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2009-03-29 19:58:27'</Date>
+<From>'Leo Franchi'</From>
+<Text>
+<Sentence ID = "12.1"> i disagree :) what you are describing is a very different use-case of the CV in general, and distinctly different from what the original idea that was developed. </Sentence>
+<Sentence ID = "12.2"> in fact, i think there is another bug where we've already had this discussion (with mark), and this has come up on IRC. </Sentence>
+<Sentence ID = "12.3"> anyway, this is not something to be fixed, but rather a change that needs to be discussed with people like e.g. leinir.</Sentence>
+<Sentence ID = "12.4"> regardless of all of this, the problem of \"applets falling off the end of the screen\" should be mitigated when we are able to resize applets.</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2009-03-29 20:48:48'</Date>
+<From>'Dan Meltzer'</From>
+<Text>
+<Sentence ID = "13.1"> You can't tell me that the screenshot attached to this bug is intended.</Sentence>
+<Sentence ID = "13.2"> There is no way to see the final line or two in the lyrics applet.  </Sentence>
+<Sentence ID = "13.3"> This is a major bug.</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2009-03-30 17:30:19'</Date>
+<From>'Dan Leinir Turthra Jensen'</From>
+<Text>
+<Sentence ID = "14.1"> The bug that is being shown here is the fact that you cannot yet resize your applets, and as such we also don't set default sizes sanely. </Sentence>
+<Sentence ID = "14.2"> You are reporting a bug on a non-completed feature ;)</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2009-03-30 19:10:07'</Date>
+<From>'mangus'</From>
+<Text>
+<Sentence ID = "15.1"> infact it was a wish! ;-)</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2009-03-30 20:04:58'</Date>
+<From>'Dan Leinir Turthra Jensen'</From>
+<Text>
+<Sentence ID = "16.1"> Of course :) Just thought i should point out that the feature is not yet completed - the polish that's gone into it Ù…ately could seem like an indication of feature completion, and as such it would seem the prudent course to inform you Ùhat that is not the case :)</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2009-03-31 00:33:48'</Date>
+<From>'Dan Meltzer'</From>
+<Text>
+<Sentence ID = "17.1"> I don't think that this should be dependent on being able to resize freely at all...</Sentence>
+<Sentence ID = "17.2"> Most of the time, the sizegrip for resizing ends up in the bottom right corner, and as such, would be inaccessable reguardless of whether it was free sizing or not.</Sentence>
+<Sentence ID = "17.3"> The bug isn't that the applet can't be made smaller, but that part of the applet is completely inaccesible.</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2009-03-31 15:56:48'</Date>
+<From>'Kevin Funk'</From>
+<Text>
+<Sentence ID = "18.1"> I fully agree with Dan aswell. </Sentence>
+<Sentence ID = "18.2"> I don't understand the confusion as it doesnt matter at all if an applet is resizable or not.</Sentence>
+<Sentence ID = "18.3"> To quote Dan:</Sentence>
+<Sentence ID = "18.4"> \"The applet should end where the toolbar begins.</Sentence>
+<Sentence ID = "18.5"> Applets should not be larger than the viewable area, if there's an applet above it, then the lower applet should get a smaller sizehint, and resize if necessary when it's the active applet (and therefore the only one on the screen)\"</Sentence>
+<Sentence ID = "18.6"> That's the expected behaviour and what is used in the playlist aswell. </Sentence>
+<Sentence ID = "18.7"> Track items dont overlap the lower toolbar, do they?</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2009-05-17 17:22:44'</Date>
+<From>'Dan Meltzer'</From>
+<Text>
+<Sentence ID = "19.1"> *** Bug 174221 has been marked as a duplicate of this bug. ***</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2009-05-18 01:02:22'</Date>
+<From>'Leo Franchi'</From>
+<Text>
+<Sentence ID = "20.1"> will be fixed in 2.1.1, done locally.</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2009-06-02 10:34:10'</Date>
+<From>'mangus'</From>
+<Text>
+<Sentence ID = "21.1"> I found it probably fixed in trunk :-) </Sentence>
+<Sentence ID = "21.2"> can Leo confirm that? </Sentence>
+<Sentence ID = "21.3"> we could close this....</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2009-06-02 10:45:41'</Date>
+<From>'Leo Franchi'</From>
+<Text>
+<Sentence ID = "22.1"> yep, sorry forgot to close when i pushed.</Sentence>
+</Text>
+</Turn>
+</BugReport>
+
+<BugReport ID = "8">
+<Title>"(66526) KDE - Indentation mode to align line to code structure "</Title>
+<Turn>
+<Date>'2003-10-25 00:53:11'</Date>
+<From>'Martin KÃ¶bele'</From>
+<Text>
+<Sentence ID = "1.1"> Version:            (using KDE Devel)</Sentence>
+<Sentence ID = "1.2"> Installed from:    Compiled sources</Sentence>
+<Sentence ID = "1.3"> identation itself works fine.</Sentence>
+<Sentence ID = "1.4"> But:</Sentence>
+<Sentence ID = "1.5"> let's see this example:</Sentence>
+<Sentence ID = "1.6"> 	hello1</Sentence>
+<Sentence ID = "1.7"> 	    hello2</Sentence>
+<Sentence ID = "1.8"> 	hello3</Sentence>
+<Sentence ID = "1.9"> If you go with the cursor to hello2 and press ctrl-i, hello2 is moved even further to the right.</Sentence>
+<Sentence ID = "1.10"> The right (and expected) behaviour is that hello should be moved to the left so it is right under hello1.</Sentence>
+<Sentence ID = "1.11"> (compare it with the behaviour of tab in xemacs)</Sentence>
+<Sentence ID = "1.12"> In my eyes, this really needs to be fixed.</Sentence>
+<Sentence ID = "1.13"> Thanks!!!</Sentence>
+<Sentence ID = "1.14"> Martin</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2003-10-25 00:54:41'</Date>
+<From>'Martin KÃ¶bele'</From>
+<Text>
+<Sentence ID = "2.1"> oh dear, the formatting is lost.</Sentence>
+<Sentence ID = "2.2"> Imagine, that hello2 is moved a bit to the right, like a \\t in front of it.</Sentence>
+<Sentence ID = "2.3"> Martin</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2003-10-25 01:05:45'</Date>
+<From>'Jesse'</From>
+<Text>
+<Sentence ID = "3.1"> Hmm, why would hello2 move left?  </Sentence>
+<Sentence ID = "3.2"> Are you saying it should align itself to the 'closest' tab boundary?</Sentence>
+<Sentence ID = "3.3"> So if you had a tabspace of 8 characters and you had</Sentence>
+<Sentence ID = "3.4"> ........hello</Sentence>
+<Sentence ID = "3.5"> ...........hello2</Sentence>
+<Sentence ID = "3.6"> Ctrl-I on hello2 should move it left because it's only 3 away from the left boundary but 5 away from the right one?</Sentence>
+<Sentence ID = "3.7"> For Kate, ctrl-I semantics have always been to unconditionally insert a 'positive' indent. </Sentence>
+<Sentence ID = "3.8"> Positive meaning to the right.  </Sentence>
+<Sentence ID = "3.9"> This is a bug wrt other editors ...</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2003-10-25 01:11:35'</Date>
+<From>'Martin KÃ¶bele'</From>
+<Text>
+<Sentence ID = "4.1"> hi,</Sentence>
+<Sentence ID = "4.2"> hello2 should be moved to the left, because it is not aligned with the line  above.</Sentence>
+<Sentence ID = "4.3"> Martin</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2003-10-25 09:30:53'</Date>
+<From>'Martin KÃ¶bele'</From>
+<Text>
+<Sentence ID = "5.1"> Martin KÃ¶bele  2003-10-25 09:30:53  -------</Sentence>
+<Sentence ID = "5.2"> let me try it again:</Sentence>
+<Sentence ID = "5.3"> let's say we have the code</Sentence>
+<Sentence ID = "5.4"> something </Sentence>
+<Sentence ID = "5.5"> {</Sentence>
+<Sentence ID = "5.6"> ........hello1();</Sentence>
+<Sentence ID = "5.7"> ...........hello2();</Sentence>
+<Sentence ID = "5.8"> ........hello3();</Sentence>
+<Sentence ID = "5.9"> }</Sentence>
+<Sentence ID = "5.10"> if you go now with the cursor in the line of hello2, hello2 should be moved to the left, because</Sentence>
+<Sentence ID = "5.11"> 1.) identation is about +8 spaces in a block, beginning from the opening parentheses (amount of spaces depends on your configuration of course).</Sentence>
+<Sentence ID = "5.12"> 2.) hello1 specifies where the block shall be aligned.</Sentence>
+<Sentence ID = "5.13"> Martin</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2003-10-25 19:22:52'</Date>
+<From>'Jesse'</From>
+<Text>
+<Sentence ID = "6.1"> Right, so you are looking for an 'Align' action. </Sentence>
+<Sentence ID = "6.2">  This is more of a 'wishlist' since Kate doesn't really have this (see below).  </Sentence>
+<Sentence ID = "6.3"> It has unconditional indent left and right.</Sentence>
+<Sentence ID = "6.4"> If you want hello2 to move left go to Tools and hit 'Unindent' which will move it left to the tab stop. </Sentence>
+<Sentence ID = "6.5"> If you 'Indent' it will move to position 16, the next tab stop to the right.</Sentence>
+<Sentence ID = "6.6"> You can alternatively try 'Clean Indentation' and see if that aligns the misaligned blocks of code for you. </Sentence>
+<Sentence ID = "6.7"> It will even out the misaligned blocks of code most of the time if it can. </Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2004-01-02 01:18:24'</Date>
+<From>'Jesse'</From>
+<Text>
+<Sentence ID = "7.1"> *** Bug 71479 has been marked as a duplicate of this bug. ***</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2004-02-25 05:01:38'</Date>
+<From>'Jesse'</From>
+<Text>
+<Sentence ID = "8.1"> *** Bug 75951 has been marked as a duplicate of this bug. ***</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2004-06-02 05:37:41'</Date>
+<From>'Jesse'</From>
+<Text>
+<Sentence ID = "9.1"> This is available in cvs. </Sentence>
+<Sentence ID = "9.2"> Currently it works only if you use the 'cstyle' auto-indenter.  </Sentence>
+<Sentence ID = "9.3"> The default shortcut is CTRL + TAB (controlled tab) and will align the current line OR the block of text you select according to normal c/c++ conventions.</Sentence>
+<Sentence ID = "9.4"> See also bug 40656 for further information and a warning.</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2004-06-02 12:23:11'</Date>
+<From>'jkyro@pp.htv.fi'</From>
+<Text>
+<Sentence ID = "10.1"> How does this work with things inside parenthesis, like parameter lists and conditionals?</Sentence>
+<Sentence ID = "10.2"> I'd like to have it as in emacs:</Sentence>
+<Sentence ID = "10.3"> if ( foo == 1 &amp;&amp;</Sentence>
+<Sentence ID = "10.4">      bar == 2 ) {</Sentence>
+<Sentence ID = "10.5">    doit();</Sentence>
+<Sentence ID = "10.6"> }</Sentence>
+<Sentence ID = "10.7"> In this case the second condition should be aligned with the first one, not according to normal stuff.</Sentence>
+<Sentence ID = "10.8"> And parameter list handling like:</Sentence>
+<Sentence ID = "10.9"> int foo(</Sentence>
+<Sentence ID = "10.10">          int bar,</Sentence>
+<Sentence ID = "10.11">          char *baz,</Sentence>
+<Sentence ID = "10.12">          struct sizzle *gee</Sentence>
+<Sentence ID = "10.13">         )</Sentence>
+<Sentence ID = "10.14"> {</Sentence>
+<Sentence ID = "10.15">     ...</Sentence>
+<Sentence ID = "10.16"> }</Sentence>
+<Sentence ID = "10.17"> In this case the closing parenthesis should be aligned with the opening one.</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2004-06-03 06:58:47'</Date>
+<From>'Jesse'</From>
+<Text>
+<Sentence ID = "11.1"> Yes, your first example works as expected.</Sentence>
+<Sentence ID = "11.2"> Your second example kinda works right now.  </Sentence>
+<Sentence ID = "11.3"> Parameter lists are aligned just like you expect but it needs a reference character in the 'int foo (' line to judge what col to align to after that.  </Sentence>
+<Sentence ID = "11.4"> Also, closing parenthesis are not aligned with the opening one.  </Sentence>
+<Sentence ID = "11.5"> If this is really a problem for you, open up another wishlist item with appropriate examples.</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2004-06-03 09:26:12'</Date>
+<From>'Martin KÃ¶bele'</From>
+<Text>
+<Sentence ID = "12.1"> great, thanks a lot!!</Sentence>
+<Sentence ID = "12.2"> there is one little bug though:</Sentence>
+<Sentence ID = "12.3"> .	.	foo();</Sentence>
+<Sentence ID = "12.4"> .	.	bar();</Sentence>
+<Sentence ID = "12.5"> if your cursor is in the line between foo() and bar(), in the line where no tabs are made yet and you press now the shortcut for the new align, the cursor just won't move under foo().</Sentence>
+<Sentence ID = "12.6"> but the rest of it works very nicely!</Sentence>
+<Sentence ID = "12.7"> Thanks guys!</Sentence>
+<Sentence ID = "12.8"> Maybe re-open this bug since I think the feature is incomplete, but I can open a new bugreport about this.</Sentence>
+<Sentence ID = "12.9"> Thanks</Sentence>
+<Sentence ID = "12.10"> Martin</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2004-06-03 17:28:26'</Date>
+<From>'Jesse'</From>
+<Text>
+<Sentence ID = "13.1"> With regards to the foo-bar problem, this was intentional. </Sentence>
+<Sentence ID = "13.2"> I didn't want to indent empty lines as that would leave quite a bit of useless leading spaces when selecting large regions and hitting Align -- it's also MUCH slower if I do not skip these lines when formatting an entire document. </Sentence>
+<Sentence ID = "13.3"> I guess I could make it so that's only the case when you're aligning a _block_ of text though --</Sentence>
+<Sentence ID = "13.4"> I'll see what I can do.  </Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2009-01-11 14:46:56'</Date>
+<From>'Kari Argillander'</From>
+<Text>
+<Sentence ID = "14.1"> I cannot get this feature work. </Sentence>
+<Sentence ID = "14.2"> Is this working on kde4 beta2?</Sentence>
+</Text>
+</Turn>
+</BugReport>
+
+<BugReport ID = "9">
+<Title>"(155920) KDE - ctrl+c doesn\'t breaks foreground job"</Title>
+<Turn>
+<Date>'2008-01-16 16:31:06'</Date>
+<From>'Pavel Volkovitskiy'</From>
+<Text>
+<Sentence ID = "1.1"> Version:            (using Devel)</Sentence>
+<Sentence ID = "1.2"> Installed from:    Compiled sources</Sentence>
+<Sentence ID = "1.3"> OS:                Linux</Sentence>
+<Sentence ID = "1.4"> from some time ago ctrl+c stops work</Sentence>
+<Sentence ID = "1.5"> i have 2.1 konsole (kde 4.0.80+r762060 from trunk)</Sentence>
+<Sentence ID = "1.6"> reproduce:</Sentence>
+<Sentence ID = "1.7"> sleep 10 and press ctrl+c</Sentence>
+<Sentence ID = "1.8"> so now i use ctrl+z; kill %1; fg</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2008-01-17 19:55:37'</Date>
+<From>'Urs Wolfer'</From>
+<Text>
+<Sentence ID = "2.1"> Same problem here.</Sentence>
+<Sentence ID = "2.2"> Another thing which is IMHO releated: the konsole \"window cursor\" does not get anymore the focus (the cursor gets not filled white).</Sentence>
+<Sentence ID = "2.3"> This issues has appeared some days ago..</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2008-01-17 20:55:06'</Date>
+<From>'Hiáº¿u HoÃ ng'</From>
+<Text>
+<Sentence ID = "3.1"> Some info: when I use completion, C-c works (i.e. type \"pTABTAB\", while bash is tallying the possible completions, C-c stops the process and returns the prompt).</Sentence>
+<Sentence ID = "3.2"> This bug is possibly not in konsole, because yesterday I can't use C-[S-]v to paste in any app (including konsole), or C-l to clear screen (in konsole, gajim and pidgin).</Sentence>
+<Sentence ID = "3.3"> Grepping ~/.xssession-errors only yields one \"error\" in the search krunner runner.</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2008-01-18 04:49:53'</Date>
+<From>'Thomas Georgiou'</From>
+<Text>
+<Sentence ID = "4.1"> I get this with new konsole too, it works with some progs like strace, but not with others like ruby (which works fine in a vt).</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2008-01-20 21:33:02'</Date>
+<From>'Urs Wolfer'</From>
+<Text>
+<Sentence ID = "5.1"> This issue makes working with Konole really hard.. </Sentence>
+<Sentence ID = "5.2"> you always need to kill jobs from another Konsole... </Sentence>
+<Sentence ID = "5.3"> There are a lot of people asking about this issue on IRC.</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2008-01-21 02:49:51'</Date>
+<From>'Robert Knight'</From>
+<Text>
+<Sentence ID = "6.1"> I cannot reproduce here.</Sentence>
+<Sentence ID = "6.2"> &amp;gt; I get this with new konsole too, it works with some progs like strace, but not with others like ruby (which works fine in a vt). </Sentence>
+<Sentence ID = "6.3"> That is bizarre.  </Sentence>
+<Sentence ID = "6.4"> I cannot think why the behavior might depend on what is running on the terminal.  </Sentence>
+<Sentence ID = "6.5"> &amp;gt;  There are a lot of people asking about this issue on IRC. </Sentence>
+<Sentence ID = "6.6"> Are they running Konsole from the KDE 4.0 branch or trunk?</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2008-01-21 02:51:48'</Date>
+<From>'Robert Knight'</From>
+<Text>
+<Sentence ID = "7.1"> &amp;gt; Are they running Konsole from the KDE 4.0 branch or trunk? </Sentence>
+<Sentence ID = "7.2"> You could winding kdebase/apps/konsole back a few revisions to see if the problem disappears.  </Sentence>
+<Sentence ID = "7.3"> If you get as far as the KDE 4.0.0 tagging then it is likely somewhere else.</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2008-01-21 14:06:51'</Date>
+<From>'Dmitry Suzdalev'</From>
+<Text>
+<Sentence ID = "8.1"> Running trunk. Noticing this for some days.</Sentence>
+<Sentence ID = "8.2"> Working around that by doing \"Ctrl-Z and kill %1\"...</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2008-01-21 20:46:24'</Date>
+<From>'Robert Knight'</From>
+<Text>
+<Sentence ID = "9.1"> *** Bug 156320 has been marked as a duplicate of this bug. ***</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2008-01-22 12:49:24'</Date>
+<From>'Robert Knight'</From>
+<Text>
+<Sentence ID = "10.1"> &amp;gt; Running trunk. Noticing this for some days.</Sentence>
+<Sentence ID = "10.2"> As I cannot reproduce, I need to know which revision introduced the bug.  </Sentence>
+<Sentence ID = "10.3"> You can use svn up -r &amp;lt;revision&amp;gt; to change kdebase/apps/konsole/src to an earlier revision.</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2008-01-22 19:58:30'</Date>
+<From>'Paolo Capriotti'</From>
+<Text>
+<Sentence ID = "11.1"> I can confirm this problem. </Sentence>
+<Sentence ID = "11.2"> The first revision where it happens is 760614:</Sentence>
+<Sentence ID = "11.3"> http://websvn.kde.org/?view=rev&amp;revision=760614</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2008-01-23 12:37:17'</Date>
+<From>'Christian Muehlhaeuser'</From>
+<Text>
+<Sentence ID = "12.1"> i'm running trunk. </Sentence>
+<Sentence ID = "12.2"> i can ctrl+c svn for example or a compile job. </Sentence>
+<Sentence ID = "12.3"> but i can't ctrl+c dselect (or btdownloadcurses or ...)</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2008-01-23 17:20:11'</Date>
+<From>'Pavel Volkovitskiy'</From>
+<Text>
+<Sentence ID = "13.1"> after i switch to konsole window, cursor doesn't filled and ctrl+c doesn't works, but if i type something then this passes to konsole _and_ cursor became fillled after that i'm able to use ctrl+c</Sentence>
+<Sentence ID = "13.2"> ie, switch to konsole</Sentence>
+<Sentence ID = "13.3"> press &amp;lt;space&amp;gt; (to get cursor filled)</Sentence>
+<Sentence ID = "13.4"> press ctrl+c (will work now)</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2008-01-23 18:03:05'</Date>
+<From>'Pavel Volkovitskiy'</From>
+<Text>
+<Sentence ID = "14.1"> this doesn't always work, cursor became filled, but ctrl+c doesn't work</Sentence>
+<Sentence ID = "14.2"> ctrl+c works in bash or read prompt (even with non-filled cursor)</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2008-01-26 00:12:55'</Date>
+<From>'Dmitry Suzdalev'</From>
+<Text>
+<Sentence ID = "15.1"> Robert, I can confirm what Paolo said: it happens first in 760614 revision (porting to KProcess).</Sentence>
+<Sentence ID = "15.2"> I also noticed this warning in Session.cpp's Session::sendSignal() function:</Sentence>
+<Sentence ID = "15.3"> #warning \"TODO: Send the right signal here, QProcess::kill() always sends SIGKILL\"</Sentence>
+<Sentence ID = "15.4"> I blindly tried to replace _shellProcess-&amp;gt;kill() with _shellProcess-&amp;gt;terminate(), but that did not help, so I gave up :)</Sentence>
+<Sentence ID = "15.5"> Maybe this even not that piece of code that causes the problem (although seems quite related).</Sentence>
+<Sentence ID = "15.6"> Maybe you'll have some further ideas.</Sentence>
+<Sentence ID = "15.7"> And I wasn't able to reproduce this bug on my machine at work, although both home and work machines run Debian/testing (but have different hardware).</Sentence>
+<Sentence ID = "15.8"> I'm puzzled what can cause this :)</Sentence>
+<Sentence ID = "15.9"> But while it's reproducable here, at home, I can test your ideas if any.</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2008-01-26 00:25:10'</Date>
+<From>'Robert Knight'</From>
+<Text>
+<Sentence ID = "16.1"> &amp;gt; I also noticed this warning in Session.cpp's Session::sendSignal() function: </Sentence>
+<Sentence ID = "16.2"> That is only called at the end of the terminal session to kill the main shell process.  </Sentence>
+<Sentence ID = "16.3"> Otherwise Konsole doesn't touch any processes directly - it just sends the key presses you enter to the terminal.</Sentence>
+<Sentence ID = "16.4"> &amp;gt; although both home and work machines run Debian/testing</Sentence>
+<Sentence ID = "16.5"> In other words, they have the same versions of all common software?</Sentence>
+<Sentence ID = "16.6"> &amp;gt; (but have different hardware)</Sentence>
+<Sentence ID = "16.7"> Do they use the same type of CPU?  </Sentence>
+<Sentence ID = "16.8"> I don't suppose it could be a 32bit / 64bit difference?</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2008-01-26 00:27:58'</Date>
+<From>'Dmitry Suzdalev'</From>
+<Text>
+<Sentence ID = "17.1"> Ah, no, seems unrelated :)</Sentence>
+<Sentence ID = "17.2"> How about this:</Sentence>
+<Sentence ID = "17.3"> void Pty::lockPty(bool lock)</Sentence>
+<Sentence ID = "17.4"> {</Sentence>
+<Sentence ID = "17.5"> #warning \"TODO: Support for locking the Pty\"</Sentence>
+<Sentence ID = "17.6">   //if (lock)</Sentence>
+<Sentence ID = "17.7">     //suspend();</Sentence>
+<Sentence ID = "17.8">   //else</Sentence>
+<Sentence ID = "17.9">     //resume();</Sentence>
+<Sentence ID = "17.10"> }</Sentence>
+<Sentence ID = "17.11"> Not sure if this is it too...</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2008-01-26 00:30:22'</Date>
+<From>'Dmitry Suzdalev'</From>
+<Text>
+<Sentence ID = "18.1"> &amp;gt; In other words, they have the same versions of all common software?</Sentence>
+<Sentence ID = "18.2"> Well, currently not, because I forgot that I updated home machine to debian/sid, but I recall that I was seeing this bug before I upgraded.</Sentence>
+<Sentence ID = "18.3"> Mmmm... not 100% sure though. 90% ;)</Sentence>
+<Sentence ID = "18.4"> &amp;gt; Do they use the same type of CPU?  </Sentence>
+<Sentence ID = "18.5"> &amp;gt; I don't suppose it could be a 32bit / 64bit difference? </Sentence>
+<Sentence ID = "18.6"> Yep. </Sentence>
+<Sentence ID = "18.7"> Both use intel core duo</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2008-01-26 01:00:58'</Date>
+<From>'Robert Knight'</From>
+<Text>
+<Sentence ID = "19.1"> &amp;gt; Not sure if this is it too... </Sentence>
+<Sentence ID = "19.2"> No, that is called when Ctrl+S or Ctrl+Q is pressed.</Sentence>
+<Sentence ID = "19.3"> Can you try changing the interrupt key sequence to something else and see if it makes any difference.</Sentence>
+<Sentence ID = "19.4"> For example, change the interrupt key to Ctrl+Y</Sentence>
+<Sentence ID = "19.5"> stty intr /-\\Y</Sentence>
+<Sentence ID = "19.6"> Then try strace, sleep, make etc. but use Ctrl+Y instead of Ctrl+C to kill them.</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2008-01-26 01:02:40'</Date>
+<From>'Dmitry Suzdalev'</From>
+<Text>
+<Sentence ID = "20.1"> Chatting with ossi bringed up another very interesting usecase:</Sentence>
+<Sentence ID = "20.2"> Fact: ctrl-c doesn't work in konsole</Sentence>
+<Sentence ID = "20.3"> Next step: launch xterm and launch  strace -ttt -o konsole.trace konsole --nofork</Sentence>
+<Sentence ID = "20.4"> Now in that started konsole app, 'make' breaks just ok!</Sentence>
+<Sentence ID = "20.5"> Wonders :)</Sentence>
+<Sentence ID = "20.6"> strace fixes things :)</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2008-01-26 01:06:05'</Date>
+<From>'Dmitry Suzdalev'</From>
+<Text>
+<Sentence ID = "21.1"> After changing /-\\C to be /-\\Y situation is the same for /-\\Y as it was for /-\\C:</Sentence>
+<Sentence ID = "21.2"> e.g. /-\\Y breaks 'strace', but not 'make'</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2008-01-26 01:20:17'</Date>
+<From>'Robert Knight'</From>
+<Text>
+<Sentence ID = "22.1"> &amp;gt; strace fixes things :) </Sentence>
+<Sentence ID = "22.2"> You're doing two things there though, running Konsole with strace and also with the --nofork argument.  </Sentence>
+<Sentence ID = "22.3"> To be sure which was making a difference, you'd need to:</Sentence>
+<Sentence ID = "22.4"> 1.  Run \"konsole --nofork\" (without strace) and see if the problem is still there.</Sentence>
+<Sentence ID = "22.5"> 2.  Start Konsole normally (with no arguments), then attach to it with strace (using strace -ttt -p &amp;lt;pid of konsole&amp;gt;) and see if the problem is still there.</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2008-01-26 02:07:56'</Date>
+<From>'Paolo Capriotti'</From>
+<Text>
+<Sentence ID = "23.1"> The problem disappears for me with both 1 and 2, while changing the interrupt sequence has no effect just like Dmitry reported.</Sentence>
+<Sentence ID = "23.2"> Any idea where to look in the code, where to set breakpoints, etc...?</Sentence>
+</Text>
+</Turn>
+
+<Turn>
+<Date>'2008-02-06 13:34:24'</Date>
+<From>'Robert Knight'</From>
+<Text>
+<Sentence ID = "24.1"> Fixed by SVN commit #771570.</Sentence>
+<Sentence ID = "24.2"> \"Fix Ctrl+C not killing applications on some users' systems.  </Sentence>
+<Sentence ID = "24.3"> Reset all signal handlers to the default (SIG_DFL) in the child process after forking\"</Sentence>
+</Text>
+</Turn>
+</BugReport>
+</root>
